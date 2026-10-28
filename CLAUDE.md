@@ -3,6 +3,17 @@
 File bàn giao cho Claude ở những cuộc trò chuyện sau. Đọc hết file này trước khi sửa bất cứ thứ gì.
 Chủ dự án nói chuyện bằng tiếng Việt, xưng "mình/tôi". Hãy trả lời bằng tiếng Việt.
 
+## 0. Đợt 2 (29/10/2026, nhánh `preview-v3`, CHƯA lên `main`)
+
+Chủ dự án duyệt trên bản xem trước rồi mới merge vào `main`. Bản xem trước: `https://kthegoat-git-preview-v3-namkzhongli-3019.vercel.app`. Đã làm:
+- **Emblem thay đồng hồ** sau chữ ký 3D: hàm `emblem()` vẽ SVG nét mảnh gốc (chữ K dưới vòm gothic, con dấu chữ "K THE GOAT · NAMK · EST. 2021 / ANYTHING YOU CAN IMAGINE", hai thập tự, vòng cánh hoa). Đây là thiết kế riêng, **không** dùng logo Chrome Hearts thật (chủ dự án đã đồng ý hướng này). Vòng ngoài `.em-ring` xoay chậm; phần lõi đứng yên.
+- **Dải logo bấm được** ở mục Dự án (`.tick` là `<button>`): bấm logo thì cuộn mượt tới chương đó (`workJump`).
+- **Trang dự án:** các dòng "Việc đã làm" bấm/Enter để xem ảnh ngay (dòng đang chọn có nhãn "Đang xem"); nhiều ảnh thì tự đổi mỗi 3,8 giây và có chấm bấm; mỗi dòng có thể có đoạn chi tiết (phần tử thứ 4 của `work[i]`). Thêm khối **"Câu chuyện"** (`t.story = {eb,h,p[],q,qb}`) sau mục Việc đã làm: vài đoạn văn + câu trích sáng dần từng từ. Viết từ lời kể của chủ dự án, không bịa số liệu.
+- **Bỏ Embé.** Còn 8 thương hiệu; lưới 5×2 = 8 logo + ô **Outsource** (bấm hiện lời nhắn về bảo mật khách hàng, cửa sổ `#ow`) + ô "Thương hiệu tiếp theo?". Các mảng `period/role/desc/br_kind` và `POLY` đều 8 phần tử.
+- **Lookbook** (`#look`, giữa Đội nhóm và Kỹ năng): 8 ảnh cá nhân xếp theo nhịp sáng/tối (`LOOK`, ảnh trong `img/look/` và vài tấm dùng chung), có chú thích "LOOK 01…08", đoạn giới thiệu gu. Ảnh do Claude chọn, chủ dự án sẽ tự thay nếu không ưng. Mục đánh số lại: (05) Lookbook, (06) Kỹ năng, (07) Liên hệ.
+- **Kỹ năng** viết lại hoa mỹ hơn (vi + en). Chỉ số "10 ngành nghề" do chủ dự án yêu cầu (Claude đếm được khoảng 8 chưa kể Outsource, nên **cần chủ dự án xác nhận con số đúng**).
+- Ảnh Google Drive không tải thêm được qua khung chat (mỗi tấm quá nặng), nên các dòng nhiều ảnh dùng lại ảnh đã có trong repo. Muốn thêm ảnh: nhờ chủ dự án gửi trong chat hoặc đặt vào `_project/` rồi nén bằng `prep_photos.py`.
+
 ## 1. Trạng thái hiện tại (cập nhật 29/10/2026)
 
 - **Trang đang chạy:** https://kthegoat.vercel.app
@@ -65,9 +76,9 @@ Brief gốc (câu trả lời đầu tiên của chủ dự án) nằm ở `_pro
 ## 4. Cấu trúc kho
 
 ```
-index.html                 Toàn bộ trang: CSS, HTML, JS trong một file (~1100 dòng)
-img/                       25 ảnh đang dùng (đã nén 1800px, ~150KB/ảnh)
-logos/                     7 logo đã chuyển sang đen trên nền trong suốt
+index.html                 Toàn bộ trang: CSS, HTML, JS trong một file (~2200 dòng)
+img/                       Ảnh đang dùng (nén 1500–1800px); thư mục con theo thương hiệu (bv, com, kimmy, zojy, astro, meow, kaza, dd) và img/look/ cho Lookbook
+logos/                     Logo đã chuyển sang đen trên nền trong suốt (embe.png không còn dùng)
 _project/                  Tài liệu dự án, KHÔNG deploy (xem .vercelignore)
   brief-original.txt       Câu trả lời brief đầu tiên của chủ dự án
   photos-unused/           25 ảnh còn lại (đã nén), dùng khi cần thay ảnh
@@ -84,14 +95,15 @@ _project/                  Tài liệu dự án, KHÔNG deploy (xem .vercelignor
 - Google Fonts: Archivo (trục wdth 62–125, wght 100–900) và Geist Mono
 
 ### Thứ tự các mục trên trang
-1. **Hero** (`#hero`): chữ chrome 3D, vòng vạch viền đồng hồ, lưới chấm, các nhãn ở góc. Mục này bị ghim (`pinSpacing:false`) để mục Giới thiệu trượt lên che, đồng thời các chữ cái tách ra bay đi.
+1. **Hero** (`#hero`): chữ ký 3D đen nhám viền sáng, emblem K gothic phía sau (`#bezel`), lưới chấm, các nhãn ở góc. Mục này bị ghim (`pinSpacing:false`) để mục Giới thiệu trượt lên che, đồng thời các chữ cái tách ra bay đi.
 2. **Giới thiệu** (`#about`): mép trên cắt chéo, 2 dải chữ chạy ngang, tiêu đề hiện từng chữ cái, ảnh `img_9651` trong khối đa giác có đường viền đi theo, đoạn văn sáng dần từng từ, 4 con số đếm lên.
-3. **Thương hiệu** (`#brands`): lưới 4×2 gồm 7 logo và 1 ô kêu gọi "Thương hiệu tiếp theo?". Rê chuột vào ô thì ô chuyển đen.
-4. **Dự án** (`#work`): ghim, 7 chương. Ảnh đổi hình khối đa giác, đường viền SVG đi theo, tên thương hiệu cỡ lớn dạng chữ viền chạy phía sau, logo + năm + tên + vai trò + mô tả, thanh tiến độ theo năm, số đếm 01/07.
+3. **Thương hiệu** (`#brands`): lưới 5×2 gồm 8 logo, ô Outsource và ô kêu gọi "Thương hiệu tiếp theo?". Rê chuột vào ô thì ô chuyển đen.
+4. **Dự án** (`#work`): ghim, 8 chương, có dải logo bấm để nhảy chương. Ảnh đổi hình khối đa giác, đường viền SVG đi theo, tên thương hiệu cỡ lớn dạng chữ viền chạy phía sau, logo + năm + tên + vai trò + mô tả, thanh tiến độ theo năm, số đếm 01/08.
 5. **Tunnel** (`#tun`): canvas 2D vẽ tia sáng xám, câu "Không ai dọn đường. Mình tự mở."
 6. **Đội nhóm** (`#team`): ghim, dải 10 ảnh trượt ngang, nghiêng theo tốc độ cuộn.
-7. **Kỹ năng** (`#skills`): 7 dòng. Rê chuột thì chữ cuộn lên và ảnh chân dung nhỏ đi theo chuột.
-8. **Liên hệ** (`#contact`): tiêu đề chữ nhiễu rồi giải mã, SĐT và email (nút Gọi, Gửi mail, Chép), dải chữ chạy, chữ chrome 3D ở chân trang.
+7. **Lookbook** (`#look`): lưới biên tập 8 ảnh, mở bằng rèm cắt, ảnh trượt nhẹ khi cuộn.
+8. **Kỹ năng** (`#skills`): 7 dòng bấm-mở-rộng, mỗi dòng một hình SVG chuyển động.
+9. **Liên hệ** (`#contact`): tiêu đề chữ nhiễu rồi giải mã, SĐT và email (nút Gọi, Gửi mail, Chép), dải chữ chạy, chữ ký 3D ở chân trang.
 
 **Lớp phủ toàn trang:** nhiễu hạt (grain), 7 đường lưới dọc mờ, thanh menu (có nền mờ sau khi qua màn đầu), thanh nhỏ ở góc dưới (desktop) hiện mục hiện tại, tọa độ chuột và phần trăm đã cuộn. Màn chờ đếm 000 → 100.
 
@@ -119,7 +131,8 @@ _project/                  Tài liệu dự án, KHÔNG deploy (xem .vercelignor
   - `.strip img` cần `max-width:none`, nếu không ảnh đội nhóm co về 0.
   - Nút cần `text-transform:inherit`.
   - `.ln` có padding trên 0.2em để dấu tiếng Việt trên chữ in hoa (Ừ, Ế, Đ) không bị cắt; khi trang ở tiếng Việt, `line-height` của `.disp` là 1.02.
-- Ảnh dùng `filter: grayscale(1)` bằng CSS; ảnh gốc vẫn có màu.
+- Ảnh giữ màu gốc (đã bỏ `grayscale`). Chữ ký 3D là đen nhám + viền sáng 1px, không còn chrome bạc.
+- **Chụp offline:** ảnh `loading=lazy` ở phần dưới trang có thể hiện ô xám trong ảnh chụp cả trang; đó là do chưa giải mã, không phải lỗi. Cuộn tới phần tử rồi chụp lại.
 
 ## 7. Cách kiểm tra (quan trọng)
 
@@ -135,8 +148,8 @@ _project/                  Tài liệu dự án, KHÔNG deploy (xem .vercelignor
 
 ## 8. Việc còn dang dở và gợi ý tiếp theo
 
-0. Chủ dự án duyệt lại ảnh và câu chữ của 8 trang dự án (đã chọn tạm). Embé chưa có trang vì không có tư liệu; chương Embé vẫn dùng ảnh studio `art-14`.
-1. Meow: "giải lớn nhất" chưa rõ phạm vi (thành phố hay hệ thống), hiện ghi "giải lớn nhất mình từng tổ chức ở đây".
+0. Chủ dự án duyệt bản `preview-v3` (emblem, Lookbook, 8 trang dự án, Outsource) rồi mới merge vào `main`. Xác nhận lại con số "10 ngành nghề".
+1. Meow: giờ ghi "giải lớn nhất thuộc hệ thống" (theo lời chủ dự án).
 2. **Phần Kỹ năng:** chủ dự án chưa duyệt từng dòng.
 3. **Thêm ngôn ngữ** Trung, Hàn, Nhật, Pháp, Tây Ban Nha (xem mục 5).
 4. **Tên miền riêng** (nếu chủ dự án muốn).
