@@ -16,27 +16,28 @@ Chủ dự án đã duyệt bản này ("tương đối ổn rồi") và cho đ�
 
 ## 1b. Trang dự án riêng cho từng thương hiệu (cập nhật 29/10/2026)
 
-- **Đã làm: KAZA** (`https://kthegoat.vercel.app/#kaza`). Chủ dự án chọn hướng "C": bấm nút "Xem dự án" ở chương KAZA (mục Dự án), bấm vào ảnh chương, hoặc bấm ô logo KAZA ở mục Thương hiệu → ảnh trong khối đa giác bay ra toàn màn hình, chuyển đen trắng sang màu, có vệt sáng chrome quét ngang, rồi tên thương hiệu trồi lên và giải mã chữ.
+- **Đã làm cho 8/9 thương hiệu** (mọi thương hiệu trừ Embé, vì Embé không có tư liệu). Link trực tiếp: `#bv`, `#com`, `#kimmy`, `#zojy`, `#astro`, `#meow`, `#kaza`, `#dd`. KAZA là bản đầy đủ nhất (có thêm Con số, Cột mốc, Hậu trường); các trang khác dùng chung khuôn, phần nào không có dữ liệu thì tự bỏ. Chủ dự án chọn hướng "C": bấm nút "Xem dự án" ở chương KAZA (mục Dự án), bấm vào ảnh chương, hoặc bấm ô logo KAZA ở mục Thương hiệu → ảnh trong khối đa giác bay ra toàn màn hình, chuyển đen trắng sang màu, có vệt sáng chrome quét ngang, rồi tên thương hiệu trồi lên và giải mã chữ.
 - Bên trong: màn đầu (logo, tên lớn, 4 ô thông tin) → (01) Khởi đầu → (02) Con số (nền đen) → (03) Việc đã làm (ảnh dính bên phải đổi theo dòng đang đọc) → (04) Những đêm (dải ảnh trượt ngang, dính màn hình) → (05) Cột mốc → (06) Hậu trường → chân trang đen, chữ chạy "Keep All Zeal Alive", nút "Chương tiếp theo".
 - **Code:** `CASES` (ảnh, kích thước, chú thích, mốc) và `I18N[lang].cases.kaza` (chữ). `BRANDS[i].cs = 'kaza'` bật trang cho thương hiệu đó. Các hàm `renderCase`, `buildCaseFX`, `openCase`, `closeCase`, `requestClose`. Trang là lớp phủ `#cs` có thanh cuộn riêng (Lenis riêng, ScrollTrigger dùng `scroller: cs`); Lenis chính dừng lại và `main` bị `inert` khi trang mở. Đóng bằng nút Đóng, phím Esc, hoặc nút Back của trình duyệt.
 - **Làm thương hiệu tiếp theo:** thêm khóa vào `CASES` + `I18N.vi/en.cases`, đặt `cs` trong `BRANDS`, ảnh vào `img/<tên>/` (nén 1500–1800px, q78). Ảnh trong mỗi dự án xếp **theo nhịp sáng/tối** (chủ dự án yêu cầu), không theo ngày; dòng thời gian vẫn theo ngày.
-- Ảnh trang dự án **giữ màu gốc** (chủ dự án đã đồng ý bỏ đen trắng; phần còn lại của trang vẫn đen trắng cho đến khi chủ dự án nói "làm").
+- Ảnh trên toàn trang **giữ màu gốc** (đã bỏ `grayscale`).
+- Ảnh từng thương hiệu nằm ở `img/bv`, `img/com`, `img/kimmy`, `img/zojy`, `img/astro`, `img/meow`, `img/kaza`, `img/dd` (lấy từ Drive, đã chọn tạm, chủ dự án sẽ tự thay nếu không ưng). Logo ZOJY và ASTRO đã thêm vào `_project/logos-original/` và `process_logos.py`.
 - **Dữ kiện KAZA (chủ dự án xác nhận):** bắt đầu 13.10.2024, khi quán vừa xây xong; chức danh **Giám Đốc Sáng Tạo** (không chỉ Marketing); đội Sáng tạo 4 → 7 người; điều phối 100+ nhân sự toàn quán; 3 kênh TikTok (kênh lớn nhất 100K người theo dõi, video cao nhất 7M lượt xem); tự xây Game Night, Ladies Night (chương trình của chính KAZA, không phải bên thứ ba), From The Chef – Món ngon mời bạn (mời món miễn phí tối thứ 6 hàng tuần), Performance; chiến dịch KAZA Carnival, KAZA có gì vui?, KAZA's Special – Món này bếp khen; ảnh điện thoại quay là ảnh hậu trường của đội. Ảnh đã chọn tạm, chủ dự án sẽ tự thay nếu không ưng.
 - Ảnh gốc nằm trên Google Drive của chủ dự án (thư mục "NamK Portfolio", có thư mục con cho từng thương hiệu/đêm diễn). Công cụ Drive tải được ảnh ≤ ~6 MB; ảnh lớn hơn phải nhờ chủ dự án gửi trong chat.
 
-### Việc đã chốt nhưng CHỜ chủ dự án nói "làm" (chưa sửa)
-- Chữ 3D đổi từ chrome bạc sang **đen nhám, có đường sáng mảnh ở cạnh vát** (giữ nguyên hình khối và chuyển động).
-- Bỏ đen trắng toàn trang (`.gimg`), sắp ảnh theo tone cho hài hòa.
-- Thêm **ZOJY CAFE** và **ASTRO** → 9 thương hiệu, lưới 5×2 (9 + ô kêu gọi), bộ đếm "/ 09", sửa "Bảy thương hiệu". Mọi mảng i18n phải đủ 9 phần tử. Chưa có logo ZOJY/ASTRO.
-- Mốc thời gian mới: Cốm 1–4/2023; Kimmy và ZOJY 2–6/2024 (cùng vai trò); Embé 3–4/2024; ASTRO 8/2024–hết 9/2024 (chỉ ghi giai đoạn + vai trò); Meow 2/9/2024–31/8/2025 (nâng giải từ đấu 1-1/2-2 lên giải 64 người, tổng thưởng 50 triệu; chưa rõ "lớn nhất" ở phạm vi nào); KAZA từ 13/10/2024; Dog & Duck 12/2024–5/2025 (giữ câu "Không phải chương nào cũng thắng…", thêm "Được sống với HipHop, sống với đam mê và ước mơ luôn cháy trong tim, luôn là một cuộc đời hoàn hảo").
-- Bốn ô số mục Giới thiệu: 5 năm làm sáng tạo / 6 ngành nghề / 200+ nhân sự từng làm việc cùng / 7M lượt xem cao nhất một video (dòng phụ 100K người theo dõi một kênh). Bỏ mọi câu "5–7 người" và "2 năm thành điểm đến hàng đầu".
-- Mục Kỹ năng: bấm để mở rộng (accordion) với hình chuyển động SVG tượng trưng, mô tả ngắn, bỏ ảnh chân dung chạy theo chuột.
+### Đã làm xong ngày 29/10/2026 (chủ dự án nói "làm tất tần tật")
+- Chữ ký 3D: **đen nhám**, thành bên than chì tối, cộng một **đường viền sáng 1px** (`THREE.LineLoop` theo từng đường viền chữ) ở mép trước. Không còn chrome bạc.
+- Dưới chữ ký: 6 nghề (Social Media, Planner, Photographer, Editor, Content Creator, Copywriter), rê chuột hoặc chạm thì từng chữ nảy lên; câu "Anything you can imagine." giải mã chữ khi vào trang. Vị trí bám theo đáy chữ 3D qua biến CSS `--sigb`.
+- 9 thương hiệu theo thứ tự thời gian, lưới 5×2 (điện thoại 2 cột), bộ đếm "/ 09". Mốc thời gian, vai trò, câu chuyện mới (vi + en) theo ghi chú của chủ dự án.
+- Giới thiệu: "Từ nhân viên kho đến Giám Đốc Sáng Tạo"; 4 ô số 05 năm / 06 ngành / 200+ nhân sự / 07M lượt xem (dòng phụ 100K người theo dõi). Đã bỏ "5–7 người" và "2 năm thành điểm đến hàng đầu".
+- Kỹ năng: 7 dòng bấm-mở-rộng, mỗi dòng có hình vẽ SVG chuyển động riêng (`SK_ART`, chạy bằng CSS keyframes, dừng khi đóng), mô tả ngắn + thẻ. Đã bỏ ảnh chân dung chạy theo chuột.
+- Chức danh: Giám Đốc Sáng Tạo (KAZA) và Marketing Director (Bích Vân Store).
 
 ## 2. Gu và quyết định đã chốt (đừng tự ý đổi)
 
 - **Tông:** sáng, chỉ đen, trắng và xám. **Không** có màu nhấn (đã từ chối cả gradient hồng–xanh của Bích Vân Store lẫn màu mới). **Không** có nút đổi giao diện tối/sáng.
 - **Phong cách:** tối giản, chuyên nghiệp, "thật công nghệ, hiện đại". Chữ không chân, rộng và đậm kiểu Balenciaga / Fear of God (font Archivo, `font-stretch:125%`, đậm 800–900, viết hoa). Nhãn nhỏ dùng Geist Mono.
-- **Chữ ký 3D:** "K THE GOAT" bằng chrome bạc 3D, xuất hiện ở màn đầu và chân trang. Đây là cái gật đầu với Chrome Hearts mà chủ dự án thích. Chủ dự án **đã chê font gothic (blackletter)** nên giờ dùng chính font Archivo. Không dùng logo hay họa tiết của Chrome Hearts.
+- **Chữ ký 3D:** "K THE GOAT" khối 3D **đen nhám có viền sáng mảnh** (chủ dự án chê chrome bạc "hơi đau mắt"), xuất hiện ở màn đầu và chân trang. Chủ dự án **đã chê font gothic (blackletter)** nên giờ dùng chính font Archivo. Không dùng logo hay họa tiết của Chrome Hearts.
 - **Tên:** tên lớn là **K THE GOAT**, các chỗ khác gọi **NamK**, tên thật **Y Nam Knul**.
 - **Không** dùng con trỏ chuột tùy biến. Trang phải nhẹ và mượt trên điện thoại.
 - **Giọng văn:** kể ngắn, tinh thần "không ngại thử thách". Chủ dự án nói: "kể dài dòng cũng có ai đọc đâu".
@@ -54,7 +55,8 @@ Chủ dự án đã duyệt bản này ("tương đối ổn rồi") và cho đ�
 - **10/2024 đến nay:** **KAZA** (slogan trên logo: "Keep All Zeal Alive"). Bắt đầu làm theo đội, quản lý đội 5–7 người. Một thương hiệu mới mở, chỉ trong khoảng 2 năm đã thành một trong những điểm ăn chơi hàng đầu thành phố.
 - **12/2024 – 05/2025:** **Dog & Duck** (quán bar local nhỏ, đã đóng cửa).
 - Ở các thương hiệu trước KAZA, chủ dự án là nhân viên Social Media làm một mình toàn bộ: lên kế hoạch, chụp, sửa hình, viết bài, đăng bài.
-- **Hiện tại:** Marketing Director của KAZA Restaurant và Bích Vân Store.
+- **Hiện tại:** Giám Đốc Sáng Tạo của KAZA và Marketing Director của Bích Vân Store.
+- **Mốc thời gian chuẩn (mới nhất, thay các mốc ở trên):** Bích Vân 2021–nay; Cốm 01–04/2023; Kimmy và ZOJY 02–06/2024; Embé 03–04/2024; ASTRO 08–09/2024; Meow 02.09.2024–31.08.2025; KAZA từ 13.10.2024; Dog & Duck 12/2024–05/2025.
 - **Liên hệ công khai** (chủ dự án đã cho phép hiển thị): SĐT 0706 034 567, email kthegoat.info@gmail.com.
 - **Phần Kỹ năng** là bản nháp do Claude viết, chủ dự án chưa sửa từng dòng.
 
@@ -96,8 +98,8 @@ _project/                  Tài liệu dự án, KHÔNG deploy (xem .vercelignor
 ## 5. Sửa nội dung ở đâu (trong `index.html`)
 
 - **`BRANDS`** (khoảng dòng 434): tên, logo, **ảnh của từng chương** (`img`), năm.
-- **`TEAM_IMG`**: danh sách ảnh dải đội nhóm. **`SK_IMG`**: ảnh hiện khi rê chuột ở mục Kỹ năng (7 ảnh, theo thứ tự dòng).
-- **`I18N.vi` / `I18N.en`**: toàn bộ chữ trên trang. Mỗi thuộc tính phải có ở **cả hai** ngôn ngữ. Các mảng `period`, `role`, `desc`, `br_kind`, `skills` phải đúng **7 phần tử** theo thứ tự `BRANDS`.
+- **`TEAM_IMG`**: danh sách ảnh dải đội nhóm.
+- **`I18N.vi` / `I18N.en`**: toàn bộ chữ trên trang. Mỗi thuộc tính phải có ở **cả hai** ngôn ngữ. Các mảng `period`, `role`, `desc`, `br_kind` phải đúng **9 phần tử** theo thứ tự `BRANDS`; `skills` có 7 phần tử dạng `[tên, dòng ngắn, mô tả, thẻ[]]` khớp với 7 hình trong `SK_ART`. `POLY` cần đủ 9 hình đa giác.
 - **Thêm ngôn ngữ** (chủ dự án muốn sau này có Trung, Hàn, Nhật, Pháp, Tây Ban Nha):
   1. Thêm `I18N.zh` (v.v.) với đủ các khóa.
   2. Thêm nút `<button data-lang="zh">` trong `.lang`.
@@ -123,6 +125,8 @@ _project/                  Tài liệu dự án, KHÔNG deploy (xem .vercelignor
 
 - **Môi trường cloud của Claude thường KHÔNG truy cập được CDN** (jsDelivr, cdnjs, Google Fonts, npm đều bị chặn). Vì vậy:
   - **Kiểm tra bố cục và lỗi code offline:** `NODE_PATH=$(npm root -g) node _project/tools/test/run.js`. Lệnh dùng thư viện giả, chụp toàn trang desktop và điện thoại, báo tràn ngang. Lệnh này không chạy chuyển động thật hay WebGL.
+  - **Thư viện thật + WebGL ngay trong cloud:** CDN bị chặn nhưng GitHub thì không. Xem hướng dẫn đầu file `_project/tools/test/run-real.js` (clone three.js r160, GSAP 3.12.5, font Archivo/Geist Mono từ GitHub), rồi chạy `LIBS=... node _project/tools/test/run-real.js`: render chữ 3D thật bằng SwiftShader, chụp màn đầu, lưới thương hiệu, chương dự án, Kỹ năng, một trang dự án (máy tính + điện thoại). Lenis vẫn là bản giả.
+  - **Lưu ý:** ngày 29/10/2026 Chrome trên máy chủ dự án báo WebGL bị tắt ("GL_VENDOR = Disabled"), nên chữ 3D rơi về chữ dự phòng phẳng khi xem qua Chrome đó. Không phải lỗi code. Bật lại: chrome://settings → Hệ thống → "Dùng tăng tốc đồ hoạ", hoặc khởi động lại Chrome.
   - **Trang dự án offline:** `NODE_PATH=$(npm root -g) node _project/tools/test/run-case.js` mở trang KAZA (chế độ giảm chuyển động) và chụp toàn bộ, ra `case-desk.png`, `case-mob.png`.
   - **Xem chuyển động thật trước khi lên production:** push lên một nhánh khác `main` (ví dụ `kaza-case`) → Vercel tạo bản xem trước tại `https://kthegoat-git-<tên-nhánh>-namkzhongli-3019.vercel.app` (mở được trong Chrome của chủ dự án vì đã đăng nhập Vercel). Muốn xem khung điện thoại khi cửa sổ không thu nhỏ được: thay trang bằng một `<iframe>` 390×844 trỏ về chính trang đó. Muốn chụp giữa chuyển động: `gsap.globalTimeline.timeScale(0.12)`.
   - **Kiểm tra thật:** push lên `main`, đợi khoảng 10 giây để Vercel deploy, rồi mở https://kthegoat.vercel.app trong trình duyệt của app Claude trên máy chủ dự án (trang đã được cho phép). Thêm `?v=số` để tránh cache, đọc console, dùng `resize_window` để thử 1440×900 và khung điện thoại, rồi nhớ đặt lại.
@@ -131,8 +135,8 @@ _project/                  Tài liệu dự án, KHÔNG deploy (xem .vercelignor
 
 ## 8. Việc còn dang dở và gợi ý tiếp theo
 
-0. **Trang dự án cho các thương hiệu còn lại** (Bích Vân, Cốm, Embé, Kimmy, ZOJY, Meow, ASTRO, Dog & Duck) theo khuôn KAZA, và các việc ở mục 1b đang chờ lệnh "làm".
-1. **Ảnh thật cho từng chương dự án.** (KAZA đã có ảnh thật `img/kaza/k-cover`.) Ảnh trong `BRANDS[].img` đang được **gán tạm theo cảm giác**, chưa đúng thương hiệu. Chủ dự án chưa gửi ảnh riêng từng nơi. Riêng `ktg-08` (nightclub) gán cho KAZA và `bomb9215` (quán bar) gán cho Dog & Duck cũng chỉ là đoán.
+0. Chủ dự án duyệt lại ảnh và câu chữ của 8 trang dự án (đã chọn tạm). Embé chưa có trang vì không có tư liệu; chương Embé vẫn dùng ảnh studio `art-14`.
+1. Meow: "giải lớn nhất" chưa rõ phạm vi (thành phố hay hệ thống), hiện ghi "giải lớn nhất mình từng tổ chức ở đây".
 2. **Phần Kỹ năng:** chủ dự án chưa duyệt từng dòng.
 3. **Thêm ngôn ngữ** Trung, Hàn, Nhật, Pháp, Tây Ban Nha (xem mục 5).
 4. **Tên miền riêng** (nếu chủ dự án muốn).

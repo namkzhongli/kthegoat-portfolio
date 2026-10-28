@@ -211,8 +211,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .sk-it.open::after{transform:scaleX(1)}
 .sk-head{width:100%;display:grid;grid-template-columns:clamp(34px,4vw,64px) minmax(0,7fr) minmax(0,4fr) 44px;gap:16px;align-items:center;padding:clamp(16px,2.6vh,28px) 0;text-align:left;text-transform:inherit;letter-spacing:inherit}
 .sk-no{color:var(--ink-3)}
-.sk .n{display:block;overflow:hidden;height:1.06em;font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.03em;font-size:clamp(22px,3.4vw,58px);line-height:1.06}
-.sk .n .roll>span{height:1.06em}
+.sk .n{display:block;font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.03em;font-size:clamp(20px,3vw,52px);line-height:1.04;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .sk .d{color:var(--ink-2);font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
 .sk-pl{position:relative;width:40px;height:40px;border:1px solid var(--line-2);border-radius:50%;justify-self:end;transition:transform .6s cubic-bezier(.7,0,.2,1),background .3s,border-color .3s}
 .sk-pl::before,.sk-pl::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:1px;background:var(--ink);transform:translate(-50%,-50%);transition:background .3s}
@@ -257,7 +256,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 @keyframes skNode{0%,100%{fill:transparent}30%,60%{fill:currentColor}}
 @keyframes skFlow{to{stroke-dashoffset:-14}}
 @keyframes skDot{0%,100%{transform:translateY(0);opacity:.35}40%{transform:translateY(-7px);opacity:1}}
-@media (hover:hover){.sk-head:hover .roll{transform:translateY(-50%)}.sk-head:hover .sk-pl{border-color:var(--ink)}}
+@media (hover:hover){.sk-head:hover .n{transform:translateX(12px)}.sk-head:hover .sk-pl{border-color:var(--ink)}}
 
 /* contact */
 .contact{position:relative;z-index:2;background:linear-gradient(var(--p3),var(--p1) 40%);padding-top:clamp(60px,10vh,120px)}
@@ -462,6 +461,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .tick span{font-size:9px}
   .sk-head{grid-template-columns:28px minmax(0,1fr) 36px;gap:10px}
   .sk .d{display:none}
+  .sk .n{font-size:clamp(18px,5.6vw,30px)}
   .sk-pl{width:34px;height:34px}
   .sk-wrap{grid-template-columns:1fr;gap:20px}
   .sk-art,.sk-txt{grid-column:1}
@@ -1209,7 +1209,7 @@ function applyLang(){
   setSplit($('#skTitle'), t.sk_lines);
   $$('#skList li').forEach((li, i) => {
     const [name, short, lead, tags] = t.skills[i];
-    const n = $('.n', li); n.innerHTML = ''; const r = document.createElement('span'); setRoll(r, name); n.appendChild(r.firstChild); n.setAttribute('aria-label', name);
+    $('.n', li).textContent = name;
     $('.d', li).textContent = short; $('.sk-lead', li).textContent = lead; $('.sk-tags', li).innerHTML = tags.map(x => `<span>${esc(x)}</span>`).join('');
   });
   setSplit($('#ctTitle'), t.ct_lines);
@@ -1344,7 +1344,7 @@ function makeStage(canvas, layouts, opts = {}){
   /* matte black faces; the bevel + walls are a dark glossy metal so the studio lights draw thin bright lines on the edges.
      ExtrudeGeometry group 0 = front/back caps, group 1 = bevel + side walls. */
   const capMat = new THREE.MeshStandardMaterial({ color: 0x0c0c0c, metalness: 0, roughness: .82 });
-  const edgeMat = new THREE.MeshStandardMaterial({ color: 0xbdbdbd, metalness: 1, roughness: .2, envMapIntensity: 1.25 });
+  const edgeMat = new THREE.MeshStandardMaterial({ color: 0x2b2b2b, metalness: .85, roughness: .38, envMapIntensity: 1 });
   const mat = [capMat, edgeMat];
   const lineMat = new THREE.LineBasicMaterial({ color: 0xe2e2e0, transparent: true, opacity: .9 });
   const group = new THREE.Group(); scene.add(group);
