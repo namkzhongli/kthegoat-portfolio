@@ -3,14 +3,15 @@
 File bàn giao cho Claude ở những cuộc trò chuyện sau. Đọc hết file này trước khi sửa bất cứ thứ gì.
 Chủ dự án nói chuyện bằng tiếng Việt, xưng "mình/tôi". Hãy trả lời bằng tiếng Việt.
 
-## 0. Đợt 2 (29/10/2026, nhánh `preview-v3`, CHƯA lên `main`)
+## 0. Đợt 2 (29/10/2026, ĐÃ lên `main`)
 
-Chủ dự án duyệt trên bản xem trước rồi mới merge vào `main`. Bản xem trước: `https://kthegoat-git-preview-v3-namkzhongli-3019.vercel.app`. Đã làm:
-- **Emblem thay đồng hồ** sau chữ ký 3D: hàm `emblem()` vẽ SVG nét mảnh gốc (chữ K dưới vòm gothic, con dấu chữ "K THE GOAT · NAMK · EST. 2021 / ANYTHING YOU CAN IMAGINE", hai thập tự, vòng cánh hoa). Đây là thiết kế riêng, **không** dùng logo Chrome Hearts thật (chủ dự án đã đồng ý hướng này). Vòng ngoài `.em-ring` xoay chậm; phần lõi đứng yên.
+Làm trên nhánh `preview-v3`, chủ dự án xem rồi yêu cầu sửa thêm và đưa lên `main`. Đã làm:
+- **Con dấu thay đồng hồ** sau chữ ký 3D: hàm `emblem()` vẽ SVG nét mảnh gốc (vòng chữ "K THE GOAT · NAMK · EST. 2021 / ANYTHING YOU CAN IMAGINE", hai thập tự, vòng cánh hoa), `.em-ring` xoay chậm. Thiết kế riêng, **không** dùng logo Chrome Hearts. **Chủ dự án chê chữ K cách điệu + vòm gothic ở giữa ("xấu quá") nên đã bỏ**; đừng thêm lại. Nếu chủ dự án muốn bỏ luôn cả vòng con dấu: xóa `$('#bezel').innerHTML = emblem();`.
 - **Dải logo bấm được** ở mục Dự án (`.tick` là `<button>`): bấm logo thì cuộn mượt tới chương đó (`workJump`).
 - **Trang dự án:** các dòng "Việc đã làm" bấm/Enter để xem ảnh ngay (dòng đang chọn có nhãn "Đang xem"); nhiều ảnh thì tự đổi mỗi 3,8 giây và có chấm bấm; mỗi dòng có thể có đoạn chi tiết (phần tử thứ 4 của `work[i]`). Thêm khối **"Câu chuyện"** (`t.story = {eb,h,p[],q,qb}`) sau mục Việc đã làm: vài đoạn văn + câu trích sáng dần từng từ. Viết từ lời kể của chủ dự án, không bịa số liệu.
 - **Bỏ Embé.** Còn 8 thương hiệu; lưới 5×2 = 8 logo + ô **Outsource** (bấm hiện lời nhắn về bảo mật khách hàng, cửa sổ `#ow`) + ô "Thương hiệu tiếp theo?". Các mảng `period/role/desc/br_kind` và `POLY` đều 8 phần tử.
-- **Lookbook** (`#look`, giữa Đội nhóm và Kỹ năng): 8 ảnh cá nhân xếp theo nhịp sáng/tối (`LOOK`, ảnh trong `img/look/` và vài tấm dùng chung), có chú thích "LOOK 01…08", đoạn giới thiệu gu. Ảnh do Claude chọn, chủ dự án sẽ tự thay nếu không ưng. Mục đánh số lại: (05) Lookbook, (06) Kỹ năng, (07) Liên hệ.
+- **Lookbook** (`#look`, giữa Đội nhóm và Kỹ năng, có trong thanh menu): 10 ảnh (`LOOK`, ảnh trong `img/look/` và vài tấm dùng chung), chú thích "LOOK 01…10", đoạn giới thiệu gu. Ảnh đầu tiên `6e7a0408` là **ảnh chủ dự án thích nhất**: full chiều ngang 16:9 (điện thoại 4:5), có nhãn "Tấm mình thích nhất". `bfd1f8a9` và `ndu02048` cũng do chủ dự án chọn (tên file gốc 6E7A0408, BFD1F8A9-…, NDU02048 trong Drive "HOẠT ĐỘNG CÁ NHÂN TẠI KAZA"; Claude ghép tên theo thứ tự ảnh gửi trong chat, nếu sai thì đổi tên file). Đã bỏ ảnh `ktg-08` (giữa đám đông) theo yêu cầu. Mục đánh số lại: (05) Lookbook, (06) Kỹ năng, (07) Liên hệ.
+- **Ô Outsource** từng tràn chữ ra ngoài khung (tiêu đề quá to so với thẻ): đã sửa bằng `container-type:inline-size` + cỡ chữ theo `cqi`.
 - **Kỹ năng** viết lại hoa mỹ hơn (vi + en). Chỉ số "10 ngành nghề" do chủ dự án yêu cầu (Claude đếm được khoảng 8 chưa kể Outsource, nên **cần chủ dự án xác nhận con số đúng**).
 - Ảnh Google Drive không tải thêm được qua khung chat (mỗi tấm quá nặng), nên các dòng nhiều ảnh dùng lại ảnh đã có trong repo. Muốn thêm ảnh: nhờ chủ dự án gửi trong chat hoặc đặt vào `_project/` rồi nén bằng `prep_photos.py`.
 
@@ -148,7 +149,7 @@ _project/                  Tài liệu dự án, KHÔNG deploy (xem .vercelignor
 
 ## 8. Việc còn dang dở và gợi ý tiếp theo
 
-0. Chủ dự án duyệt bản `preview-v3` (emblem, Lookbook, 8 trang dự án, Outsource) rồi mới merge vào `main`. Xác nhận lại con số "10 ngành nghề".
+0. Chủ dự án nói "còn lại từ từ sửa sau": duyệt lại 8 trang dự án (câu chuyện, câu trích), Kỹ năng, Lookbook. Xác nhận lại con số "10 ngành nghề".
 1. Meow: giờ ghi "giải lớn nhất thuộc hệ thống" (theo lời chủ dự án).
 2. **Phần Kỹ năng:** chủ dự án chưa duyệt từng dòng.
 3. **Thêm ngôn ngữ** Trung, Hàn, Nhật, Pháp, Tây Ban Nha (xem mục 5).
