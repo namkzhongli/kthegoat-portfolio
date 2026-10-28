@@ -225,8 +225,157 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .gl2-ready .foot-fallback{opacity:0}
 .foot-meta{position:absolute;left:var(--gl);right:var(--gr);bottom:calc(24px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;color:var(--ink-2);gap:12px}
 
+/* case study: one mini landing page per brand, opened from the work chapter */
+.ch-open{margin-top:24px}
+.ch-open .pill{gap:10px}
+.stage.has-case{cursor:pointer}
+.bcell.has-case{cursor:pointer}
+.bcell .cs-mark{position:absolute;top:14px;right:14px;color:var(--ink);transition:color .3s}
+@media (hover:hover){.bcell:hover .cs-mark{color:var(--p3)}}
+.cs-fly{position:fixed;z-index:86;overflow:hidden;pointer-events:none;background:#0b0b0b;will-change:clip-path}
+.cs-fly img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cs-sweep{position:absolute;inset:-10% -80%;pointer-events:none;mix-blend-mode:screen;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.06) 45%,rgba(255,255,255,.55) 50%,rgba(255,255,255,.06) 55%,transparent 60%)}
+.cs-sweep.b{background:linear-gradient(105deg,transparent 48.6%,rgba(255,255,255,.95) 50%,transparent 51.4%)}
+.cs-fly .cs-tag{position:absolute;left:16px;bottom:14px;color:#fff;mix-blend-mode:difference;font-variant-numeric:tabular-nums}
+.cs{position:fixed;inset:0;z-index:85;background:var(--p3);overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;visibility:hidden;-webkit-overflow-scrolling:touch}
+.cs.open{visibility:visible}
+.cs img{max-width:none}
+.cs-bar{position:fixed;z-index:6;top:0;left:0;right:0;height:calc(var(--nav-h) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) var(--gr) 0 var(--gl);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;color:#fff;mix-blend-mode:difference}
+.cs-bar .pill{border-color:currentColor;justify-self:start;gap:10px}
+.cs-bar .pill svg{width:10px;height:10px}
+@media (hover:hover){.cs-bar .pill:hover{background:#fff;color:#000}}
+.cs-idx{font-variant-numeric:tabular-nums}
+.cs-sec{padding-block:clamp(90px,16vh,190px)}
+.cs-h{font-size:clamp(38px,6.6vw,120px)}
+.cs-hd{display:grid;gap:clamp(20px,3.4vh,36px);margin-bottom:clamp(40px,8vh,96px)}
+.cs-hero{position:relative;height:var(--vh);min-height:560px;overflow:hidden;background:#0b0b0b;color:var(--p3)}
+.cs-hero .bg{position:absolute;inset:0;overflow:hidden}
+.cs-hero .bg img{width:100%;height:100%;object-fit:cover;transform-origin:50% 40%}
+.cs-hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.42),rgba(0,0,0,0) 26%,rgba(0,0,0,.08) 50%,rgba(0,0,0,.86))}
+.cs-hero-in{position:absolute;left:var(--gl);right:var(--gr);bottom:calc(26px + env(safe-area-inset-bottom,0px));display:grid;gap:clamp(14px,2.6vh,30px)}
+.cs-hero-top{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;color:rgba(248,248,247,.72)}
+.cs-logo{height:clamp(30px,5vh,54px);width:auto;filter:invert(1)}
+.cs-title.disp,:root[lang=vi] .cs-title.disp{font-size:clamp(96px,27vw,470px);line-height:.8;letter-spacing:-.055em;margin-left:-.04em}
+.cs-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid rgba(248,248,247,.28)}
+.cs-meta>div{padding:14px 16px 0 0;display:grid;gap:8px;align-content:start}
+.cs-meta>div+div{border-left:1px solid rgba(248,248,247,.28);padding-left:16px}
+.cs-meta .k{color:rgba(248,248,247,.58)}
+.cs-meta .v{font-family:var(--f-sans);font-weight:800;font-stretch:118%;font-size:clamp(14px,1.35vw,21px);letter-spacing:-.01em;line-height:1.1}
+.cs-cue{position:absolute;right:var(--gr);top:calc(var(--nav-h) + 26px + env(safe-area-inset-top,0px));color:rgba(248,248,247,.8)}
+.cs-intro .cs-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:clamp(56px,10vh,110px);align-items:start}
+.cs-intro .cs-hd{grid-column:1 / span 7;grid-row:1;margin:0}
+.cs-lead{grid-column:1 / span 6;grid-row:2;display:grid;gap:22px;max-width:660px}
+.cs-lead p{margin:0;font-size:clamp(19px,1.7vw,27px);line-height:1.38;font-weight:500;letter-spacing:-.008em}
+.cs-lead .w{display:inline-block;white-space:pre}
+.cs-lead .sub{color:var(--ink-2);font-size:clamp(15px,1.15vw,18px);font-weight:400}
+.cs-fig{margin:0;position:relative}
+.cs-fig .ph{position:relative;overflow:hidden;background:#cfcfcd;aspect-ratio:3/4}
+.cs-fig .ph img{position:absolute;left:0;top:-9%;width:100%;height:118%;object-fit:cover}
+.cs-fig figcaption{display:flex;justify-content:space-between;gap:12px;margin-top:14px;color:var(--ink-2)}
+.cs-fig.f1{grid-column:8 / span 5;grid-row:1 / span 2}
+.cs-fig.f1 .ph{clip-path:polygon(0 0,100% 0,100% 84%,82% 100%,0 100%)}
+.cs-fig.f2{grid-column:3 / span 4}
+.cs-fig.f2 .ph{clip-path:polygon(16% 0,100% 0,100% 100%,0 100%,0 14%)}
+.cs-num{position:relative;background:#0b0b0b;color:var(--p3);overflow:hidden}
+.cs-num .bg{position:absolute;inset:-12% 0;opacity:.32}
+.cs-num .bg img{width:100%;height:100%;object-fit:cover}
+.cs-num .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0b0b0b,rgba(11,11,11,.3) 40%,rgba(11,11,11,.5) 70%,#0b0b0b)}
+.cs-num .wrap{position:relative;padding-block:clamp(100px,18vh,200px)}
+.cs-num .eyebrow{color:rgba(248,248,247,.7)}
+.cs-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid rgba(248,248,247,.26)}
+.cs-stat{padding:24px 20px 10px 0;display:grid;gap:16px;align-content:start}
+.cs-stat+.cs-stat{border-left:1px solid rgba(248,248,247,.26);padding-left:20px}
+.cs-stat .v{font-weight:800;font-stretch:125%;letter-spacing:-.045em;font-size:clamp(52px,8vw,150px);line-height:.88;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cs-stat .label{color:rgba(248,248,247,.62);max-width:22ch}
+.cs-teamline{display:flex;justify-content:space-between;gap:16px;margin-top:clamp(40px,7vh,80px);padding-top:18px;border-top:1px solid rgba(248,248,247,.26);color:rgba(248,248,247,.62)}
+.cs-teamline b{color:var(--p3);font-weight:500}
+.cs-do-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,5vw,80px);align-items:start}
+.cs-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.cs-list li{position:relative;display:grid;grid-template-columns:clamp(40px,5vw,72px) minmax(0,1fr);gap:12px 8px;padding:clamp(20px,3.4vh,34px) 0;border-bottom:1px solid var(--line);transition:opacity .5s}
+.cs-list li::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .8s cubic-bezier(.7,0,.2,1)}
+.cs-list li.on::after{transform:scaleX(1)}
+.cs-list .no{color:var(--ink-3);padding-top:.5em}
+.cs-list h4{margin:0;font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.03em;font-size:clamp(22px,2.7vw,46px);line-height:1.04}
+.cs-list p{grid-column:2;margin:0;color:var(--ink-2);font-size:clamp(15px,1.15vw,18px);max-width:52ch}
+.cs-tags{grid-column:2;display:flex;flex-wrap:wrap;gap:8px}
+.cs-tags span{border:1px solid var(--line-2);border-radius:99px;padding:7px 12px 6px;line-height:1}
+.cs-list .m{display:none}
+.cs-stick{position:sticky;top:calc(var(--nav-h) + 30px + env(safe-area-inset-top,0px))}
+.cs-stack{position:relative;aspect-ratio:4/5;overflow:hidden;background:#cfcfcd;clip-path:polygon(0 0,100% 0,100% 88%,86% 100%,0 100%)}
+.cs-stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cs-stick .figcap{margin-top:16px}
+.cs-gal{position:relative;background:var(--p2)}
+.cs-gal-pin{position:sticky;top:0;height:var(--vh);overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(22px,4vh,44px);padding-top:calc(var(--nav-h) + env(safe-area-inset-top,0px))}
+.cs-gal-hd{display:flex;justify-content:space-between;align-items:end;gap:24px}
+.cs-gal-hd .cs-hd{margin:0}
+.cs-gal-hd>.label{color:var(--ink-2);text-align:right;font-variant-numeric:tabular-nums}
+@media (min-width:821px){.cs-list li:not(.on){opacity:.42}}
+.cs-track{display:flex;align-items:flex-start;gap:clamp(14px,2vw,32px);padding:0 var(--gr) 0 var(--gl);width:max-content;will-change:transform}
+.cs-track figure{margin:0;flex:none;display:grid;gap:12px}
+.cs-track figure:nth-child(even){margin-top:clamp(24px,7vh,84px)}
+.cs-track .ph{overflow:hidden;clip-path:polygon(0 0,100% 0,100% 88%,94% 100%,0 100%)}
+.cs-track img{height:clamp(220px,50vh,560px);width:auto;transform-origin:center}
+.cs-track figcaption{display:flex;justify-content:space-between;gap:16px;color:var(--ink-2)}
+.cs-track figcaption b{color:var(--ink);font-weight:500}
+.cs-tl{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.cs-tl li{position:relative;display:grid;grid-template-columns:minmax(0,2.4fr) minmax(0,2.6fr) minmax(0,7fr);gap:24px;align-items:baseline;padding:clamp(16px,2.8vh,28px) 12px;margin:0 -12px;border-bottom:1px solid var(--line);isolation:isolate;overflow:hidden}
+.cs-tl li::before{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleY(0);transform-origin:bottom;transition:transform .5s cubic-bezier(.7,0,.2,1);z-index:-1}
+.cs-tl .d{font-variant-numeric:tabular-nums}
+.cs-tl .t{color:var(--ink-3)}
+.cs-tl .a{font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.03em;font-size:clamp(20px,3vw,50px);line-height:1.04;transition:color .3s}
+.cs-tl .d,.cs-tl .t{transition:color .3s}
+@media (hover:hover){.cs-tl li:hover::before{transform:scaleY(1)}.cs-tl li:hover .a,.cs-tl li:hover .d{color:var(--p3)}.cs-tl li:hover .t{color:rgba(248,248,247,.6)}}
+.cs-bts-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:40px;align-items:end}
+.cs-bts .cs-hd{grid-column:1 / -1}
+.cs-bts .big{grid-column:1 / span 8}
+.cs-bts .big .ph{aspect-ratio:3/2;clip-path:polygon(0 0,92% 0,100% 12%,100% 100%,0 100%)}
+.cs-bts .side{grid-column:9 / span 4;display:grid;gap:28px}
+.cs-bts .side .ph{aspect-ratio:2/3;clip-path:polygon(0 10%,18% 0,100% 0,100% 100%,0 100%)}
+.cs-bts .side p{margin:0;font-size:clamp(17px,1.4vw,22px);line-height:1.42;font-weight:500}
+.cs-end{background:var(--ink);color:var(--p3);overflow:hidden;padding-bottom:calc(30px + env(safe-area-inset-bottom,0px))}
+.cs-mq{overflow:hidden;white-space:nowrap;border-bottom:1px solid rgba(248,248,247,.2);padding-block:clamp(14px,2.4vh,26px)}
+.cs-mq .tr{display:inline-flex;animation:csmq 38s linear infinite}
+.cs-mq .mq-item{color:transparent;-webkit-text-stroke:1.2px var(--p3);font-size:clamp(56px,11vw,200px)}
+@keyframes csmq{to{transform:translateX(-50%)}}
+.cs-next{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;padding-top:clamp(60px,12vh,140px)}
+.cs-next a{display:grid;gap:18px;text-decoration:none}
+.cs-next .label{color:rgba(248,248,247,.6)}
+.cs-next .nm{display:flex;align-items:center;gap:.3em;font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.04em;font-size:clamp(40px,8.4vw,150px);line-height:.92}
+.cs-next .nm i{display:inline-grid;place-items:center;font-style:normal;width:.62em;height:.62em;border:1px solid rgba(248,248,247,.4);border-radius:50%;font-size:.5em;transition:transform .5s cubic-bezier(.2,.7,.2,1),background .3s,color .3s}
+@media (hover:hover){.cs-next a:hover .nm i{transform:rotate(-45deg);background:var(--p3);color:var(--ink)}}
+.cs-end .pill{border-color:rgba(248,248,247,.4);justify-self:start}
+@media (hover:hover){.cs-end .pill:hover{background:var(--p3);color:var(--ink)}}
+.cs-end-meta{display:flex;justify-content:space-between;gap:16px;margin-top:clamp(40px,8vh,90px);padding-top:18px;border-top:1px solid rgba(248,248,247,.2);color:rgba(248,248,247,.5)}
+
 @media (max-width:820px){
   :root{--nav-h:56px}
+  .bcell .cs-mark{top:auto;bottom:12px;right:12px;font-size:9px}
+  .cs-title.disp,:root[lang=vi] .cs-title.disp{font-size:clamp(84px,30vw,200px)}
+  .cs-meta{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cs-meta>div:nth-child(3){border-left:0;padding-left:0}
+  .cs-meta>div:nth-child(n+3){border-top:1px solid rgba(248,248,247,.28);margin-top:14px}
+  .cs-meta .v{font-size:14px}
+  .cs-cue{display:none}
+  .cs-intro .cs-hd,.cs-lead{grid-column:1 / -1}
+  .cs-fig.f1{grid-column:2 / span 11;grid-row:auto}
+  .cs-fig.f2{grid-column:1 / span 8}
+  .cs-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cs-stat:nth-child(3){border-left:0;padding-left:0}
+  .cs-stat:nth-child(n+3){border-top:1px solid rgba(248,248,247,.26)}
+  .cs-stat .v{font-size:clamp(46px,15vw,84px)}
+  .cs-do-grid{grid-template-columns:1fr}
+  .cs-stick{display:none}
+  .cs-list .m{display:block;grid-column:1 / -1;margin-top:8px;overflow:hidden;aspect-ratio:16/10;clip-path:polygon(0 0,100% 0,100% 86%,92% 100%,0 100%)}
+  .cs-list .m img{width:100%;height:100%;object-fit:cover}
+  .cs-gal-hd{flex-direction:column;align-items:flex-start;gap:8px}
+  .cs-gal-hd .label{text-align:left}
+  .cs-track img{height:clamp(200px,40vh,380px)}
+  .cs-tl li{grid-template-columns:auto 1fr;gap:4px 16px}
+  .cs-tl .a{grid-column:1 / -1}
+  .cs-bts .big,.cs-bts .side{grid-column:1 / -1}
+  .cs-bts .side{grid-template-columns:5fr 7fr;align-items:end}
+  .cs-next{grid-template-columns:1fr}
+  .cs-end-meta{flex-direction:column}
   .nav{grid-template-columns:auto 1fr auto}
   .nav ul,.clock,.guides,.hud{display:none}
   .hc.bc{display:none}
@@ -257,7 +406,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .team-head .label{text-align:left}
   .strip img{height:clamp(200px,42vh,420px)}
 }
-@media (prefers-reduced-motion:reduce){#loader{transition:none}.grain,.bezel svg,.brand b{animation:none}}
+@media (prefers-reduced-motion:reduce){#loader{transition:none}.grain,.bezel svg,.brand b,.cs-mq .tr{animation:none}}
 </style>
 
 <div id="loader" aria-hidden="true">
@@ -437,12 +586,46 @@ const BRANDS = [
   { name:'Embé', logo:'embe', img:'art-14', year:'2022' },
   { name:'Kimmy Cuisine & Lounge', logo:'kimmy', img:'img_9658', year:'2023' },
   { name:'Meow Billiards', logo:'meow', img:'dscf1790', year:'2024' },
-  { name:'KAZA', logo:'kaza', img:'ktg-08', year:'2024' },
+  { name:'KAZA', logo:'kaza', img:'kaza/k-cover', year:'2024', cs:'kaza' },
   { name:'Dog & Duck', logo:'dogduck', img:'bomb9215', year:'2024' }
 ];
 const N = BRANDS.length;
 const TEAM_IMG = ['dscf1860','dscf1935','dscf1912','dscf2058','dscf2061','dscf1865','dscf2063','dscf2071','dscf1913','dscf2080'];
 const SK_IMG = ['img_9648','img_9652','img_9653','img_9655','img_9656','img_9657','img_9649'];
+
+/* Case studies (mini landing page per brand). Text lives in I18N[lang].cases[key].
+   Photos: [file, width, height]. Gallery items add [date, artist] and are ordered by light/dark rhythm, not by date. */
+const CASES = {
+  kaza: {
+    cover: ['kaza/k-cover', 1800, 1200],
+    figs: [['kaza/k-start-bar', 1125, 1500], ['kaza/k-meeting', 1125, 1500]],
+    crowd: ['kaza/k-crowd', 1800, 1200],
+    stats: [{ v: 3, w: 2, suf: '' }, { v: 100, w: 3, suf: 'K' }, { v: 7, w: 2, suf: 'M' }, { v: 100, w: 3, suf: '+' }],
+    work: ['kaza/k-start-sign', 'kaza/k-uhp-selfie', 'kaza/k-programs', 'kaza/k-dt-dongson', 'kaza/k-andree', 'kaza/k-team'],
+    gallery: [
+      ['kaza/k-uhp-neon', 1600, 1066, '16.10.2025', 'Ưng Hoàng Phúc'],
+      ['kaza/k-themen', 1600, 1067, '15.01.2026', 'The Men'],
+      ['kaza/k-pjn', 1600, 1066, '17.09.2026', 'Huỳnh James & PJNBOYS'],
+      ['kaza/k-dt-portrait', 933, 1400, '27.08.2026', 'Đan Trường'],
+      ['kaza/k-datg-wide', 1600, 1067, '22.10.2026', 'Đạt G'],
+      ['kaza/k-uhp-1st', 1600, 1067, '16.10.2025', 'Ưng Hoàng Phúc'],
+      ['kaza/k-dt-bouquet', 1600, 1066, '27.08.2026', 'Đan Trường'],
+      ['kaza/k-ttb', 1600, 1066, '05.02.2026', 'Trịnh Thăng Bình'],
+      ['kaza/k-datg', 1600, 1067, '22.10.2026', 'Đạt G']
+    ],
+    timeline: [
+      ['13.10.2024', 0, 'KAZA'],
+      ['16.10.2025', 1, 'Ưng Hoàng Phúc'],
+      ['15.01.2026', 2, 'The Men'],
+      ['05.02.2026', 2, 'Trịnh Thăng Bình'],
+      ['18.06.2026', 2, 'Andree Right Hand'],
+      ['27.08.2026', 2, 'Đan Trường'],
+      ['17.09.2026', 2, 'Huỳnh James & PJNBOYS'],
+      ['22.10.2026', 3, 'Đạt G']
+    ],
+    bts: [['kaza/k-bts-phone', 1600, 1066], ['kaza/k-bts-me', 933, 1400]]
+  }
+};
 
 const I18N = {
   vi: {
@@ -459,14 +642,14 @@ const I18N = {
     br_kind:['Bán lẻ Apple','Café · Camping','Thời trang trẻ em','Fine Dining','Billiard','F&B · Giải trí','Bar'],
     br_cta:'Thương hiệu tiếp theo?', br_cta2:'Liên hệ',
     period:['2021 — nay','2022','2022','2023','2024','10/2024 — nay','12/2024 — 05/2025'],
-    role:['Nhân viên kho → Marketing Director','Social Media · Café & Camping','Social Media · Thời trang trẻ em','Social Media · Nhà hàng Fine Dining','Social Media · Chuỗi billiard toàn quốc','Marketing Director · Đội 5–7 người','Quán bar local nhỏ'],
+    role:['Nhân viên kho → Marketing Director','Social Media · Café & Camping','Social Media · Thời trang trẻ em','Social Media · Nhà hàng Fine Dining','Social Media · Chuỗi billiard toàn quốc','Giám Đốc Sáng Tạo','Quán bar local nhỏ'],
     desc:[
       'Bắt đầu ở kho. Tự học Digital Marketing và một mình xử lý mọi vấn đề: auto-reply khách hàng, nâng cấp hình ảnh thương hiệu, đổi logo. Hai năm sau mới có đội 2–3 người.',
       'Làm một mình từ đầu đến cuối: lên kế hoạch, chụp hình, sửa hình, viết bài, đăng bài.',
       'Một mình lo toàn bộ nội dung, từ ý tưởng đến bài đăng.',
       'Nhà hàng fine dining, vẫn một mình lo trọn quy trình nội dung.',
       'Phụ trách cơ sở Buôn Ma Thuột của chuỗi billiard toàn quốc.',
-      'Từ đây mình bắt đầu làm việc theo đội. Một thương hiệu mới mở, chỉ trong 2 năm đã thành một trong những điểm ăn chơi hàng đầu của thành phố.',
+      'Vào khi quán vừa xây xong. Dựng nhận diện, hệ thống 3 kênh TikTok và cả loạt chương trình riêng của KAZA. Đội Sáng tạo từ 4 lên 7 người.',
       'Đóng cửa tháng 5/2025. Không phải chương nào cũng thắng, nhưng chương nào cũng là của mình.'
     ],
     tun_lines:['Không ai dọn đường.','Mình tự mở.'], tun_cap:'Tinh thần',
@@ -483,7 +666,38 @@ const I18N = {
     ],
     ct_lines:['Hãy làm việc','cùng nhau.'],
     c_phone:'Điện thoại', c_call:'Gọi', c_mail:'Gửi mail', c_copy:'Chép', c_copied:'Đã chép', to_top:'Lên đầu trang',
-    loading:'Đang tải'
+    loading:'Đang tải',
+    cs_open:'Xem dự án', cs_close:'Đóng', cs_mark:'Xem ↗', cs_proj:'Dự án', cs_next:'Chương tiếp theo', cs_back:'Đóng dự án', cs_scroll:'Cuộn',
+    cases: {
+      kaza: {
+        meta:[['Thời gian','13.10.2024 → Nay'],['Vai trò','Giám Đốc Sáng Tạo'],['Lĩnh vực','F&B · Giải trí'],['Tinh thần','Keep All Zeal Alive']],
+        est:'Từ 13.10.2024',
+        eb1:'(01) Khởi đầu', h1:['Vào khi quán','vừa xây xong.'],
+        lead:'Mình đến KAZA khi quán vừa xây xong. Từ chữ, màu, hình đến từng chương trình, mọi thứ khách nhìn thấy ở KAZA đều qua tay mình.',
+        sub:'Đội Sáng tạo bắt đầu với 4 người. Giờ là 7.',
+        figs:[['Những ngày đầu','10.2024'],['Cuộc họp đầu tiên','KAZA']],
+        eb2:'(02) Con số', h2:['Những con số','nói thay.'],
+        stats:['Kênh TikTok mình xây cho KAZA','Người theo dõi trên kênh lớn nhất','Lượt xem cao nhất của một video','Nhân sự toàn quán mình điều phối'],
+        team:['Đội Sáng tạo','<b>04</b> → <b>07</b> người'],
+        eb3:'(03) Việc đã làm', h3:['Việc','đã làm.'],
+        work:[
+          ['Nhận diện & hình ảnh','Chữ, màu, hình, ấn phẩm. Mọi thứ khách nhìn thấy đều do mình quyết.',[]],
+          ['Hệ thống 3 kênh TikTok','Kênh lớn nhất 100K người theo dõi. Video cao nhất 7 triệu lượt xem.',[]],
+          ['Chương trình thường kỳ','Xây từ ý tưởng đến hình ảnh. From The Chef: tối thứ 6 hàng tuần, mời khách món miễn phí.',['Game Night','Ladies Night','From The Chef – Món ngon mời bạn','Performance']],
+          ['Chiến dịch','Các chiến dịch truyền thông của quán, làm từ ý tưởng đến lúc lên sóng.',['KAZA Carnival','KAZA có gì vui?',"KAZA's Special – Món này bếp khen"]],
+          ['Đêm nghệ sĩ','Sinh nhật quán và các đêm KAZA Special cùng nghệ sĩ.',['Ưng Hoàng Phúc','Đan Trường','Andree Right Hand','Trịnh Thăng Bình','The Men','Huỳnh James & PJNBOYS','Đạt G']],
+          ['Dẫn đội','Đội Sáng tạo từ 4 lên 7 người, cùng hơn 100 nhân sự toàn quán.',[]]
+        ],
+        eb4:'(04) Những đêm', h4:['Những đêm','KAZA cháy nhất.'],
+        eb5:'(05) Cột mốc', h5:['Cột mốc.'],
+        kinds:['Khởi đầu','Sinh nhật 1 tuổi','KAZA Special','Sinh nhật 2 tuổi'],
+        first:'Ngày đầu tiên',
+        eb6:'(06) Hậu trường', h6:['Hậu trường.'],
+        bts:'Phía sau mỗi đêm diễn là đội Sáng tạo: lên ý tưởng, quay, dựng và đăng.',
+        btsCap:[['Đội quay trực tiếp','27.08.2026'],['Tại KAZA','NamK']],
+        mq:['Keep All Zeal Alive','KAZA']
+      }
+    }
   },
   en: {
     nav_about:'About', nav_work:'Work', nav_team:'Team', nav_contact:'Contact',
@@ -499,14 +713,14 @@ const I18N = {
     br_kind:['Apple retail','Café · Camping','Kids fashion','Fine dining','Billiards','F&B · Entertainment','Bar'],
     br_cta:'Your brand next?', br_cta2:'Contact',
     period:['2021 — now','2022','2022','2023','2024','10/2024 — now','12/2024 — 05/2025'],
-    role:['Warehouse staff → Marketing Director','Social Media · Café & Camping','Social Media · Kids fashion','Social Media · Fine dining','Social Media · National billiard chain','Marketing Director · Team of 5–7','Small local bar'],
+    role:['Warehouse staff → Marketing Director','Social Media · Café & Camping','Social Media · Kids fashion','Social Media · Fine dining','Social Media · National billiard chain','Creative Director','Small local bar'],
     desc:[
       'Started in the warehouse. Taught myself digital marketing and solved every problem alone: customer auto-reply, a stronger brand image, a new logo. A team of 2–3 came two years later.',
       'Solo, start to finish: planning, shooting, editing photos, writing and posting.',
       'All content handled alone, from idea to published post.',
       'A fine dining restaurant, still running the whole content process alone.',
       'Handled the Buôn Ma Thuột branch of a nationwide billiard chain.',
-      'This is where I started working as a team. A brand new venue that became one of the top places to eat and go out in the city within two years.',
+      'Joined when the venue had just been built. Built the identity, a 3-channel TikTok system and a whole line of KAZA-owned programs. The creative team grew from 4 to 7.',
       'Closed in May 2025. Not every chapter wins, but every one of them is mine.'
     ],
     tun_lines:['Nobody cleared the road.','I opened it myself.'], tun_cap:'Mindset',
@@ -523,7 +737,38 @@ const I18N = {
     ],
     ct_lines:["Let's work",'together.'],
     c_phone:'Phone', c_call:'Call', c_mail:'Send mail', c_copy:'Copy', c_copied:'Copied', to_top:'Back to top',
-    loading:'Loading'
+    loading:'Loading',
+    cs_open:'View project', cs_close:'Close', cs_mark:'View ↗', cs_proj:'Project', cs_next:'Next chapter', cs_back:'Close project', cs_scroll:'Scroll',
+    cases: {
+      kaza: {
+        meta:[['Period','13.10.2024 → Now'],['Role','Creative Director'],['Field','F&B · Entertainment'],['Spirit','Keep All Zeal Alive']],
+        est:'Since 13.10.2024',
+        eb1:'(01) The start', h1:['Joined when the','walls were fresh.'],
+        lead:'I came to KAZA when the venue had just been built. From type, colour and imagery to every single program, everything guests see at KAZA goes through my hands.',
+        sub:'The creative team started with 4 people. Now it is 7.',
+        figs:[['The early days','10.2024'],['The first meeting','KAZA']],
+        eb2:'(02) In numbers', h2:['The numbers','speak for it.'],
+        stats:['TikTok channels I built for KAZA','Followers on the biggest channel','Views on the top video','Venue staff I coordinate'],
+        team:['Creative team','<b>04</b> → <b>07</b> people'],
+        eb3:'(03) What I did', h3:['What','I did.'],
+        work:[
+          ['Identity & imagery','Type, colour, imagery, print. Everything guests see is my call.',[]],
+          ['3-channel TikTok system','Biggest channel at 100K followers. Top video at 7 million views.',[]],
+          ['Recurring programs','Built from idea to visuals. From The Chef: every Friday night, a free dish for guests.',['Game Night','Ladies Night','From The Chef – Món ngon mời bạn','Performance']],
+          ['Campaigns','The venue’s campaigns, from first idea to going live.',['KAZA Carnival','KAZA có gì vui?',"KAZA's Special – Món này bếp khen"]],
+          ['Artist nights','Anniversary parties and KAZA Special nights with artists.',['Ưng Hoàng Phúc','Đan Trường','Andree Right Hand','Trịnh Thăng Bình','The Men','Huỳnh James & PJNBOYS','Đạt G']],
+          ['Leading the team','A creative team grown from 4 to 7, alongside 100+ venue staff.',[]]
+        ],
+        eb4:'(04) The nights', h4:['The nights','KAZA burned brightest.'],
+        eb5:'(05) Milestones', h5:['Milestones.'],
+        kinds:['Day one','1st anniversary','KAZA Special','2nd anniversary'],
+        first:'Day one',
+        eb6:'(06) Behind the scenes', h6:['Behind the scenes.'],
+        bts:'Behind every show is the creative team: ideas, shooting, editing and posting.',
+        btsCap:[['Team shooting live','27.08.2026'],['At KAZA','NamK']],
+        mq:['Keep All Zeal Alive','KAZA']
+      }
+    }
   }
 };
 let lang = 'vi';
@@ -532,10 +777,10 @@ const T = () => I18N[lang];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 /* text helpers */
-function setSplit(el, lines){
-  el.innerHTML = lines.map(l => `<span class="ln"><span>${l.split(' ').map(w => `<span class="wd">${Array.from(w).map(ch => `<span class="c">${esc(ch)}</span>`).join('')}</span>`).join(' ')}</span></span>`).join('');
-}
-function setWords(el, text){ el.innerHTML = text.split(' ').map(w => `<span class="w">${esc(w)} </span>`).join(''); }
+const splitHTML = lines => lines.map(l => `<span class="ln"><span>${l.split(' ').map(w => `<span class="wd">${Array.from(w).map(ch => `<span class="c">${esc(ch)}</span>`).join('')}</span>`).join(' ')}</span></span>`).join('');
+function setSplit(el, lines){ el.innerHTML = splitHTML(lines); }
+const wordsHTML = text => text.split(' ').map(w => `<span class="w">${esc(w)} </span>`).join('');
+function setWords(el, text){ el.innerHTML = wordsHTML(text); }
 function setRoll(el, text){ el.innerHTML = `<span class="roll"><span>${esc(text)}</span><span aria-hidden="true">${esc(text)}</span></span>`; el.setAttribute('aria-label', text); }
 const STAR = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 0 C10.6 6.4 13.6 9.4 20 10 C13.6 10.6 10.6 13.6 10 20 C9.4 13.6 6.4 10.6 0 10 C6.4 9.4 9.4 6.4 10 0Z" fill="currentColor"/></svg>';
 
@@ -559,7 +804,7 @@ BRANDS.forEach((b, i) => {
   sh.innerHTML = `<img class="gimg" src="${IMG(b.img)}" alt="${esc(b.name)}" decoding="async" ${i > 1 ? 'loading="lazy"' : ''}>`;
   stage.appendChild(sh);
   const ch = document.createElement('div'); ch.className = 'ch';
-  ch.innerHTML = `<div class="ch-top label"><img class="ch-logo" src="${LOGO(b.logo)}" alt=""><span class="ch-period"></span></div><h3 class="disp ch-name">${esc(b.name)}</h3><p class="ch-role label"></p><p class="ch-desc"></p>`;
+  ch.innerHTML = `<div class="ch-top label"><img class="ch-logo" src="${LOGO(b.logo)}" alt=""><span class="ch-period"></span></div><h3 class="disp ch-name">${esc(b.name)}</h3><p class="ch-role label"></p><p class="ch-desc"></p>${b.cs ? `<div class="ch-open label"><button type="button" class="pill" data-case="${b.cs}" data-i="${i}" data-t="cs_open" data-roll></button></div>` : ''}`;
   chs.appendChild(ch);
   const tk = document.createElement('div'); tk.className = 'tick'; tk.innerHTML = `<i></i><span>${b.year}</span>`; ticks.appendChild(tk);
   const bn = document.createElement('div'); bn.className = 'bgname'; bn.textContent = b.name; bgnames.appendChild(bn);
@@ -569,7 +814,8 @@ const shapes = $$('.shape', stage), chEls = $$('.ch', chs), tickEls = $$('.tick'
 const bgrid = $('#bgrid');
 BRANDS.forEach((b, i) => {
   const c = document.createElement('div'); c.className = 'bcell';
-  c.innerHTML = `<span class="i label">${pad(i + 1)}</span><img src="${LOGO(b.logo)}" alt="${esc(b.name)}" loading="lazy"><span class="y label">${b.year}</span><span class="k label"></span>`;
+  c.innerHTML = `<span class="i label">${pad(i + 1)}</span><img src="${LOGO(b.logo)}" alt="${esc(b.name)}" loading="lazy"><span class="y label">${b.year}</span><span class="k label"></span>${b.cs ? '<span class="cs-mark label" data-t="cs_mark"></span>' : ''}`;
+  if (b.cs) { c.classList.add('has-case'); c.dataset.case = b.cs; c.dataset.i = i; c.setAttribute('role', 'button'); c.tabIndex = 0; }
   bgrid.appendChild(c);
 });
 const cta = document.createElement('a'); cta.className = 'bcell cta'; cta.href = '#contact'; cta.dataset.go = '#contact';
@@ -589,6 +835,14 @@ SK_IMG.forEach((n, i) => {
   li.innerHTML = '<span class="n"></span><span class="d"></span>'; skList.appendChild(li);
   const im = document.createElement('img'); im.className = 'gimg'; im.src = IMG(n); im.alt = ''; im.loading = 'lazy'; skPrev.appendChild(im);
 });
+
+/* case-study overlay shell; the inside is rendered per brand when it opens */
+const CS = { open: false, busy: false, key: null, ctx: null, lenis: null, raf: null, tick: null, vel: 0, pushed: false, from: null, before: null, after: null, refresh: null };
+const cs = document.createElement('div');
+cs.className = 'cs'; cs.id = 'cs'; cs.tabIndex = -1;
+cs.setAttribute('role', 'dialog'); cs.setAttribute('aria-modal', 'true'); cs.setAttribute('aria-hidden', 'true'); cs.setAttribute('data-lenis-prevent', '');
+cs.innerHTML = `<div class="cs-bar label"><button type="button" class="pill cs-close" id="csClose"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 1l8 8M9 1L1 9" stroke="currentColor" stroke-width="1.3" fill="none"/></svg><span id="csCloseT"></span></button><span class="cs-idx" id="csIdx"></span><div class="lang"><button type="button" data-lang="vi" aria-pressed="true">VI</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div></div><div class="cs-in" id="csIn"></div>`;
+document.body.appendChild(cs);
 
 $$('.mq').forEach(m => m.dataset.key = m.classList.contains('big') ? 'mq3' : m.classList.contains('out') ? 'mq2' : 'mq1');
 function fillMarquee(m){
@@ -637,7 +891,9 @@ function applyLang(){
   setSplit($('#ctTitle'), t.ct_lines);
   $$('.mq').forEach(fillMarquee);
   $('#loadMsg').textContent = t.loading;
+  $('#csCloseT').textContent = t.cs_close;
   $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+  if (CS.open && CS.refresh) CS.refresh();
 }
 applyLang();
 
@@ -926,8 +1182,10 @@ function initStats(){
   });
 }
 
+let workIdx = 0, workGo = null;
 function initWork(){
   const outline = $('#wkOutline');
+  const CH_PARTS = '.ch-top,.ch-name,.ch-role,.ch-desc,.ch-open';
   shapes.forEach((sh, i) => gsap.set(sh, { clipPath: i === 0 ? poly(POLY[0]) : polyAt(0, 100), zIndex: i + 1 }));
   chEls.forEach((c, i) => gsap.set(c, { autoAlpha: i === 0 ? 1 : 0 }));
   bgEls.forEach((b, i) => gsap.set(b, { autoAlpha: i === 0 ? 1 : 0, xPercent: 0 }));
@@ -936,14 +1194,14 @@ function initWork(){
   for (let i = 1; i < N; i++) {
     const t0 = (i - 1) * STEP + FIRST;
     tl.to(shapes[i - 1], { clipPath: polyAt(100, 0), duration: .75, ease: 'power2.in' }, t0);
-    tl.to($$('.ch-top,.ch-name,.ch-role,.ch-desc', chEls[i - 1]), { yPercent: -40, autoAlpha: 0, duration: .45, ease: 'power2.in', stagger: .04 }, t0);
+    tl.to($$(CH_PARTS, chEls[i - 1]), { yPercent: -40, autoAlpha: 0, duration: .45, ease: 'power2.in', stagger: .04 }, t0);
     tl.to(bgEls[i - 1], { autoAlpha: 0, duration: .4 }, t0 + .2);
     tl.set(chEls[i - 1], { autoAlpha: 0 }, t0 + .62);
     tl.to(outline, { attr: { points: pts(POLY[i]) }, duration: 1.1, ease: 'power3.inOut' }, t0 + .15);
     tl.fromTo(shapes[i], { clipPath: polyAt(0, 100) }, { clipPath: poly(POLY[i]), duration: .95, ease: 'power3.out' }, t0 + .45);
     tl.fromTo($('img', shapes[i]), { scale: 1.4, yPercent: 6 }, { scale: 1, yPercent: 0, duration: 1.2, ease: 'power2.out' }, t0 + .45);
     tl.set(chEls[i], { autoAlpha: 1 }, t0 + .62);
-    tl.fromTo($$('.ch-top,.ch-name,.ch-role,.ch-desc', chEls[i]), { yPercent: 60, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: .55, ease: 'power3.out', stagger: .05 }, t0 + .65);
+    tl.fromTo($$(CH_PARTS, chEls[i]), { yPercent: 60, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: .55, ease: 'power3.out', stagger: .05 }, t0 + .65);
     tl.fromTo(bgEls[i], { autoAlpha: 0 }, { autoAlpha: 1, duration: .5 }, t0 + .6);
   }
   tl.to({}, { duration: 1 });
@@ -954,12 +1212,18 @@ function initWork(){
     const idx = clamp(Math.floor((time - FIRST - .6) / STEP) + 1, 0, N - 1);
     const cont = clamp(time / Math.max(.001, tl.duration()) * N, 0, N);
     tickEls.forEach((t, k) => { t.classList.toggle('on', k === idx); $('i', t).style.setProperty('--f', clamp(cont - k, 0, 1).toFixed(3)); });
-    if (idx !== last) { last = idx; cnt.textContent = pad(idx + 1); if (!reduce) gsap.fromTo(cnt, { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .4, ease: 'power3.out' }); }
+    if (idx !== last) { last = idx; workIdx = idx; stage.classList.toggle('has-case', !!BRANDS[idx].cs); cnt.textContent = pad(idx + 1); if (!reduce) gsap.fromTo(cnt, { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .4, ease: 'power3.out' }); }
   };
   setIdx(0);
   tl.eventCallback('onUpdate', () => setIdx(tl.time()));
-  ScrollTrigger.create({ trigger: '#workPin', start: 'top top', pin: true, scrub: .9, animation: tl, anticipatePin: 1,
+  const wst = ScrollTrigger.create({ trigger: '#workPin', start: 'top top', pin: true, scrub: .9, animation: tl, anticipatePin: 1,
     end: () => '+=' + Math.round(tl.duration() * innerHeight * .42) });
+  /* scroll position where chapter i is fully on screen (used by "next chapter" in a case study) */
+  workGo = i => {
+    const t = i === 0 ? 0 : (i - 1) * STEP + FIRST + 1.3;
+    const y = wst.start + (t / Math.max(.001, tl.duration())) * (wst.end - wst.start);
+    if (lenis) { lenis.start(); lenis.scrollTo(y, { immediate: true, force: true }); } else scrollTo(0, y);
+  };
 }
 
 function initTunnel(){
@@ -1042,6 +1306,293 @@ function scrambleTitle(){
   requestAnimationFrame(tick);
 }
 
+/* ================= case study ================= */
+const FULL = [[0,0],[100,0],[100,100],[100,100],[0,100],[0,0]];
+const SCR = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789#%&/';
+function scrambleChars(els, { dur = 600, gap = 45, set = SCR, delay = 0 } = {}){
+  if (reduce || !els.length) return;
+  const fin = els.map(c => c.textContent), st = performance.now() + delay;
+  const tick = now => {
+    let done = true;
+    els.forEach((c, i) => {
+      const t = (now - st - i * gap) / dur;
+      if (t < 1) { done = false; if (fin[i].trim()) c.textContent = (t < 0 || Math.random() > t) ? set[(Math.random() * set.length) | 0] : fin[i]; }
+      else c.textContent = fin[i];
+    });
+    if (!done) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+function renderCase(key){
+  const c = CASES[key], t = T().cases[key], g = T();
+  const bi = BRANDS.findIndex(b => b.cs === key), b = BRANDS[bi], ni = (bi + 1) % N, nb = BRANDS[ni];
+  const im = (a, extra = '') => `<img src="${IMG(a[0])}" alt="" width="${a[1]}" height="${a[2]}" decoding="async" loading="lazy" ${extra}>`;
+  const hd = (eb, h, cls = '') => `<div class="cs-hd ${cls}"><div class="eyebrow label"><span>${esc(eb)}</span></div><h3 class="disp cs-h">${splitHTML(h)}</h3></div>`;
+  const mqItem = `<span class="mq-item">${t.mq.map(w => `${esc(w)} ${STAR}`).join(' ')}</span>`;
+  $('#csIdx').textContent = `${g.cs_proj} ${pad(bi + 1)} / ${pad(N)} — ${b.name}`;
+  cs.setAttribute('aria-label', b.name);
+  $('#csIn').innerHTML = `
+  <header class="cs-hero" id="csHero">
+    <div class="bg"><img src="${IMG(c.cover[0])}" alt="${esc(b.name)}" width="${c.cover[1]}" height="${c.cover[2]}" decoding="async"></div>
+    <span class="cs-cue label">(${pad(bi + 1)}) ${esc(t.est)}</span>
+    <div class="cs-hero-in">
+      <div class="cs-hero-top label"><img class="cs-logo" src="${LOGO(b.logo)}" alt=""><span>${esc(g.cs_scroll)} ↓</span></div>
+      <h2 class="disp cs-title" id="csTitle">${splitHTML([b.name])}</h2>
+      <div class="cs-meta label">${t.meta.map(m => `<div><span class="k">${esc(m[0])}</span><span class="v">${esc(m[1])}</span></div>`).join('')}</div>
+    </div>
+  </header>
+  <section class="cs-sec cs-intro wrap"><div class="cs-grid">
+    ${hd(t.eb1, t.h1)}
+    <figure class="cs-fig f1"><div class="ph">${im(c.figs[0])}</div><figcaption class="label"><span>${esc(t.figs[0][0])}</span><span>${esc(t.figs[0][1])}</span></figcaption></figure>
+    <div class="cs-lead"><p id="csLead">${wordsHTML(t.lead)}</p><p class="sub">${esc(t.sub)}</p></div>
+    <figure class="cs-fig f2"><div class="ph">${im(c.figs[1])}</div><figcaption class="label"><span>${esc(t.figs[1][0])}</span><span>${esc(t.figs[1][1])}</span></figcaption></figure>
+  </div></section>
+  <section class="cs-num" id="csNum"><div class="bg">${im(c.crowd)}</div><div class="wrap">
+    ${hd(t.eb2, t.h2)}
+    <div class="cs-stats" id="csStats">${c.stats.map((s, i) => `<div class="cs-stat"><span class="v" data-v="${s.v}" data-w="${s.w}" data-suf="${s.suf}">${pad(s.v, s.w)}${s.suf}</span><span class="label">${esc(t.stats[i])}</span></div>`).join('')}</div>
+    <div class="cs-teamline label"><span>${esc(t.team[0])}</span><span>${t.team[1]}</span></div>
+  </div></section>
+  <section class="cs-sec cs-do wrap">
+    ${hd(t.eb3, t.h3)}
+    <div class="cs-do-grid">
+      <ol class="cs-list" id="csList">${t.work.map((w, i) => `<li><span class="no label">${pad(i + 1)}</span><h4>${esc(w[0])}</h4><p>${esc(w[1])}</p>${w[2].length ? `<div class="cs-tags label">${w[2].map(x => `<span>${esc(x)}</span>`).join('')}</div>` : ''}<div class="m"><img src="${IMG(c.work[i])}" alt="" loading="lazy" decoding="async"></div></li>`).join('')}</ol>
+      <div class="cs-stick"><div class="cs-stack" id="csStack">${c.work.map(n => `<img src="${IMG(n)}" alt="" loading="lazy" decoding="async">`).join('')}</div><div class="figcap label"><span id="csWkNo"></span><span id="csWkName"></span></div></div>
+    </div>
+  </section>
+  <section class="cs-gal" id="csGal"><div class="cs-gal-pin">
+    <div class="wrap cs-gal-hd">${hd(t.eb4, t.h4)}<span class="label" id="csGalCount">01 / ${pad(c.gallery.length)}</span></div>
+    <div class="cs-track" id="csTrack">${c.gallery.map(p => `<figure><div class="ph">${im(p)}</div><figcaption class="label"><b>${esc(p[3])}</b><span>${esc(p[4])}</span></figcaption></figure>`).join('')}</div>
+  </div></section>
+  <section class="cs-sec cs-mile wrap">
+    ${hd(t.eb5, t.h5)}
+    <ul class="cs-tl" id="csTl">${c.timeline.map(r => `<li><span class="d label">${r[0]}</span><span class="t label">${esc(t.kinds[r[1]])}</span><span class="a">${esc(r[1] === 0 ? t.first : r[2])}</span></li>`).join('')}</ul>
+  </section>
+  <section class="cs-sec cs-bts wrap"><div class="cs-bts-grid">
+    ${hd(t.eb6, t.h6)}
+    <figure class="cs-fig big"><div class="ph">${im(c.bts[0])}</div><figcaption class="label"><span>${esc(t.btsCap[0][0])}</span><span>${esc(t.btsCap[0][1])}</span></figcaption></figure>
+    <div class="side"><p>${esc(t.bts)}</p><figure class="cs-fig"><div class="ph">${im(c.bts[1])}</div><figcaption class="label"><span>${esc(t.btsCap[1][0])}</span><span>${esc(t.btsCap[1][1])}</span></figcaption></figure></div>
+  </div></section>
+  <footer class="cs-end">
+    <div class="cs-mq" aria-hidden="true"><div class="tr">${mqItem.repeat(4)}</div></div>
+    <div class="wrap">
+      <div class="cs-next">
+        <a href="#work" id="csNext" data-i="${ni}"><span class="label">${esc(g.cs_next)} — ${pad(ni + 1)} / ${pad(N)}</span><span class="nm">${esc(nb.name)} <i aria-hidden="true">→</i></span></a>
+        <button type="button" class="pill label" id="csBack"><span>${esc(g.cs_back)}</span></button>
+      </div>
+      <div class="cs-end-meta label"><span>${esc(b.name)} — ${esc(t.meta[0][1])}</span><span>© 2026 Y Nam Knul</span></div>
+    </div>
+  </footer>`;
+  $('#csBack').addEventListener('click', () => requestClose());
+  $('#csNext').addEventListener('click', e => {
+    e.preventDefault();
+    if (nb.cs && CASES[nb.cs]) requestClose({ after: () => openCase(nb.cs, null, POLY[ni]) });
+    else requestClose({ before: () => workGo && workGo(ni) });
+  });
+}
+
+function setupCaseScroll(){
+  if (reduce || !window.Lenis) return;
+  CS.lenis = new Lenis({ wrapper: cs, content: $('#csIn'), lerp: .09, smoothWheel: true });
+  CS.lenis.on('scroll', e => { CS.vel = e.velocity || 0; ScrollTrigger.update(); });
+  CS.raf = time => { if (CS.lenis) CS.lenis.raf(time * 1000); };
+  gsap.ticker.add(CS.raf);
+}
+
+function buildCaseFX(intro){
+  const key = CS.key, c = CASES[key], t = T().cases[key];
+  const S = o => ({ scroller: cs, ...o });
+  const desk = matchMedia('(min-width: 821px)').matches;
+  const gal = $('#csGal'), track = $('#csTrack');
+  const dist = () => Math.max(0, track.scrollWidth - innerWidth);
+  const setGalH = () => { gal.style.height = (innerHeight + dist()) + 'px'; };
+  if (reduce) { const pin = $('.cs-gal-pin', gal); Object.assign(pin.style, { position: 'static', height: 'auto', overflowX: 'auto', paddingBottom: '60px' }); }
+  else {
+    setGalH();
+    ScrollTrigger.addEventListener('refreshInit', setGalH);
+    CS.cleanup = () => { ScrollTrigger.removeEventListener('refreshInit', setGalH); };
+  }
+
+  /* sticky image stack in "what I did" */
+  const stackImgs = $$('#csStack img'), rows = $$('#csList li');
+  let wk = -1, z = 1;
+  const setWork = (i, instant) => {
+    if (i === wk) return; wk = i;
+    rows.forEach((li, k) => li.classList.toggle('on', k === i));
+    $('#csWkNo').textContent = `${pad(i + 1)} / ${pad(rows.length)}`;
+    $('#csWkName').textContent = t.work[i][0];
+    const im = stackImgs[i]; if (!im) return;
+    im.style.zIndex = ++z;
+    if (instant || reduce) { gsap.set(im, { clipPath: 'inset(0% 0% 0% 0%)', scale: 1 }); return; }
+    gsap.fromTo(im, { clipPath: 'inset(100% 0% 0% 0%)', scale: 1.2 }, { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 1.1, ease: 'expo.out', overwrite: true });
+  };
+
+  CS.ctx = gsap.context(() => {
+    gsap.set(stackImgs.slice(1), { clipPath: 'inset(100% 0% 0% 0%)' });
+    setWork(0, true);
+    if (reduce) return;
+
+    /* hero */
+    if (intro) {
+      const chars = $$('#csTitle .c');
+      gsap.from(chars, { yPercent: 118, duration: 1.3, ease: 'expo.out', stagger: .07 });
+      scrambleChars(chars, { dur: 700, gap: 90 });
+      gsap.from('.cs-hero-top, .cs-meta > div, .cs-cue', { opacity: 0, y: 26, duration: 1.1, ease: 'power3.out', stagger: .07, delay: .25 });
+      scrambleChars($$('.cs-meta .v'), { dur: 500, gap: 0, delay: 350 });
+      gsap.from('.cs-bar', { opacity: 0, duration: .6, delay: .15 });
+    }
+    gsap.to('.cs-hero .bg img', { scale: 1.16, yPercent: 7, ease: 'none', scrollTrigger: S({ trigger: '#csHero', start: 'top top', end: 'bottom top', scrub: true }) });
+    gsap.to('.cs-hero-in', { yPercent: -18, opacity: 0, ease: 'none', scrollTrigger: S({ trigger: '#csHero', start: '30% top', end: 'bottom top', scrub: true }) });
+
+    /* headings rise, character by character */
+    $$('.cs-h', cs).forEach(h => {
+      if (h.closest('.cs-gal')) charsIn(h, { scrollTrigger: S({ trigger: gal, start: 'top 75%', once: true }) });
+      else charsIn(h, { scrollTrigger: S({ trigger: h, start: 'top 88%', once: true }) });
+    });
+    /* lead paragraph lights up word by word */
+    gsap.fromTo($$('#csLead .w'), { opacity: .14 }, { opacity: 1, ease: 'none', stagger: .06, scrollTrigger: S({ trigger: '#csLead', start: 'top 82%', end: 'bottom 52%', scrub: true }) });
+    gsap.from('.cs-lead .sub', { opacity: 0, y: 20, duration: 1, ease: 'power3.out', scrollTrigger: S({ trigger: '.cs-lead .sub', start: 'top 92%', once: true }) });
+
+    /* figures: wipe in, then parallax */
+    $$('.cs-fig', cs).forEach(f => {
+      gsap.fromTo(f, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'expo.out', clearProps: 'clipPath', scrollTrigger: S({ trigger: f, start: 'top 90%', once: true }) });
+      gsap.fromTo($('img', f), { yPercent: -7, scale: 1.14 }, { yPercent: 7, scale: 1, ease: 'none', scrollTrigger: S({ trigger: f, start: 'top bottom', end: 'bottom top', scrub: true }) });
+    });
+
+    /* numbers */
+    gsap.fromTo('.cs-num .bg', { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: S({ trigger: '#csNum', start: 'top bottom', end: 'bottom top', scrub: true }) });
+    gsap.from('.cs-stat', { opacity: 0, y: 46, duration: 1.1, ease: 'power3.out', stagger: .09, scrollTrigger: S({ trigger: '#csStats', start: 'top 86%', once: true }) });
+    ScrollTrigger.create(S({ trigger: '#csStats', start: 'top 86%', once: true, onEnter: () => {
+      $$('#csStats .v').forEach((v, i) => { const n = +v.dataset.v, w = +v.dataset.w, suf = v.dataset.suf, o = { v: 0 }; v.textContent = pad(0, w) + suf; gsap.to(o, { v: n, duration: 2, delay: i * .09, ease: 'power3.out', onUpdate: () => { v.textContent = pad(Math.round(o.v), w) + suf; } }); });
+    } }));
+    gsap.from('.cs-teamline', { opacity: 0, y: 20, duration: 1, ease: 'power3.out', scrollTrigger: S({ trigger: '.cs-teamline', start: 'top 94%', once: true }) });
+
+    /* what I did: rows + scroll-spy driving the sticky image */
+    rows.forEach((li, i) => {
+      gsap.from(li.children, { y: 26, opacity: 0, duration: 1, ease: 'power3.out', stagger: .05, scrollTrigger: S({ trigger: li, start: 'top 92%', once: true }) });
+      ScrollTrigger.create(S({ trigger: li, start: 'top 58%', end: 'bottom 58%', onToggle: e => { if (e.isActive) setWork(i); } }));
+    });
+    if (desk) gsap.from('#csStack', { clipPath: 'polygon(0 100%,0 100%,0 100%,0 100%,0 100%)', duration: 1.4, ease: 'expo.out', clearProps: 'clipPath', scrollTrigger: S({ trigger: '#csList', start: 'top 80%', once: true }) });
+
+    /* the nights: sticky horizontal strip */
+    const n = c.gallery.length, cnt = $('#csGalCount');
+    let gi = -1;
+    gsap.fromTo(track, { x: 0 }, { x: () => -dist(), ease: 'none', scrollTrigger: S({ trigger: gal, start: 'top top', end: 'bottom bottom', scrub: .7, invalidateOnRefresh: true,
+      onUpdate: s => { const k = clamp(Math.round(s.progress * (n - 1)), 0, n - 1); if (k !== gi) { gi = k; cnt.textContent = `${pad(k + 1)} / ${pad(n)}`; } } }) });
+    gsap.from($$('figure', track), { yPercent: 18, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: .06, scrollTrigger: S({ trigger: gal, start: 'top 70%', once: true }) });
+
+    /* milestones */
+    const tl = $$('#csTl li');
+    gsap.from(tl, { opacity: 0, y: 26, duration: .9, ease: 'power3.out', stagger: .06, scrollTrigger: S({ trigger: '#csTl', start: 'top 86%', once: true }) });
+    ScrollTrigger.create(S({ trigger: '#csTl', start: 'top 86%', once: true, onEnter: () => tl.forEach((li, i) => scrambleChars($$('.d', li).flatMap(d => { const s = d.textContent; d.innerHTML = Array.from(s).map(ch => `<span>${ch}</span>`).join(''); return $$('span', d); }), { dur: 500, gap: 30, set: '0123456789', delay: i * 70 })) }));
+
+    /* behind the scenes + end */
+    gsap.from('.cs-bts .side p', { opacity: 0, y: 24, duration: 1, ease: 'power3.out', scrollTrigger: S({ trigger: '.cs-bts .side', start: 'top 88%', once: true }) });
+    gsap.from('.cs-next .nm', { yPercent: 60, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: S({ trigger: '.cs-next', start: 'top 92%', once: true }) });
+  }, cs);
+
+  /* velocity skew on the strip, like the team strip on the main page */
+  const gimgs = $$('img', track); let sk = 0;
+  CS.tick = () => { const tg = clamp(CS.vel * .25, -7, 7); sk += (tg - sk) * .12; if (Math.abs(sk) > .01) gimgs.forEach(im => { im.style.transform = `skewX(${(-sk).toFixed(2)}deg) scale(${(1 + Math.abs(sk) * .006).toFixed(3)})`; }); };
+  if (!reduce) gsap.ticker.add(CS.tick);
+  ScrollTrigger.refresh();
+}
+
+function teardownCase(){
+  if (CS.ctx) { CS.ctx.revert(); CS.ctx = null; }
+  if (CS.cleanup) { CS.cleanup(); CS.cleanup = null; }
+  if (CS.tick) { gsap.ticker.remove(CS.tick); CS.tick = null; }
+  if (CS.raf) { gsap.ticker.remove(CS.raf); CS.raf = null; }
+  if (CS.lenis) { CS.lenis.destroy(); CS.lenis = null; }
+  CS.vel = 0;
+}
+
+function lockPage(on){
+  ['main', '.nav', '#hud'].forEach(s => { const el = $(s); if (el) el.inert = on; });
+  if (lenis) on ? lenis.stop() : lenis.start();
+}
+
+function openCase(key, fromEl, fromPoly){
+  if (CS.open || CS.busy || !CASES[key]) return;
+  CS.busy = true; CS.key = key; CS.from = document.activeElement;
+  const bi = BRANDS.findIndex(b => b.cs === key), b = BRANDS[bi], c = CASES[key];
+  renderCase(key);
+  cs.scrollTop = 0;
+  lockPage(true);
+  if (location.hash !== '#' + key) { try { history.pushState({ cs: key }, '', '#' + key); CS.pushed = true; } catch (e) {} }
+  const show = () => {
+    cs.classList.add('open'); cs.setAttribute('aria-hidden', 'false');
+    CS.open = true; CS.busy = false;
+    CS.refresh = () => { const y = cs.scrollTop; teardownCase(); renderCase(CS.key); setupCaseScroll(); buildCaseFX(false); cs.scrollTop = y; if (CS.lenis) CS.lenis.scrollTo(y, { immediate: true, force: true }); };
+    setupCaseScroll(); buildCaseFX(true);
+    $('#csClose').focus({ preventScroll: true });
+  };
+  if (reduce || !window.gsap) { show(); return; }
+
+  /* the chapter photo flies out of its polygon to full screen, turns from grey to colour, with a chrome light sweep */
+  const r = fromEl ? fromEl.getBoundingClientRect() : { left: innerWidth * .3, top: innerHeight * .25, width: innerWidth * .4, height: innerHeight * .5 };
+  const fly = document.createElement('div'); fly.className = 'cs-fly'; fly.setAttribute('aria-hidden', 'true');
+  fly.innerHTML = `<img src="${IMG(c.cover[0])}" alt=""><i class="cs-sweep"></i><i class="cs-sweep b"></i><span class="cs-tag label">${esc(b.name)} · ${esc(T().cases[key].meta[0][1])}</span>`;
+  document.body.appendChild(fly);
+  const img = $('img', fly), sw = $$('.cs-sweep', fly), tag = $('.cs-tag', fly);
+  gsap.set(fly, { left: r.left, top: r.top, width: r.width, height: r.height, clipPath: poly(fromPoly || FULL) });
+  gsap.set(img, { filter: 'grayscale(1) contrast(1.06) brightness(1)' });
+  gsap.set(sw, { xPercent: -60 });
+  const tl = gsap.timeline({ onComplete: () => { show(); gsap.to(fly, { opacity: 0, duration: .4, ease: 'power1.out', onComplete: () => fly.remove() }); } });
+  tl.to(fly, { left: 0, top: 0, width: innerWidth, height: innerHeight, clipPath: poly(FULL), duration: 1.3, ease: 'expo.inOut' }, 0)
+    .fromTo(img, { scale: 1.12 }, { scale: 1, duration: 1.3, ease: 'expo.inOut' }, 0)
+    .to(img, { filter: 'grayscale(0) contrast(1) brightness(1)', duration: .9, ease: 'power2.inOut' }, .35)
+    .to(img, { filter: 'grayscale(0) contrast(1) brightness(1.35)', duration: .18, ease: 'power1.out' }, .62)
+    .to(img, { filter: 'grayscale(0) contrast(1) brightness(1)', duration: .5, ease: 'power2.out' }, .8)
+    .to(sw[0], { xPercent: 60, duration: 1.25, ease: 'power2.inOut' }, .08)
+    .to(sw[1], { xPercent: 60, duration: 1, ease: 'power3.inOut' }, .3)
+    .fromTo(tag, { opacity: 0 }, { opacity: 1, duration: .25 }, .15)
+    .to(tag, { opacity: 0, duration: .25 }, 1.05);
+}
+
+function closeCase(){
+  if (!CS.open || CS.busy) return;
+  CS.busy = true;
+  const before = CS.before, after = CS.after; CS.before = CS.after = null;
+  const done = () => {
+    teardownCase();
+    cs.classList.remove('open'); cs.setAttribute('aria-hidden', 'true');
+    gsap.set(cs, { clearProps: 'clipPath' });
+    $('#csIn').innerHTML = '';
+    CS.open = false; CS.busy = false; CS.key = null; CS.refresh = null;
+    if (after) after();
+    else if (CS.from && CS.from.focus && document.contains(CS.from)) CS.from.focus({ preventScroll: true });
+  };
+  lockPage(false);
+  if (before) before();
+  if (reduce) { done(); return; }
+  /* curtain lifts upward, the same move as the loader */
+  gsap.fromTo(cs, { clipPath: 'inset(0% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 100% 0%)', duration: 1, ease: 'expo.inOut', onComplete: done });
+}
+
+function requestClose(opts = {}){
+  if (!CS.open || CS.busy) return;
+  CS.before = opts.before || null; CS.after = opts.after || null;
+  if (CS.pushed && location.hash === '#' + CS.key) { CS.pushed = false; history.back(); return; } // popstate closes
+  try { if (location.hash) history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+  closeCase();
+}
+addEventListener('popstate', () => {
+  const h = location.hash.slice(1);
+  if (CS.open && h !== CS.key) { CS.pushed = false; closeCase(); }
+  else if (!CS.open && !CS.busy && CASES[h]) { const bi = BRANDS.findIndex(b => b.cs === h); openCase(h, null, POLY[bi]); }
+});
+addEventListener('keydown', e => { if (e.key === 'Escape' && CS.open) requestClose(); });
+$('#csClose').addEventListener('click', () => requestClose());
+$$('.ch-open [data-case]').forEach(btn => btn.addEventListener('click', e => { e.stopPropagation(); const i = +btn.dataset.i; openCase(btn.dataset.case, shapes[i], POLY[i]); }));
+stage.addEventListener('click', () => { const b = BRANDS[workIdx]; if (b && b.cs) openCase(b.cs, shapes[workIdx], POLY[workIdx]); });
+$$('.bcell.has-case').forEach(cell => {
+  const go = () => openCase(cell.dataset.case, cell, FULL);
+  cell.addEventListener('click', go);
+  cell.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+});
+addEventListener('resize', () => { if (CS.open) ScrollTrigger.refresh(); });
+
 /* language + copy */
 $$('[data-lang]').forEach(b => b.addEventListener('click', () => {
   if (b.dataset.lang === lang) return; lang = b.dataset.lang;
@@ -1066,6 +1617,9 @@ $$('[data-copy]').forEach(b => b.addEventListener('click', async () => {
   clearTimeout(guard);
   await finishLoader();
   if (heroStage) heroStage.playIntro();
+  /* deep link, e.g. kthegoat.vercel.app/#kaza */
+  const dl = location.hash.slice(1);
+  if (CASES[dl]) { const bi = BRANDS.findIndex(b => b.cs === dl); setTimeout(() => openCase(dl, null, POLY[bi]), reduce ? 0 : 500); }
   if (!reduce) {
     gsap.from('.hfade', { opacity: 0, y: 16, duration: 1, ease: 'power3.out', stagger: .08, delay: .5 });
     gsap.from('.nav > *', { opacity: 0, y: -14, duration: 1, ease: 'power3.out', stagger: .08, delay: .3 });

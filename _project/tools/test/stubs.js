@@ -7,12 +7,12 @@ exports.gsap = `
    if(v.attr) Object.keys(v.attr).forEach(k=>el.setAttribute(k,v.attr[k]));
    if('zIndex' in v) el.style.zIndex=v.zIndex; }); };
  const tw=()=>({kill(){},progress(){return 0}});
- const mkTl=()=>{ const tl={ to(t,v){apply(t,v);return tl}, from(){return tl}, fromTo(t,a,b){apply(t,a);return tl}, set(t,v){apply(t,v);return tl}, duration(){return 10}, time(){return 0}, progress(){return 0} }; return tl; };
+ const mkTl=(o)=>{ if(o&&o.onComplete) setTimeout(o.onComplete,0); const tl={ to(t,v){apply(t,v);return tl}, from(){return tl}, fromTo(t,a,b){apply(t,a);return tl}, set(t,v){apply(t,v);return tl}, eventCallback(){return tl}, duration(){return 10}, time(){return 0}, progress(){return 0} }; return tl; };
  window.__tickers=[];
- window.gsap={ registerPlugin(){}, to(t,v){return tw()}, from(){return tw()}, fromTo(t,a,b){return tw()}, set(t,v){apply(t,v);return tw()}, timeline(){return mkTl()}, ticker:{add(f){window.__tickers.push(f)}, lagSmoothing(){}} };
+ window.gsap={ registerPlugin(){}, to(t,v){return tw()}, from(){return tw()}, fromTo(t,a,b){return tw()}, set(t,v){apply(t,v);return tw()}, timeline(o){return mkTl(o)}, context(f){ try{f()}catch(e){console.error(e)} return {revert(){},add(){}} }, ticker:{add(f){window.__tickers.push(f)}, remove(){}, lagSmoothing(){}} };
 })();`;
-exports.st = `window.ScrollTrigger={create(o){return {}},config(){},refresh(){},update(){},maxScroll(){return 1000}};`;
-exports.lenis = `window.Lenis=class{constructor(){} on(){} raf(){} scrollTo(){}};`;
+exports.st = `window.ScrollTrigger={create(o){return {start:0,end:1000}},addEventListener(){},removeEventListener(){},config(){},refresh(){},update(){},maxScroll(){return 1000}};`;
+exports.lenis = `window.Lenis=class{constructor(){} on(){} raf(){} scrollTo(){} stop(){} start(){} destroy(){}};`;
 exports.three = `
 export class Vector2{constructor(x,y){this.x=x;this.y=y}}
 export class Shape{constructor(p){this.pts=p;this.holes=[]}}
