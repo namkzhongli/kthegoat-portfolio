@@ -1,0 +1,1071 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>K THE GOAT</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: light monochrome editorial grid. Wide black grotesque (Balenciaga / Fear of God restraint),
+   mono HUD labels for the tech layer, one chrome 3D signature at the top and the bottom. */
+:root{
+  --ink:#0b0b0b; --ink-2:#4d4d4a; --ink-3:#8a8a86; --line:rgba(11,11,11,.13); --line-2:rgba(11,11,11,.32);
+  --p1:#f1f1ef; --p2:#e7e7e5; --p3:#f8f8f7; --p4:#dcdcda;
+  --f-sans:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --f-mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --gl:max(16px,env(safe-area-inset-left,0px)); --gr:max(16px,env(safe-area-inset-right,0px));
+  --nav-h:64px; --vh:100vh;
+}
+@supports (height:100svh){:root{--vh:100svh}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--p1);color:var(--ink);font-family:var(--f-sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.label{font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;line-height:1.35}
+.wrap{padding-left:var(--gl);padding-right:var(--gr)}
+.disp{margin:0;font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.035em;line-height:.92;text-wrap:balance}
+.ln{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
+.ln>span{display:block}
+.wd{display:inline-block;white-space:nowrap}
+.c{display:inline-block;will-change:transform}
+.gimg{filter:grayscale(1) contrast(1.06)}
+.eyebrow{display:flex;gap:14px;align-items:center;color:var(--ink-2)}
+.eyebrow::after{content:"";flex:0 0 48px;height:1px;background:currentColor}
+
+/* overlays */
+.grain{position:fixed;inset:-50%;z-index:90;pointer-events:none;opacity:.07;mix-blend-mode:multiply;animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-4%)}60%{transform:translate(-4%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+.guides{position:fixed;inset:0;z-index:55;pointer-events:none;display:flex;justify-content:space-between;padding:0 var(--gr) 0 var(--gl)}
+.guides i{width:1px;background:rgba(11,11,11,.045)}
+
+/* loader */
+#loader{position:fixed;inset:0;z-index:100;background:var(--p1);display:grid;grid-template-rows:auto 1fr auto;padding:calc(24px + env(safe-area-inset-top,0px)) var(--gr) calc(24px + env(safe-area-inset-bottom,0px)) var(--gl);transition:clip-path 1.1s cubic-bezier(.76,0,.24,1);clip-path:inset(0 0 0 0)}
+#loader.done{clip-path:inset(0 0 100% 0);pointer-events:none}
+#loader .top,#loader .bot{display:flex;justify-content:space-between;gap:16px;color:var(--ink-2)}
+#loader .count{align-self:end;font-weight:800;font-stretch:125%;font-size:clamp(72px,17vw,260px);letter-spacing:-.05em;line-height:.8;font-variant-numeric:tabular-nums;margin-bottom:20px}
+#loader .bar{height:1px;background:var(--line);margin-bottom:14px;overflow:hidden}
+#loader .bar i{display:block;height:100%;background:var(--ink);transform-origin:left;transform:scaleX(0)}
+
+/* nav + hud */
+.nav{position:fixed;z-index:80;top:0;left:0;right:0;height:calc(var(--nav-h) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) var(--gr) 0 var(--gl);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;pointer-events:none}
+.nav>*{pointer-events:auto}
+.brand{justify-self:start;font-weight:800;font-stretch:125%;letter-spacing:-.02em;font-size:16px;text-decoration:none;text-transform:uppercase;display:flex;gap:10px;align-items:center}
+.brand b{display:inline-block;width:9px;height:9px;background:var(--ink);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+.nav ul a{text-decoration:none;display:inline-flex;overflow:hidden;height:1.35em}
+.roll{display:inline-flex;flex-direction:column;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.roll>span{display:block;height:1.35em}
+@media (hover:hover){a:hover .roll,button:hover .roll{transform:translateY(-50%)}}
+.lang{justify-self:end;display:flex;gap:14px;align-items:center}
+.lang button{opacity:.4;transition:opacity .2s;padding:6px 0}
+.lang button[aria-pressed="true"]{opacity:1}
+.lang button[aria-pressed="true"]::before{content:"[";}
+.lang button[aria-pressed="true"]::after{content:"]";}
+.clock{font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.hud{position:fixed;z-index:80;left:var(--gl);right:var(--gr);bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;pointer-events:none;color:var(--ink-2);opacity:0;transition:opacity .5s}
+.hud.on{opacity:1}
+.hud span{font-variant-numeric:tabular-nums}
+
+/* hero */
+.hero{position:relative;z-index:1;height:var(--vh);min-height:560px;overflow:hidden;background:var(--p1)}
+.dots{position:absolute;inset:0;background-image:radial-gradient(rgba(11,11,11,.16) 1px,transparent 1.2px);background-size:26px 26px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000 20%,transparent 75%)}
+.bezel{position:absolute;inset:0;margin:auto;width:min(84vh,94vw);height:min(84vh,94vw);color:var(--ink);opacity:.5}
+.bezel svg{width:100%;height:100%;display:block;animation:spin 140s linear infinite}
+.shadow{position:absolute;left:50%;top:63%;width:min(70vw,1100px);height:60px;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(11,11,11,.22),transparent 68%);filter:blur(8px)}
+#c-hero{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-fallback{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;text-align:center;font-size:clamp(48px,11vw,190px);transition:opacity .6s}
+.gl-ready .hero-fallback{opacity:0}
+.hc{position:absolute;display:grid;gap:4px}
+.hc.tl{left:var(--gl);top:calc(var(--nav-h) + 28px + env(safe-area-inset-top,0px))}
+.hc.tr{right:var(--gr);top:calc(var(--nav-h) + 28px + env(safe-area-inset-top,0px));text-align:right}
+.hc.bl{left:var(--gl);bottom:calc(30px + env(safe-area-inset-bottom,0px))}
+.hc.bc{left:0;right:0;margin:0 auto;width:max-content;bottom:calc(30px + env(safe-area-inset-bottom,0px));text-align:center;white-space:nowrap}
+.hc.br{right:var(--gr);bottom:calc(30px + env(safe-area-inset-bottom,0px));text-align:right}
+.hc .mut{color:var(--ink-3)}
+.scrollcue{display:flex;align-items:center;gap:12px}
+.scrollcue i{display:block;width:1px;height:38px;background:var(--line);position:relative;overflow:hidden}
+.scrollcue i::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--ink);animation:cue 1.8s cubic-bezier(.6,0,.2,1) infinite}
+@keyframes cue{to{top:100%}}
+
+/* about (covers the pinned hero) */
+.about{position:relative;z-index:2;background:var(--p3);will-change:clip-path}
+.mq{overflow:hidden;white-space:nowrap;border-bottom:1px solid var(--line);padding-block:clamp(10px,1.6vh,18px)}
+.mq-track{display:inline-flex;will-change:transform}
+.mq-item{display:inline-flex;align-items:center;gap:.4em;padding-right:.4em;font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.03em;font-size:clamp(44px,8.5vw,150px);line-height:1}
+.mq-item svg{width:.42em;height:.42em;flex:none}
+.mq.out .mq-item{color:transparent;-webkit-text-stroke:1.2px var(--ink)}
+.st{padding-block:clamp(90px,16vh,190px) clamp(70px,12vh,140px)}
+.st-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:56px;align-items:start}
+.st-head{grid-column:1 / span 8;display:grid;gap:clamp(24px,4vh,44px)}
+.st-title{font-size:clamp(38px,7.2vw,132px)}
+.st-fig{grid-column:9 / span 4;grid-row:1 / span 2;margin:0;position:relative}
+.polywrap{position:relative}
+.outline{position:absolute;inset:0;width:100%;height:100%;transform:translate(14px,14px);overflow:visible;pointer-events:none}
+.outline polygon{fill:none;stroke:var(--ink);stroke-width:1;vector-effect:non-scaling-stroke}
+.st-poly{position:relative;aspect-ratio:4/5;overflow:hidden;background:#cfcfcd;clip-path:polygon(0% 12%,70% 0%,100% 0%,100% 100%,30% 100%,0% 64%)}
+.st-poly img{width:100%;height:118%;object-fit:cover;object-position:50% 18%}
+.figcap{display:flex;justify-content:space-between;margin-top:30px;color:var(--ink-2)}
+.st-copy{grid-column:1 / span 6;display:grid;gap:26px;max-width:600px}
+.st-copy p{margin:0;font-size:clamp(18px,1.55vw,24px);line-height:1.42;font-weight:500;letter-spacing:-.005em}
+.st-copy .w{display:inline-block;white-space:pre}
+.st-copy .sub{color:var(--ink-2);font-size:clamp(15px,1.15vw,18px);font-weight:400}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);margin-top:clamp(70px,12vh,140px)}
+.stat{padding:22px 20px 26px 0;display:grid;gap:14px;align-content:start}
+.stat+.stat{border-left:1px solid var(--line);padding-left:20px}
+.stat .v{font-weight:800;font-stretch:125%;letter-spacing:-.04em;font-size:clamp(44px,6.4vw,112px);line-height:.9;font-variant-numeric:tabular-nums}
+.stat .label{color:var(--ink-2);max-width:24ch}
+
+/* brands */
+.brands{position:relative;z-index:2;background:linear-gradient(var(--p3) 0 80%,var(--p1));padding-block:clamp(40px,8vh,90px) clamp(90px,16vh,180px)}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:clamp(36px,6vh,72px)}
+.sec-head .disp{font-size:clamp(34px,5.6vw,100px)}
+.sec-head .label{color:var(--ink-2);text-align:right;max-width:30ch}
+.bgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.bcell{position:relative;aspect-ratio:1.18;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden;text-decoration:none;isolation:isolate}
+.bcell::before{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleY(0);transform-origin:bottom;transition:transform .55s cubic-bezier(.7,0,.2,1);z-index:-1}
+.bcell img{width:56%;height:42%;object-fit:contain;transition:transform .55s cubic-bezier(.2,.7,.2,1),filter .3s}
+.bcell .y,.bcell .k{position:absolute;bottom:14px;transition:color .3s}
+.bcell .y{left:14px}.bcell .k{right:14px;color:var(--ink-3);text-align:right}
+.bcell .i{position:absolute;top:14px;left:14px;color:var(--ink-3);transition:color .3s}
+.bcell.cta{flex-direction:column;gap:14px;text-align:center;padding:16px}
+.bcell.cta .q{font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.03em;font-size:clamp(18px,1.8vw,30px);line-height:1;transition:color .3s}
+.bcell.cta .arr{width:40px;height:40px;border:1px solid var(--line-2);border-radius:50%;display:grid;place-items:center;transition:transform .5s,border-color .3s}
+@media (hover:hover){
+  .bcell:hover::before{transform:scaleY(1)}
+  .bcell:hover img{filter:invert(1);transform:scale(1.08)}
+  .bcell:hover .y,.bcell:hover .k,.bcell:hover .i,.bcell:hover .q{color:var(--p3)}
+  .bcell.cta:hover .arr{transform:rotate(-45deg);border-color:var(--p3);color:var(--p3)}
+}
+
+/* work */
+.work{position:relative;z-index:2;background:var(--p1)}
+.work-pin{position:relative;height:var(--vh);min-height:600px;overflow:hidden;background:var(--p1)}
+.bgnames{position:absolute;left:0;top:50%;transform:translateY(-58%);width:100%;pointer-events:none}
+.bgname{position:absolute;left:0;top:0;white-space:nowrap;font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.04em;line-height:.85;font-size:clamp(120px,22vw,400px);color:transparent;-webkit-text-stroke:1px var(--line-2);opacity:.75}
+.work-head{position:absolute;left:var(--gl);right:var(--gr);top:calc(var(--nav-h) + 22px + env(safe-area-inset-top,0px));display:flex;justify-content:space-between;color:var(--ink-2)}
+.work-count{font-variant-numeric:tabular-nums}
+.work-count b{color:var(--ink);font-weight:500}
+.stage{position:absolute;right:calc(var(--gr) + 14px);top:50%;transform:translateY(-50%);height:min(66vh,680px);aspect-ratio:4/5;max-width:44vw}
+.stage .outline{transform:translate(14px,14px)}
+.shape{position:absolute;inset:0;overflow:hidden;will-change:clip-path;background:#cfcfcd}
+.shape img{width:100%;height:100%;object-fit:cover}
+.ch{position:absolute;left:var(--gl);bottom:15vh;width:min(46vw,700px)}
+.ch-top{display:flex;align-items:center;gap:18px;margin-bottom:22px;color:var(--ink-2)}
+.ch-logo{height:clamp(30px,4.2vh,48px);width:auto;max-width:150px;object-fit:contain;object-position:left center}
+.ch-name{margin:0 0 18px;font-size:clamp(34px,5.4vw,96px)}
+.ch-role{margin:0 0 14px}
+.ch-desc{margin:0;max-width:44ch;color:var(--ink-2);font-size:clamp(15px,1.15vw,18px);line-height:1.5}
+.ticks{position:absolute;left:var(--gl);right:var(--gr);bottom:calc(5vh + env(safe-area-inset-bottom,0px));display:flex;gap:8px;align-items:flex-end}
+.tick{flex:1;display:grid;gap:8px;color:var(--ink-3);transition:color .3s}
+.tick i{display:block;height:1px;background:var(--line-2);position:relative;overflow:hidden}
+.tick i::after{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleX(var(--f,0));transform-origin:left}
+.tick.on{color:var(--ink)}
+
+/* tunnel */
+.tun{position:relative;z-index:2;background:linear-gradient(var(--p1),var(--p4) 25%,var(--p4) 75%,var(--p2))}
+.tun-pin{position:relative;height:var(--vh);min-height:520px;overflow:hidden}
+#tunCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.tun-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;text-align:center;padding:0 var(--gr) 0 var(--gl)}
+.tun-text .disp{font-size:clamp(34px,7vw,124px)}
+.tun-text .label{color:var(--ink-2)}
+
+/* team */
+.team{position:relative;z-index:2;background:var(--p2)}
+.team-pin{position:relative;height:var(--vh);min-height:600px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:5vh}
+.team-head{display:flex;justify-content:space-between;align-items:end;gap:24px}
+.team-head .disp{font-size:clamp(34px,6vw,104px)}
+.team-head .label{color:var(--ink-2);text-align:right}
+.strip{display:flex;gap:clamp(14px,2vw,32px);padding-left:var(--gl);padding-right:var(--gr);width:max-content;will-change:transform}
+.strip figure{margin:0;flex:none;display:grid;gap:10px}
+.strip .ph{overflow:hidden;clip-path:polygon(0 0,100% 0,100% 90%,92% 100%,0 100%)}
+.strip img{height:clamp(220px,50vh,540px);width:auto;max-width:none;transform-origin:center}
+.strip figcaption{display:flex;justify-content:space-between;color:var(--ink-3)}
+.strip figure:nth-child(even){margin-top:clamp(20px,6vh,70px)}
+
+/* skills */
+.skills{position:relative;z-index:2;background:linear-gradient(var(--p2),var(--p3) 30%);padding-block:clamp(100px,18vh,200px)}
+.sk{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.sk li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px;align-items:center;padding:clamp(16px,2.6vh,28px) 0;border-bottom:1px solid var(--line);position:relative}
+.sk li::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.7,0,.2,1)}
+.sk .n{display:block;overflow:hidden;height:1.06em;font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.03em;font-size:clamp(22px,3.6vw,60px);line-height:1.06}
+.sk .n .roll>span{height:1.06em}
+.sk .d{color:var(--ink-2);font-size:clamp(14px,1.1vw,17px)}
+@media (hover:hover){.sk li:hover::after{transform:scaleX(1)}.sk li:hover .roll{transform:translateY(-50%)}}
+.sk-prev{position:fixed;left:0;top:0;z-index:70;width:clamp(180px,16vw,260px);aspect-ratio:4/5;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.6);transition:opacity .3s,transform .4s cubic-bezier(.2,.7,.2,1);clip-path:polygon(10% 0,100% 0,100% 82%,84% 100%,0 100%,0 14%)}
+.sk-prev.on{opacity:1}
+.sk-prev img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s}
+.sk-prev img.on{opacity:1}
+
+/* contact */
+.contact{position:relative;z-index:2;background:linear-gradient(var(--p3),var(--p1) 40%);padding-top:clamp(60px,10vh,120px)}
+.contact .ct-title{font-size:clamp(40px,9.6vw,176px)}
+.c-rows{margin-top:clamp(48px,9vh,110px);border-top:1px solid var(--line)}
+.c-row{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,7fr) auto;gap:24px;align-items:center;padding:clamp(18px,3vh,32px) 0;border-bottom:1px solid var(--line)}
+.c-row .label{color:var(--ink-2)}
+.c-val{font-weight:800;font-stretch:122%;letter-spacing:-.025em;font-size:clamp(20px,3.4vw,54px);line-height:1.05;overflow-wrap:anywhere;user-select:all;text-decoration:none}
+.c-row .go{display:flex;gap:10px}
+.pill{text-transform:inherit;letter-spacing:inherit;font-family:inherit;display:inline-flex;align-items:center;height:38px;padding:0 16px;border:1px solid var(--line-2);border-radius:99px;text-decoration:none;overflow:hidden;transition:background .3s,color .3s}
+.pill .roll>span{height:38px;line-height:38px}
+.pill .roll{height:38px}
+@media (hover:hover){.pill:hover{background:var(--ink);color:var(--p3)}}
+.mq.big{border-top:1px solid var(--line);margin-top:clamp(60px,10vh,120px)}
+.foot{position:relative;height:clamp(260px,52vh,520px)}
+#c-foot{position:absolute;inset:0;width:100%;height:100%;display:block}
+.foot-fallback{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;font-size:clamp(40px,10vw,170px)}
+.gl2-ready .foot-fallback{opacity:0}
+.foot-meta{position:absolute;left:var(--gl);right:var(--gr);bottom:calc(24px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;color:var(--ink-2);gap:12px}
+
+@media (max-width:820px){
+  :root{--nav-h:56px}
+  .nav{grid-template-columns:auto 1fr auto}
+  .nav ul,.clock,.guides,.hud{display:none}
+  .hc.bc{display:none}
+  .st-head{grid-column:1 / -1}
+  .st-fig{grid-column:2 / span 10;grid-row:auto}
+  .st-copy{grid-column:1 / -1}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:nth-child(3){border-left:0;padding-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .bgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bcell .i{display:none}
+  .bcell .k{top:12px;right:12px;bottom:auto;font-size:9px;max-width:70%}
+  .bcell .y{left:12px;bottom:12px}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:12px}
+  .sec-head .label{text-align:left}
+  .stage{left:var(--gl);right:var(--gr);width:auto;top:calc(var(--nav-h) + 52px + env(safe-area-inset-top,0px));height:40svh;aspect-ratio:auto;transform:none}
+  .stage .outline{transform:translate(8px,8px)}
+  .ch{left:var(--gl);right:var(--gr);width:auto;bottom:calc(9vh + 22px)}
+  .ch-name{font-size:clamp(28px,9vw,52px);margin-bottom:12px}
+  .ch-top{margin-bottom:12px}
+  .ch-desc{font-size:14px}
+  .bgname{font-size:clamp(90px,34vw,220px)}
+  .ticks{bottom:calc(3vh + env(safe-area-inset-bottom,0px))}
+  .tick span{font-size:9px}
+  .sk li{grid-template-columns:1fr;gap:6px}
+  .c-row{grid-template-columns:1fr;row-gap:10px}
+  .team-head{flex-direction:column;align-items:flex-start;gap:8px}
+  .team-head .label{text-align:left}
+  .strip img{height:clamp(200px,42vh,420px)}
+}
+@media (prefers-reduced-motion:reduce){#loader{transition:none}.grain,.bezel svg,.brand b{animation:none}}
+</style>
+
+<div id="loader" aria-hidden="true">
+  <div class="top label"><span>K THE GOAT</span><span>Portfolio ©2026</span></div>
+  <div class="count" id="loadCount">000</div>
+  <div><div class="bar"><i id="loadBar"></i></div><div class="bot label"><span id="loadMsg">Loading</span><span>NamK</span></div></div>
+</div>
+<div class="grain" id="grain" aria-hidden="true"></div>
+<div class="guides" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+<header class="nav">
+  <a class="brand" href="#top" data-go="#top"><b></b>NamK</a>
+  <ul class="label">
+    <li><a href="#about" data-go="#about" data-t="nav_about"></a></li>
+    <li><a href="#work" data-go="#work" data-t="nav_work"></a></li>
+    <li><a href="#team" data-go="#team" data-t="nav_team"></a></li>
+    <li><a href="#contact" data-go="#contact" data-t="nav_contact"></a></li>
+  </ul>
+  <div class="lang label">
+    <span class="clock" id="clock" aria-hidden="true">GMT+7</span>
+    <button type="button" data-lang="vi" aria-pressed="true">VI</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+<div class="hud label" id="hud" aria-hidden="true"><span id="hudSec"></span><span id="hudPos"></span></div>
+
+<main id="top">
+  <section class="hero" id="hero" data-sec="hero">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="bezel" id="bezel" aria-hidden="true"></div>
+    <div class="shadow" aria-hidden="true"></div>
+    <h1 class="hero-fallback disp">K THE GOAT<span class="sr"> — Y Nam Knul (NamK), Marketing Director</span></h1>
+    <canvas id="c-hero" aria-hidden="true"></canvas>
+    <div class="hc tl label hfade"><span>Y Nam Knul</span><span class="mut">aka NamK</span></div>
+    <div class="hc tr label hfade"><span>Marketing Director</span><span class="mut">KAZA · Bích Vân Store</span></div>
+    <div class="hc bl label hfade"><span class="scrollcue"><i></i><span data-t="hero_scroll"></span></span></div>
+    <div class="hc bc label hfade"><span class="mut" data-t="hero_based"></span></div>
+    <div class="hc br label hfade"><span>Est. 2021</span></div>
+  </section>
+
+  <section class="about" id="about" data-sec="about">
+    <div class="mq" data-dir="-1" aria-hidden="true"><div class="mq-track"></div></div>
+    <div class="mq out" data-dir="1" aria-hidden="true"><div class="mq-track"></div></div>
+    <div class="st wrap">
+      <div class="st-grid">
+        <div class="st-head">
+          <div class="eyebrow label"><span data-t="eb_about"></span></div>
+          <h2 class="disp st-title split" id="stTitle"></h2>
+        </div>
+        <figure class="st-fig">
+          <div class="polywrap">
+            <svg class="outline" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon id="stOutline" points="0,12 70,0 100,0 100,100 30,100 0,64"/></svg>
+            <div class="st-poly" id="stPoly"><img class="gimg" src="img/img_9651.jpg" alt="Y Nam Knul" decoding="async"></div>
+          </div>
+          <figcaption class="figcap label"><span>Fig. 01</span><span>NamK</span></figcaption>
+        </figure>
+        <div class="st-copy">
+          <p id="stP"></p>
+          <p class="sub" id="stP2"></p>
+        </div>
+      </div>
+      <div class="stats" id="stats"></div>
+    </div>
+  </section>
+
+  <section class="brands" id="brands" data-sec="brands">
+    <div class="wrap">
+      <div class="sec-head">
+        <div style="display:grid;gap:24px">
+          <div class="eyebrow label"><span data-t="eb_brands"></span></div>
+          <h2 class="disp split" id="brTitle"></h2>
+        </div>
+        <span class="label" data-t="br_cap"></span>
+      </div>
+      <div class="bgrid" id="bgrid"></div>
+    </div>
+  </section>
+
+  <section class="work" id="work" data-sec="work">
+    <div class="work-pin" id="workPin">
+      <div class="bgnames" id="bgnames" aria-hidden="true"></div>
+      <div class="work-head label"><span class="eyebrow"><span data-t="eb_work"></span></span><span class="work-count" id="workCount"><b>01</b> / 07</span></div>
+      <div class="stage" id="stage">
+        <svg class="outline" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon id="wkOutline" points="10,0 100,0 100,78 72,100 0,100 0,22"/></svg>
+      </div>
+      <div id="chs"></div>
+      <div class="ticks label" id="ticks"></div>
+    </div>
+  </section>
+
+  <section class="tun" id="tun" data-sec="tun">
+    <div class="tun-pin" id="tunPin">
+      <canvas id="tunCanvas" aria-hidden="true"></canvas>
+      <div class="tun-text">
+        <span class="label" data-t="tun_cap"></span>
+        <h2 class="disp split" id="tunTitle"></h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="team" id="team" data-sec="team">
+    <div class="team-pin" id="teamPin">
+      <div class="wrap team-head">
+        <div style="display:grid;gap:22px">
+          <div class="eyebrow label"><span data-t="eb_team"></span></div>
+          <h2 class="disp split" id="teamTitle"></h2>
+        </div>
+        <span class="label" data-t="team_cap"></span>
+      </div>
+      <div class="strip" id="strip"></div>
+    </div>
+  </section>
+
+  <section class="skills" id="skills" data-sec="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <div style="display:grid;gap:24px">
+          <div class="eyebrow label"><span data-t="eb_skills"></span></div>
+          <h2 class="disp split" id="skTitle"></h2>
+        </div>
+        <span class="label" data-t="sk_cap"></span>
+      </div>
+      <ul class="sk" id="skList"></ul>
+    </div>
+    <div class="sk-prev" id="skPrev" aria-hidden="true"></div>
+  </section>
+
+  <section class="contact" id="contact" data-sec="contact">
+    <div class="wrap">
+      <div class="eyebrow label" style="margin-bottom:28px"><span data-t="eb_contact"></span></div>
+      <h2 class="disp ct-title" id="ctTitle"></h2>
+      <div class="c-rows">
+        <div class="c-row">
+          <span class="label" data-t="c_phone"></span>
+          <a class="c-val" href="tel:0706034567">0706 034 567</a>
+          <span class="go label"><a class="pill" href="tel:0706034567" data-t="c_call" data-roll></a><button class="pill" type="button" data-copy="0706034567" data-t="c_copy" data-roll></button></span>
+        </div>
+        <div class="c-row">
+          <span class="label">Email</span>
+          <a class="c-val" href="mailto:kthegoat.info@gmail.com">kthegoat.info@gmail.com</a>
+          <span class="go label"><a class="pill" href="mailto:kthegoat.info@gmail.com" data-t="c_mail" data-roll></a><button class="pill" type="button" data-copy="kthegoat.info@gmail.com" data-t="c_copy" data-roll></button></span>
+        </div>
+      </div>
+    </div>
+    <div class="mq big" data-dir="-1" aria-hidden="true"><div class="mq-track"></div></div>
+    <div class="foot" id="foot">
+      <h2 class="foot-fallback disp" aria-hidden="true">K THE GOAT</h2>
+      <canvas id="c-foot" aria-hidden="true"></canvas>
+      <div class="foot-meta label"><span>© 2026 Y Nam Knul</span><button type="button" class="pill" data-go="#top" data-t="to_top" data-roll></button></div>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { toCreasedNormals } from 'three/addons/utils/BufferGeometryUtils.js';
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const coarse = matchMedia('(pointer: coarse)').matches;
+const hover = matchMedia('(hover: hover)').matches;
+const root = document.documentElement;
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const pad = (n, l = 2) => String(n).padStart(l, '0');
+
+/* ================= content ================= */
+const IMG = n => `img/${n}.jpg`;
+const LOGO = n => `logos/${n}.png`;
+const BRANDS = [
+  { name:'Bích Vân Store', logo:'bichvan', img:'img_7376', year:'2021' },
+  { name:'Cốm Natural', logo:'com', img:'art-12', year:'2022' },
+  { name:'Embé', logo:'embe', img:'art-14', year:'2022' },
+  { name:'Kimmy Cuisine & Lounge', logo:'kimmy', img:'img_9658', year:'2023' },
+  { name:'Meow Billiards', logo:'meow', img:'dscf1790', year:'2024' },
+  { name:'KAZA', logo:'kaza', img:'ktg-08', year:'2024' },
+  { name:'Dog & Duck', logo:'dogduck', img:'bomb9215', year:'2024' }
+];
+const N = BRANDS.length;
+const TEAM_IMG = ['dscf1860','dscf1935','dscf1912','dscf2058','dscf2061','dscf1865','dscf2063','dscf2071','dscf1913','dscf2080'];
+const SK_IMG = ['img_9648','img_9652','img_9653','img_9655','img_9656','img_9657','img_9649'];
+
+const I18N = {
+  vi: {
+    nav_about:'Giới thiệu', nav_work:'Dự án', nav_team:'Đội nhóm', nav_contact:'Liên hệ',
+    hero_scroll:'Cuộn để xem', hero_based:'Việt Nam · GMT+7',
+    mq1:['Marketing Director','KAZA Restaurant','Bích Vân Store'], mq2:['K The Goat','NamK','Since 2021'], mq3:['Hãy làm việc cùng nhau','K The Goat'],
+    eb_about:'(01) Giới thiệu', eb_brands:'(02) Thương hiệu', eb_work:'(03) Dự án', eb_team:'(04) Đội nhóm', eb_skills:'(05) Kỹ năng', eb_contact:'(06) Liên hệ',
+    sec:{hero:'K The Goat',about:'Giới thiệu',brands:'Thương hiệu',work:'Dự án',tun:'Tinh thần',team:'Đội nhóm',skills:'Kỹ năng',contact:'Liên hệ'},
+    st_lines:['Từ nhân viên kho','đến Marketing','Director.'],
+    st_p:'Mình là Y Nam Knul, mọi người gọi là NamK. Năm 2021 mình vào Bích Vân Store ở vị trí nhân viên kho, rồi tự mày mò Digital Marketing. Hiện tại mình là Marketing Director của KAZA Restaurant và Bích Vân Store.',
+    st_p2:'Không ngại thử thách, kể cả những chương không thắng.',
+    stats:[['05','+','Năm làm nghề, bắt đầu từ 2021'],['07','','Thương hiệu đã đồng hành'],['5–7','','Người trong đội tại KAZA'],['02','','Năm để KAZA thành điểm đến hàng đầu thành phố']],
+    br_lines:['Bảy thương hiệu,','một hành trình.'], br_cap:'Từ bán lẻ đến F&B và giải trí',
+    br_kind:['Bán lẻ Apple','Café · Camping','Thời trang trẻ em','Fine Dining','Billiard','F&B · Giải trí','Bar'],
+    br_cta:'Thương hiệu tiếp theo?', br_cta2:'Liên hệ',
+    period:['2021 — nay','2022','2022','2023','2024','10/2024 — nay','12/2024 — 05/2025'],
+    role:['Nhân viên kho → Marketing Director','Social Media · Café & Camping','Social Media · Thời trang trẻ em','Social Media · Nhà hàng Fine Dining','Social Media · Chuỗi billiard toàn quốc','Marketing Director · Đội 5–7 người','Quán bar local nhỏ'],
+    desc:[
+      'Bắt đầu ở kho. Tự học Digital Marketing và một mình xử lý mọi vấn đề: auto-reply khách hàng, nâng cấp hình ảnh thương hiệu, đổi logo. Hai năm sau mới có đội 2–3 người.',
+      'Làm một mình từ đầu đến cuối: lên kế hoạch, chụp hình, sửa hình, viết bài, đăng bài.',
+      'Một mình lo toàn bộ nội dung, từ ý tưởng đến bài đăng.',
+      'Nhà hàng fine dining, vẫn một mình lo trọn quy trình nội dung.',
+      'Phụ trách cơ sở Buôn Ma Thuột của chuỗi billiard toàn quốc.',
+      'Từ đây mình bắt đầu làm việc theo đội. Một thương hiệu mới mở, chỉ trong 2 năm đã thành một trong những điểm ăn chơi hàng đầu của thành phố.',
+      'Đóng cửa tháng 5/2025. Không phải chương nào cũng thắng, nhưng chương nào cũng là của mình.'
+    ],
+    tun_lines:['Không ai dọn đường.','Mình tự mở.'], tun_cap:'Tinh thần',
+    team_lines:['Từ một mình','đến cả đội.'], team_cap:'Làm việc nhóm · KAZA',
+    sk_lines:['Kỹ năng'], sk_cap:'Những việc mình làm mỗi ngày',
+    skills:[
+      ['Chiến lược thương hiệu','Định vị, nhận diện, đổi logo, nâng cấp hình ảnh'],
+      ['Social Media & Content','Lên kế hoạch, chụp, sửa hình, viết bài, đăng bài'],
+      ['Hình ảnh & Video','Chụp ảnh, motion graphics, Reels'],
+      ['Marketing F&B & giải trí','Nhà hàng, bar, billiard, sự kiện'],
+      ['Quản lý đội nhóm','Dẫn đội 5–7 người tại KAZA'],
+      ['Tự động hóa & AI','Auto-reply khách hàng, quy trình làm việc với AI'],
+      ['Bán lẻ & Fanpage','Bích Vân Store, từ kho đến thương hiệu']
+    ],
+    ct_lines:['Hãy làm việc','cùng nhau.'],
+    c_phone:'Điện thoại', c_call:'Gọi', c_mail:'Gửi mail', c_copy:'Chép', c_copied:'Đã chép', to_top:'Lên đầu trang',
+    loading:'Đang tải'
+  },
+  en: {
+    nav_about:'About', nav_work:'Work', nav_team:'Team', nav_contact:'Contact',
+    hero_scroll:'Scroll to explore', hero_based:'Vietnam · GMT+7',
+    mq1:['Marketing Director','KAZA Restaurant','Bích Vân Store'], mq2:['K The Goat','NamK','Since 2021'], mq3:["Let's work together",'K The Goat'],
+    eb_about:'(01) About', eb_brands:'(02) Brands', eb_work:'(03) Work', eb_team:'(04) Team', eb_skills:'(05) Skills', eb_contact:'(06) Contact',
+    sec:{hero:'K The Goat',about:'About',brands:'Brands',work:'Work',tun:'Mindset',team:'Team',skills:'Skills',contact:'Contact'},
+    st_lines:['From warehouse','staff to Marketing','Director.'],
+    st_p:'I am Y Nam Knul, people call me NamK. In 2021 I joined Bích Vân Store as warehouse staff and taught myself digital marketing. Today I am Marketing Director of KAZA Restaurant and Bích Vân Store.',
+    st_p2:'Not afraid of hard problems, including the chapters that did not win.',
+    stats:[['05','+','Years in the field, since 2021'],['07','','Brands worked with'],['5–7','','People on the team at KAZA'],['02','','Years to make KAZA a top city destination']],
+    br_lines:['Seven brands,','one journey.'], br_cap:'From retail to F&B and entertainment',
+    br_kind:['Apple retail','Café · Camping','Kids fashion','Fine dining','Billiards','F&B · Entertainment','Bar'],
+    br_cta:'Your brand next?', br_cta2:'Contact',
+    period:['2021 — now','2022','2022','2023','2024','10/2024 — now','12/2024 — 05/2025'],
+    role:['Warehouse staff → Marketing Director','Social Media · Café & Camping','Social Media · Kids fashion','Social Media · Fine dining','Social Media · National billiard chain','Marketing Director · Team of 5–7','Small local bar'],
+    desc:[
+      'Started in the warehouse. Taught myself digital marketing and solved every problem alone: customer auto-reply, a stronger brand image, a new logo. A team of 2–3 came two years later.',
+      'Solo, start to finish: planning, shooting, editing photos, writing and posting.',
+      'All content handled alone, from idea to published post.',
+      'A fine dining restaurant, still running the whole content process alone.',
+      'Handled the Buôn Ma Thuột branch of a nationwide billiard chain.',
+      'This is where I started working as a team. A brand new venue that became one of the top places to eat and go out in the city within two years.',
+      'Closed in May 2025. Not every chapter wins, but every one of them is mine.'
+    ],
+    tun_lines:['Nobody cleared the road.','I opened it myself.'], tun_cap:'Mindset',
+    team_lines:['From solo','to a whole team.'], team_cap:'Teamwork · KAZA',
+    sk_lines:['Skills'], sk_cap:'What I do every day',
+    skills:[
+      ['Brand strategy','Positioning, identity, logo change, brand image upgrade'],
+      ['Social Media & Content','Planning, shooting, editing, writing, posting'],
+      ['Photo & Video','Photography, motion graphics, Reels'],
+      ['F&B & entertainment marketing','Restaurants, bars, billiards, events'],
+      ['Team leadership','Leading a team of 5–7 at KAZA'],
+      ['Automation & AI','Customer auto-reply, AI-assisted workflows'],
+      ['Retail & Fanpage','Bích Vân Store, from warehouse to brand']
+    ],
+    ct_lines:["Let's work",'together.'],
+    c_phone:'Phone', c_call:'Call', c_mail:'Send mail', c_copy:'Copy', c_copied:'Copied', to_top:'Back to top',
+    loading:'Loading'
+  }
+};
+let lang = 'vi';
+try { const s = localStorage.getItem('ktg-lang'); if (s === 'vi' || s === 'en') lang = s; else if (!(navigator.language || 'vi').toLowerCase().startsWith('vi')) lang = 'en'; } catch (e) {}
+const T = () => I18N[lang];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* text helpers */
+function setSplit(el, lines){
+  el.innerHTML = lines.map(l => `<span class="ln"><span>${l.split(' ').map(w => `<span class="wd">${Array.from(w).map(ch => `<span class="c">${esc(ch)}</span>`).join('')}</span>`).join(' ')}</span></span>`).join('');
+}
+function setWords(el, text){ el.innerHTML = text.split(' ').map(w => `<span class="w">${esc(w)} </span>`).join(''); }
+function setRoll(el, text){ el.innerHTML = `<span class="roll"><span>${esc(text)}</span><span aria-hidden="true">${esc(text)}</span></span>`; el.setAttribute('aria-label', text); }
+const STAR = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 0 C10.6 6.4 13.6 9.4 20 10 C13.6 10.6 10.6 13.6 10 20 C9.4 13.6 6.4 10.6 0 10 C6.4 9.4 9.4 6.4 10 0Z" fill="currentColor"/></svg>';
+
+/* ================= build DOM ================= */
+const POLY = [
+  [[10,0],[100,0],[100,78],[72,100],[0,100],[0,22]],
+  [[0,12],[70,0],[100,0],[100,100],[30,100],[0,64]],
+  [[22,0],[100,0],[100,62],[78,100],[0,100],[0,34]],
+  [[0,0],[100,14],[100,100],[40,100],[40,58],[0,58]],
+  [[50,0],[100,26],[100,100],[0,100],[0,26],[50,0]],
+  [[0,0],[100,0],[100,100],[55,100],[30,62],[0,100]],
+  [[30,0],[100,0],[100,70],[70,100],[0,100],[0,30]]
+];
+const poly = pts => `polygon(${pts.map(p => p[0] + '% ' + p[1] + '%').join(',')})`;
+const polyAt = (x, y) => poly(Array(6).fill([x, y]));
+const pts = p => p.map(q => q[0] + ',' + q[1]).join(' ');
+
+const stage = $('#stage'), chs = $('#chs'), ticks = $('#ticks'), bgnames = $('#bgnames');
+BRANDS.forEach((b, i) => {
+  const sh = document.createElement('div'); sh.className = 'shape';
+  sh.innerHTML = `<img class="gimg" src="${IMG(b.img)}" alt="${esc(b.name)}" decoding="async" ${i > 1 ? 'loading="lazy"' : ''}>`;
+  stage.appendChild(sh);
+  const ch = document.createElement('div'); ch.className = 'ch';
+  ch.innerHTML = `<div class="ch-top label"><img class="ch-logo" src="${LOGO(b.logo)}" alt=""><span class="ch-period"></span></div><h3 class="disp ch-name">${esc(b.name)}</h3><p class="ch-role label"></p><p class="ch-desc"></p>`;
+  chs.appendChild(ch);
+  const tk = document.createElement('div'); tk.className = 'tick'; tk.innerHTML = `<i></i><span>${b.year}</span>`; ticks.appendChild(tk);
+  const bn = document.createElement('div'); bn.className = 'bgname'; bn.textContent = b.name; bgnames.appendChild(bn);
+});
+const shapes = $$('.shape', stage), chEls = $$('.ch', chs), tickEls = $$('.tick', ticks), bgEls = $$('.bgname', bgnames);
+
+const bgrid = $('#bgrid');
+BRANDS.forEach((b, i) => {
+  const c = document.createElement('div'); c.className = 'bcell';
+  c.innerHTML = `<span class="i label">${pad(i + 1)}</span><img src="${LOGO(b.logo)}" alt="${esc(b.name)}" loading="lazy"><span class="y label">${b.year}</span><span class="k label"></span>`;
+  bgrid.appendChild(c);
+});
+const cta = document.createElement('a'); cta.className = 'bcell cta'; cta.href = '#contact'; cta.dataset.go = '#contact';
+cta.innerHTML = `<span class="i label">08</span><span class="q"></span><span class="arr" aria-hidden="true">→</span>`;
+bgrid.appendChild(cta);
+
+const strip = $('#strip');
+TEAM_IMG.forEach((n, i) => {
+  const f = document.createElement('figure');
+  f.innerHTML = `<div class="ph"><img class="gimg" src="${IMG(n)}" alt="" decoding="async" loading="eager"></div><figcaption class="label"><span>${pad(i + 1)}</span><span>/ ${pad(TEAM_IMG.length)}</span></figcaption>`;
+  strip.appendChild(f);
+});
+
+const skList = $('#skList'), skPrev = $('#skPrev');
+SK_IMG.forEach((n, i) => {
+  const li = document.createElement('li'); li.dataset.i = i;
+  li.innerHTML = '<span class="n"></span><span class="d"></span>'; skList.appendChild(li);
+  const im = document.createElement('img'); im.className = 'gimg'; im.src = IMG(n); im.alt = ''; im.loading = 'lazy'; skPrev.appendChild(im);
+});
+
+$$('.mq').forEach(m => m.dataset.key = m.classList.contains('big') ? 'mq3' : m.classList.contains('out') ? 'mq2' : 'mq1');
+function fillMarquee(m){
+  const words = T()[m.dataset.key];
+  const one = `<span class="mq-item">${words.map(w => `${esc(w)} ${STAR}`).join(' ')}</span>`;
+  $('.mq-track', m).innerHTML = one.repeat(4);
+}
+
+/* bezel (watch-bezel ring behind the signature) */
+(function bezel(){
+  let s = '<svg viewBox="-110 -110 220 220" aria-hidden="true"><circle r="104" fill="none" stroke="currentColor" stroke-width=".25"/><circle r="86" fill="none" stroke="currentColor" stroke-width=".18"/>';
+  for (let i = 0; i < 60; i++) {
+    const a = i * 6 * Math.PI / 180, big = i % 5 === 0, r1 = big ? 92 : 97, r2 = 103;
+    s += `<line x1="${(Math.sin(a) * r1).toFixed(2)}" y1="${(-Math.cos(a) * r1).toFixed(2)}" x2="${(Math.sin(a) * r2).toFixed(2)}" y2="${(-Math.cos(a) * r2).toFixed(2)}" stroke="currentColor" stroke-width="${big ? .5 : .25}"/>`;
+    if (i % 10 === 0 && i) s += `<text x="${(Math.sin(a) * 80).toFixed(2)}" y="${(-Math.cos(a) * 80 + 1.6).toFixed(2)}" font-size="4.4" text-anchor="middle" fill="currentColor" font-family="Geist Mono, monospace">${i}</text>`;
+  }
+  s += '<path d="M0 -83 L3.2 -77.5 L-3.2 -77.5Z" fill="currentColor"/></svg>';
+  $('#bezel').innerHTML = s;
+})();
+
+/* grain texture */
+(function grain(){
+  try {
+    const c = document.createElement('canvas'); c.width = c.height = 160; const x = c.getContext('2d'), d = x.createImageData(160, 160);
+    for (let i = 0; i < d.data.length; i += 4) { const v = (Math.random() * 255) | 0; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; }
+    x.putImageData(d, 0, 0); $('#grain').style.backgroundImage = `url(${c.toDataURL()})`;
+  } catch (e) {}
+})();
+
+/* ================= i18n ================= */
+function applyLang(){
+  const t = T();
+  root.lang = lang;
+  $$('[data-t]').forEach(el => { const v = t[el.dataset.t]; if (typeof v !== 'string') return; if (el.hasAttribute('data-roll') || el.closest('.nav ul')) setRoll(el, v); else el.textContent = v; });
+  setSplit($('#stTitle'), t.st_lines);
+  setWords($('#stP'), t.st_p); $('#stP2').textContent = t.st_p2;
+  $('#stats').innerHTML = t.stats.map(s => `<div class="stat"><span class="v" data-to="${esc(s[0])}" data-suf="${esc(s[1])}">${esc(s[0] + s[1])}</span><span class="label">${esc(s[2])}</span></div>`).join('');
+  setSplit($('#brTitle'), t.br_lines);
+  $$('.bcell:not(.cta) .k', bgrid).forEach((k, i) => k.textContent = t.br_kind[i]);
+  $('.q', cta).textContent = t.br_cta; cta.setAttribute('aria-label', t.br_cta + ' ' + t.br_cta2);
+  chEls.forEach((el, i) => { $('.ch-period', el).textContent = t.period[i]; $('.ch-role', el).textContent = t.role[i]; $('.ch-desc', el).textContent = t.desc[i]; });
+  setSplit($('#tunTitle'), t.tun_lines);
+  setSplit($('#teamTitle'), t.team_lines);
+  setSplit($('#skTitle'), t.sk_lines);
+  $$('#skList li').forEach((li, i) => { const n = $('.n', li); n.innerHTML = ''; const r = document.createElement('span'); setRoll(r, t.skills[i][0]); n.appendChild(r.firstChild); n.setAttribute('aria-label', t.skills[i][0]); $('.d', li).textContent = t.skills[i][1]; });
+  setSplit($('#ctTitle'), t.ct_lines);
+  $$('.mq').forEach(fillMarquee);
+  $('#loadMsg').textContent = t.loading;
+  $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+}
+applyLang();
+
+/* clock */
+(function clock(){
+  const el = $('#clock');
+  let f; try { f = new Intl.DateTimeFormat('en-GB', { hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false, timeZone:'Asia/Ho_Chi_Minh' }); } catch (e) { return; }
+  const tick = () => { el.textContent = 'GMT+7 ' + f.format(new Date()); };
+  tick(); setInterval(tick, 1000);
+})();
+
+/* ================= loader ================= */
+const loader = { target: 0, shown: 0, done: false };
+const loadCount = $('#loadCount'), loadBar = $('#loadBar');
+function setProgress(v){ loader.target = Math.max(loader.target, v); }
+(function loaderTick(){
+  loader.shown += (loader.target - loader.shown) * .08 + (loader.target > loader.shown ? .15 : 0);
+  loader.shown = Math.min(loader.shown, loader.target);
+  loadCount.textContent = pad(Math.round(loader.shown), 3);
+  loadBar.style.transform = `scaleX(${loader.shown / 100})`;
+  if (!loader.done) requestAnimationFrame(loaderTick);
+})();
+function finishLoader(){
+  return new Promise(res => {
+    setProgress(100);
+    const wait = () => { if (loader.shown >= 99.5 || reduce) { loader.done = true; loadCount.textContent = '100'; loadBar.style.transform = 'scaleX(1)'; setTimeout(() => { $('#loader').classList.add('done'); res(); setTimeout(() => $('#loader').remove(), 1400); }, 200); } else requestAnimationFrame(wait); };
+    wait();
+  });
+}
+
+/* ================= 3D chrome signature ================= */
+const SIGN_FONT = px => `expanded 900 ${px}px Archivo`;
+function contourLetters(lines, px){
+  const padPx = Math.round(px * .14), lineH = px * .98;
+  const c = document.createElement('canvas'), ctx = c.getContext('2d', { willReadFrequently: true });
+  const setFont = () => { ctx.font = SIGN_FONT(px); if ('fontStretch' in ctx) ctx.fontStretch = 'expanded'; };
+  setFont();
+  const capH = ctx.measureText('H').actualBoundingBoxAscent || px * .72;
+  const widths = lines.map(l => ctx.measureText(l).width);
+  const W = Math.ceil(Math.max(...widths)) + padPx * 2, H = Math.ceil(lineH * (lines.length - 1) + capH) + padPx * 2;
+  c.width = W; c.height = H; setFont();
+  ctx.fillStyle = '#fff'; ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
+  const boxes = [];
+  lines.forEach((l, li) => {
+    const x0 = (W - widths[li]) / 2, base = padPx + capH + li * lineH;
+    ctx.fillText(l, x0, base);
+    const chars = Array.from(l);
+    let acc = '';
+    chars.forEach(chr => { const a = ctx.measureText(acc).width; acc += chr; const b = ctx.measureText(acc).width; if (chr.trim()) boxes.push({ x0: x0 + a, x1: x0 + b, cy: base - capH / 2, li, top: base - capH, bot: base }); });
+  });
+  const data = ctx.getImageData(0, 0, W, H).data;
+  const f = (x, y) => data[(y * W + x) * 4 + 3] / 255, thr = .5;
+  const segs = [], adj = new Map();
+  const add = (a, b) => { const i = segs.length; segs.push([a, b]); let A = adj.get(a); if (!A) adj.set(a, A = []); A.push(i); let B = adj.get(b); if (!B) adj.set(b, B = []); B.push(i); };
+  const hE = (x, y) => (y * W + x) * 2, vE = (x, y) => (y * W + x) * 2 + 1;
+  for (let y = 0; y < H - 1; y++) for (let x = 0; x < W - 1; x++) {
+    const tl = f(x, y), tr = f(x + 1, y), br = f(x + 1, y + 1), bl = f(x, y + 1);
+    const k = (tl > thr ? 8 : 0) | (tr > thr ? 4 : 0) | (br > thr ? 2 : 0) | (bl > thr ? 1 : 0);
+    if (k === 0 || k === 15) continue;
+    const T_ = hE(x, y), B_ = hE(x, y + 1), L_ = vE(x, y), R_ = vE(x + 1, y);
+    switch (k) {
+      case 1: case 14: add(L_, B_); break;
+      case 2: case 13: add(B_, R_); break;
+      case 3: case 12: add(L_, R_); break;
+      case 4: case 11: add(T_, R_); break;
+      case 6: case 9: add(T_, B_); break;
+      case 7: case 8: add(T_, L_); break;
+      case 5: case 10: { const m = (tl + tr + br + bl) / 4 > thr; const same = (k === 5) === m; if (same) { add(T_, L_); add(R_, B_); } else { add(T_, R_); add(L_, B_); } break; }
+    }
+  }
+  const pos = id => { const idx = id >> 1, x = idx % W, y = (idx / W) | 0; if ((id & 1) === 0) { const a = f(x, y), b = f(x + 1, y); return [x + (thr - a) / (b - a), y]; } const a = f(x, y), b = f(x, y + 1); return [x, y + (thr - a) / (b - a)]; };
+  const used = new Uint8Array(segs.length), loops = [];
+  for (let s = 0; s < segs.length; s++) {
+    if (used[s]) continue; used[s] = 1;
+    const ids = [segs[s][0]]; let cur = segs[s][1], guard = 0;
+    while (cur !== segs[s][0] && guard++ < 400000) { ids.push(cur); const nx = (adj.get(cur) || []).find(i => !used[i]); if (nx === undefined) break; used[nx] = 1; cur = segs[nx][0] === cur ? segs[nx][1] : segs[nx][0]; }
+    if (ids.length > 8) loops.push(ids.map(pos));
+  }
+  const dpOpen = (p, eps) => { const keep = new Uint8Array(p.length); keep[0] = keep[p.length - 1] = 1; const st = [[0, p.length - 1]]; while (st.length) { const [a, b] = st.pop(); const [x1, y1] = p[a], [x2, y2] = p[b]; const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy) || 1; let md = 0, mi = -1; for (let i = a + 1; i < b; i++) { const d = Math.abs(dy * p[i][0] - dx * p[i][1] + x2 * y1 - y2 * x1) / len; if (d > md) { md = d; mi = i; } } if (md > eps && mi > 0) { keep[mi] = 1; st.push([a, mi], [mi, b]); } } return p.filter((_, i) => keep[i]); };
+  const simplify = (p, eps) => { const h = p.length >> 1; const A = dpOpen(p.slice(0, h + 1), eps), B = dpOpen(p.slice(h).concat([p[0]]), eps); return A.slice(0, -1).concat(B.slice(0, -1)); };
+  const area = p => { let a = 0; for (let i = 0, j = p.length - 1; i < p.length; j = i++) a += p[j][0] * p[i][1] - p[i][0] * p[j][1]; return a / 2; };
+  const inside = (pt, q) => { let r = false; for (let i = 0, j = q.length - 1; i < q.length; j = i++) { const [xi, yi] = q[i], [xj, yj] = q[j]; if ((yi > pt[1]) !== (yj > pt[1]) && pt[0] < (xj - xi) * (pt[1] - yi) / (yj - yi) + xi) r = !r; } return r; };
+  const L = loops.map(p => simplify(p, .4)).filter(p => p.length > 3 && Math.abs(area(p)) > 8);
+  const depth = L.map((p, i) => L.reduce((d, q, j) => d + (j !== i && inside(p[0], q) ? 1 : 0), 0));
+  const unit = px;
+  const letters = boxes.map(b => ({ ...b, outers: [] }));
+  L.forEach((p, i) => {
+    if (depth[i] % 2) return;
+    let cx = 0, cy = 0; p.forEach(q => { cx += q[0]; cy += q[1]; }); cx /= p.length; cy /= p.length;
+    let best = null, bd = 1e9;
+    letters.forEach(l => { if (cy < l.top - px * .3 || cy > l.bot + px * .3) return; const d = cx < l.x0 ? l.x0 - cx : cx > l.x1 ? cx - l.x1 : 0; if (d < bd) { bd = d; best = l; } });
+    if (best) best.outers.push({ p, holes: L.filter((q, j) => depth[j] === depth[i] + 1 && inside(q[0], p)) });
+  });
+  const out = letters.filter(l => l.outers.length).map(l => {
+    const cx = (l.x0 + l.x1) / 2, cy = l.cy;
+    const conv = p => p.map(([x, y]) => new THREE.Vector2((x - cx) / unit, -(y - cy) / unit));
+    const shapesL = l.outers.map(o => { const s = new THREE.Shape(conv(o.p)); o.holes.forEach(h => s.holes.push(new THREE.Path(conv(h)))); return s; });
+    return { shapes: shapesL, x: (cx - W / 2) / unit, y: -(cy - H / 2) / unit };
+  });
+  return { letters: out, w: (Math.max(...widths)) / unit, h: (lineH * (lines.length - 1) + capH) / unit };
+}
+
+function makeEnv(renderer){
+  const pm = new THREE.PMREMGenerator(renderer), sc = new THREE.Scene();
+  sc.add(new THREE.Mesh(new THREE.SphereGeometry(20, 48, 24), new THREE.ShaderMaterial({
+    side: THREE.BackSide,
+    vertexShader: 'varying vec3 vP; void main(){ vP = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    fragmentShader: 'varying vec3 vP; void main(){ float h = vP.y; vec3 c = mix(vec3(.02), vec3(1.05), smoothstep(-.04, .42, h)); c = mix(c, vec3(.38), smoothstep(-.06, -.85, h)); c += .25 * smoothstep(.97, 1., abs(vP.x)); gl_FragColor = vec4(c, 1.0); }'
+  })));
+  const mk = (w, h, x, y, z, v) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(v, v, v), side: THREE.DoubleSide })); m.position.set(x, y, z); m.lookAt(0, 0, 0); sc.add(m); };
+  mk(18, 4, 0, 12, 5, 6); mk(2.6, 15, -12, 1, 5, 5); mk(1.6, 12, 12, 0, 4, 4.5); mk(12, 1.2, 0, -3.5, 13, 3); mk(1.2, 9, -4, 3, 13, 2.5); mk(1.2, 9, 5, 2, 13, 2.2);
+  const tex = pm.fromScene(sc, .012).texture; pm.dispose(); return tex;
+}
+
+function makeStage(canvas, layouts, opts = {}){
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' }); } catch (e) { return null; }
+  if (!renderer.getContext()) return null;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, coarse ? 1.5 : 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08;
+  const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(24, 1, .1, 200);
+  scene.environment = makeEnv(renderer);
+  const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 1, roughness: .1 });
+  const group = new THREE.Group(); scene.add(group);
+  const st = { group, letters: [], visible: true, px: 0, py: 0, tx: 0, ty: 0, p: 0, dims: { w: 1, h: 1 }, key: '', fill: opts.fill || .7, intro: 0 };
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  function build(lines){
+    st.letters.forEach(L => { group.remove(L.mesh); L.mesh.geometry.dispose(); });
+    const r = contourLetters(lines, coarse ? 230 : 320); st.dims = r;
+    const depth = .26, bev = { bevelEnabled: true, bevelThickness: .045, bevelSize: .022, bevelSegments: coarse ? 3 : 5, curveSegments: 1, depth };
+    st.letters = r.letters.map((l, i) => {
+      const g = new THREE.ExtrudeGeometry(l.shapes, bev); g.translate(0, 0, -depth / 2);
+      const sg = toCreasedNormals(g, .7); g.dispose();
+      const mesh = new THREE.Mesh(sg, mat); mesh.position.set(l.x, l.y, 0); group.add(mesh);
+      const ang = rnd(0, Math.PI * 2);
+      return { mesh, bx: l.x, by: l.y, i, iz: 0, iy: 0, irx: 0, iry: 0, is: 1, push: 0, tilt: 0,
+        dx: Math.cos(ang) * rnd(1.2, 3.2), dy: Math.sin(ang) * rnd(.8, 2.4), dz: rnd(1.5, 5), rx: rnd(-3, 3), ry: rnd(-3, 3), rz: rnd(-1.2, 1.2), ph: rnd(0, 6.28) };
+    });
+  }
+  function layout(){
+    const rc = canvas.getBoundingClientRect(), w = Math.max(1, rc.width), h = Math.max(1, rc.height);
+    renderer.setSize(w, h, false); camera.aspect = w / h;
+    const narrow = w / h < .9 ? 1 : 0, k = narrow ? 'n' : 'w';
+    if (k !== st.key) { st.key = k; build(layouts[narrow]); }
+    const t = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+    const fw = narrow ? .86 : st.fill, fh = narrow ? .42 : .5;
+    const d = Math.max(st.dims.w / (fw * 2 * t * camera.aspect), st.dims.h / (fh * 2 * t));
+    camera.position.set(0, 0, d); camera.lookAt(0, 0, 0); camera.updateProjectionMatrix();
+    st.halfW = d * t * camera.aspect;
+  }
+  st.layout = layout;
+  st.playIntro = () => {
+    if (reduce) { st.letters.forEach(L => { L.iz = 0; }); return; }
+    st.letters.forEach(L => { Object.assign(L, { iz: -rnd(6, 12), iy: rnd(-1.5, 1.5), irx: rnd(-2.5, 2.5), iry: rnd(-2.5, 2.5), is: .4 }); });
+    gsap.to(st.letters, { iz: 0, iy: 0, irx: 0, iry: 0, is: 1, duration: 2.2, ease: 'expo.out', stagger: { each: .07, from: 'center' } });
+  };
+  st.render = time => {
+    const t = time / 1000;
+    st.px += (st.tx - st.px) * .06; st.py += (st.ty - st.py) * .06;
+    const p = st.p, e = p * p * (3 - 2 * p);
+    group.rotation.y = st.px * .32 + Math.sin(t * .4) * .1;
+    group.rotation.x = -st.py * .14 + Math.sin(t * .3) * .03;
+    const pwx = st.px * (st.halfW || 3);
+    st.letters.forEach(L => {
+      const inf = Math.exp(-((L.bx - pwx) ** 2) / .5) * (hover ? 1 : 0);
+      L.push += (inf * .35 - L.push) * .08; L.tilt += (inf * Math.sign(L.bx - pwx || 1) * .45 - L.tilt) * .08;
+      const fl = Math.sin(t * .9 + L.ph) * .025;
+      const m = L.mesh;
+      m.position.set(L.bx + L.dx * e, L.by + L.iy + fl + L.dy * e, L.iz + L.push + L.dz * e);
+      m.rotation.set(L.irx + L.rx * e + Math.sin(t * .7 + L.ph) * .03, L.iry + L.tilt + L.ry * e, L.rz * e);
+      m.scale.setScalar(L.is * (1 - e * .3));
+    });
+    renderer.render(scene, camera);
+  };
+  return st;
+}
+
+const stages = [];
+function loop(time){ stages.forEach(s => { if (s.visible) s.render(time); }); requestAnimationFrame(loop); }
+let pointer = { x: innerWidth / 2, y: innerHeight / 2 };
+addEventListener('pointermove', e => { pointer = { x: e.clientX, y: e.clientY }; const x = e.clientX / innerWidth * 2 - 1, y = e.clientY / innerHeight * 2 - 1; stages.forEach(s => { s.tx = x; s.ty = y; }); }, { passive: true });
+
+let heroStage = null;
+async function initHero(){
+  try { await Promise.race([document.fonts.load(SIGN_FONT(100), 'K THE GOAT'), new Promise(r => setTimeout(r, 4000))]); } catch (e) {}
+  setProgress(45);
+  await new Promise(r => setTimeout(r, 40));
+  const st = makeStage($('#c-hero'), [['K THE GOAT'], ['K THE', 'GOAT']], { fill: .74 });
+  if (!st) return false;
+  heroStage = st; stages.push(st); st.layout(); setProgress(85);
+  root.classList.add('gl-ready');
+  st.letters.forEach(L => { L.iz = -40; });
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => st.layout(), 160); });
+  requestAnimationFrame(loop);
+  return true;
+}
+let footStage = null;
+function initFoot(){
+  if (footStage || !window.__glOk) return;
+  const st = makeStage($('#c-foot'), [['K THE GOAT'], ['K THE', 'GOAT']], { fill: .8 });
+  if (!st) return; footStage = st; stages.push(st); st.layout(); st.visible = false;
+  root.classList.add('gl2-ready');
+  new IntersectionObserver(es => { st.visible = es[0].isIntersecting; }).observe($('#foot'));
+  addEventListener('resize', () => st.layout());
+}
+
+/* ================= scroll + motion ================= */
+let vel = 0, lenis = null;
+function charsIn(el, opts = {}){
+  const cs = $$('.c', el); if (!cs.length) return;
+  gsap.from(cs, { yPercent: 115, rotate: 7, duration: 1.15, ease: 'expo.out', stagger: { each: .018 }, ...opts });
+}
+function initScroll(){
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize: true });
+  if (!reduce && window.Lenis) {
+    lenis = new Lenis({ lerp: .09, smoothWheel: true });
+    lenis.on('scroll', e => { vel = e.velocity || 0; ScrollTrigger.update(); });
+    gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
+  }
+  $$('[data-go]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault(); const sel = a.dataset.go, tg = $(sel); if (!tg) return;
+    if (lenis) lenis.scrollTo(sel === '#top' ? 0 : tg, { duration: 1.8 }); else tg.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  }));
+
+  /* hero: pinned, letters disperse while the about section slides over it */
+  ScrollTrigger.create({ trigger: '#hero', start: 'top top', end: '+=100%', pin: true, pinSpacing: false,
+    onUpdate: s => { if (heroStage) { heroStage.p = s.progress; heroStage.visible = s.progress < .999; } } });
+  gsap.to('.hfade', { opacity: 0, y: -20, ease: 'none', scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'top 55%', scrub: true } });
+  gsap.to('#bezel', { rotate: 120, scale: 1.25, opacity: 0, ease: 'none', scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'top top', scrub: true } });
+  gsap.fromTo('#about', { clipPath: 'polygon(0% 9vw,100% 0%,100% 100%,0% 100%)' }, { clipPath: 'polygon(0% 0vw,100% 0%,100% 100%,0% 100%)', ease: 'none', scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'top 20%', scrub: true } });
+
+  /* statement */
+  charsIn($('#stTitle'), { scrollTrigger: { trigger: '#stTitle', start: 'top 85%', once: true } });
+  gsap.fromTo($$('.w', $('#stP')), { opacity: .14 }, { opacity: 1, ease: 'none', stagger: .06, scrollTrigger: { trigger: '#stP', start: 'top 85%', end: 'bottom 55%', scrub: true } });
+  gsap.fromTo('#stPoly', { clipPath: 'polygon(30% 100%,30% 100%,30% 100%,30% 100%,30% 100%,30% 100%)' }, { clipPath: 'polygon(0% 12%,70% 0%,100% 0%,100% 100%,30% 100%,0% 64%)', ease: 'power2.out', scrollTrigger: { trigger: '#stPoly', start: 'top 95%', end: 'top 35%', scrub: .6 } });
+  gsap.fromTo('#stOutline', { attr: { points: '30,100 30,100 30,100 30,100 30,100 30,100' } }, { attr: { points: '0,12 70,0 100,0 100,100 30,100 0,64' }, ease: 'power2.out', scrollTrigger: { trigger: '#stPoly', start: 'top 90%', end: 'top 25%', scrub: 1 } });
+  gsap.fromTo('#stPoly img', { yPercent: -12, scale: 1.12 }, { yPercent: 6, scale: 1, ease: 'none', scrollTrigger: { trigger: '#stPoly', start: 'top bottom', end: 'bottom top', scrub: true } });
+  initStats();
+
+  /* brands */
+  charsIn($('#brTitle'), { scrollTrigger: { trigger: '#brTitle', start: 'top 85%', once: true } });
+  gsap.from($$('.bcell', bgrid), { clipPath: 'inset(100% 0 0 0)', duration: 1.1, ease: 'expo.out', stagger: { each: .06, grid: 'auto', from: 'start' }, scrollTrigger: { trigger: bgrid, start: 'top 82%', once: true } });
+  gsap.from($$('.bcell img', bgrid), { yPercent: 40, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: .06, delay: .15, scrollTrigger: { trigger: bgrid, start: 'top 82%', once: true } });
+
+  initWork();
+  initTunnel();
+  initTeam();
+
+  /* skills */
+  charsIn($('#skTitle'), { scrollTrigger: { trigger: '#skTitle', start: 'top 85%', once: true } });
+  $$('#skList li').forEach(li => gsap.from(li, { opacity: 0, y: 30, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: li, start: 'top 94%', once: true } }));
+  initSkillPreview();
+
+  /* contact */
+  ScrollTrigger.create({ trigger: '#ctTitle', start: 'top 85%', once: true, onEnter: scrambleTitle });
+  ScrollTrigger.create({ trigger: '#contact', start: 'top 160%', once: true, onEnter: initFoot });
+
+  /* HUD */
+  const hud = $('#hud'), hudSec = $('#hudSec'), hudPos = $('#hudPos');
+  const secs = $$('[data-sec]'); let curSec = 'hero';
+  secs.forEach(s => ScrollTrigger.create({ trigger: s, start: 'top 50%', end: 'bottom 50%', onToggle: e => { if (e.isActive) curSec = s.dataset.sec; } }));
+  gsap.ticker.add(() => {
+    const max = ScrollTrigger.maxScroll(window) || 1, pr = clamp(scrollY / max, 0, 1);
+    hud.classList.toggle('on', scrollY > innerHeight * .6);
+    const order = ['hero','about','brands','work','tun','team','skills','contact'];
+    hudSec.textContent = `[${pad(order.indexOf(curSec))}] ${T().sec[curSec]}`;
+    hudPos.textContent = `X ${pad(Math.round(pointer.x), 4)}  Y ${pad(Math.round(pointer.y), 4)}  —  ${pad(Math.round(pr * 100), 3)}%`;
+  });
+
+  initMarquees();
+  addEventListener('load', () => ScrollTrigger.refresh());
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());
+}
+
+function initStats(){
+  $$('#stats .stat').forEach((s, i) => {
+    const v = $('.v', s), to = v.dataset.to, suf = v.dataset.suf;
+    const m = to.match(/^(\d+)(.*)$/); const prefixRange = to.includes('–');
+    gsap.from(s, { opacity: 0, y: 40, duration: 1, ease: 'power3.out', delay: i * .08, scrollTrigger: { trigger: '#stats', start: 'top 88%', once: true } });
+    if (prefixRange || !m) return;
+    const n = +m[1], width = m[1].length, o = { v: 0 };
+    ScrollTrigger.create({ trigger: '#stats', start: 'top 88%', once: true, onEnter: () => gsap.to(o, { v: n, duration: 1.8, ease: 'power3.out', delay: i * .08, onUpdate: () => { v.textContent = pad(Math.round(o.v), width) + suf; } }) });
+  });
+}
+
+function initWork(){
+  const outline = $('#wkOutline');
+  shapes.forEach((sh, i) => gsap.set(sh, { clipPath: i === 0 ? poly(POLY[0]) : polyAt(0, 100), zIndex: i + 1 }));
+  chEls.forEach((c, i) => gsap.set(c, { autoAlpha: i === 0 ? 1 : 0 }));
+  bgEls.forEach((b, i) => gsap.set(b, { autoAlpha: i === 0 ? 1 : 0, xPercent: 0 }));
+  const tl = gsap.timeline({ defaults: { ease: 'none' } });
+  const STEP = 1.5;
+  for (let i = 1; i < N; i++) {
+    const t0 = (i - 1) * STEP + .35;
+    tl.to(shapes[i - 1], { clipPath: polyAt(100, 0), duration: .75, ease: 'power2.in' }, t0);
+    tl.to($$('.ch-top,.ch-name,.ch-role,.ch-desc', chEls[i - 1]), { yPercent: -40, autoAlpha: 0, duration: .45, ease: 'power2.in', stagger: .04 }, t0);
+    tl.to(bgEls[i - 1], { autoAlpha: 0, duration: .4 }, t0 + .2);
+    tl.set(chEls[i - 1], { autoAlpha: 0 }, t0 + .62);
+    tl.to(outline, { attr: { points: pts(POLY[i]) }, duration: 1.1, ease: 'power3.inOut' }, t0 + .15);
+    tl.fromTo(shapes[i], { clipPath: polyAt(0, 100) }, { clipPath: poly(POLY[i]), duration: .95, ease: 'power3.out' }, t0 + .45);
+    tl.fromTo($('img', shapes[i]), { scale: 1.4, yPercent: 6 }, { scale: 1, yPercent: 0, duration: 1.2, ease: 'power2.out' }, t0 + .45);
+    tl.set(chEls[i], { autoAlpha: 1 }, t0 + .62);
+    tl.fromTo($$('.ch-top,.ch-name,.ch-role,.ch-desc', chEls[i]), { yPercent: 60, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: .6, ease: 'power3.out', stagger: .06 }, t0 + .65);
+    tl.fromTo(bgEls[i], { autoAlpha: 0 }, { autoAlpha: 1, duration: .5 }, t0 + .6);
+  }
+  tl.to({}, { duration: .5 });
+  bgEls.forEach((b, i) => { const s = Math.max(0, (i - 1) * STEP + .35); tl.fromTo(b, { xPercent: 4 }, { xPercent: -22, duration: STEP + 1.2, ease: 'none' }, Math.max(0, s - .2)); });
+  const cnt = $('#workCount b');
+  let last = -1;
+  const setIdx = time => {
+    const idx = clamp(Math.floor((time - .35 + STEP * .55) / STEP), 0, N - 1);
+    const cont = clamp(time / Math.max(.001, tl.duration()) * N, 0, N);
+    tickEls.forEach((t, k) => { t.classList.toggle('on', k === idx); $('i', t).style.setProperty('--f', clamp(cont - k, 0, 1).toFixed(3)); });
+    if (idx !== last) { last = idx; cnt.textContent = pad(idx + 1); if (!reduce) gsap.fromTo(cnt, { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .4, ease: 'power3.out' }); }
+  };
+  setIdx(0);
+  ScrollTrigger.create({ trigger: '#workPin', start: 'top top', pin: true, scrub: .9, animation: tl, anticipatePin: 1,
+    end: () => '+=' + Math.round(tl.duration() * innerHeight * .55), onUpdate: () => setIdx(tl.time()) });
+}
+
+function initTunnel(){
+  const cv = $('#tunCanvas'), ctx = cv.getContext('2d');
+  let w = 0, h = 0, prog = 0, boost = 0;
+  const rays = Array.from({ length: coarse ? 100 : 200 }, () => ({ a: Math.random() * Math.PI * 2, o: Math.random(), l: .08 + Math.random() * .3, wd: .5 + Math.random() * 1.6 }));
+  function resize(){ const r = cv.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2); w = r.width; h = r.height; cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); draw(); }
+  function draw(){
+    ctx.clearRect(0, 0, w, h);
+    const cx = w / 2, cy = h / 2, R = Math.hypot(w, h) / 2, p = prog;
+    for (const r of rays) {
+      const t = (r.o + p * 1.8) % 1, t2 = Math.min(1, t + r.l * (.3 + t) * (1 + boost));
+      const r1 = Math.pow(t, 2.3) * R, r2 = Math.pow(t2, 2.3) * R, c = Math.cos(r.a), s = Math.sin(r.a);
+      ctx.strokeStyle = `rgba(11,11,11,${(.06 + .55 * t).toFixed(3)})`; ctx.lineWidth = r.wd * (.4 + t);
+      ctx.beginPath(); ctx.moveTo(cx + c * r1, cy + s * r1); ctx.lineTo(cx + c * r2, cy + s * r2); ctx.stroke();
+    }
+    for (let k = 0; k < 4; k++) { const q = (p * 1.1 + k / 4) % 1; ctx.strokeStyle = `rgba(11,11,11,${((1 - q) * .3).toFixed(3)})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.ellipse(cx, cy, q * R * .95, q * R * .36, 0, 0, Math.PI * 2); ctx.stroke(); }
+  }
+  new ResizeObserver(resize).observe(cv); resize();
+  gsap.ticker.add(() => { const b = clamp(Math.abs(vel) / 40, 0, 1.5); if (Math.abs(b - boost) > .01) { boost += (b - boost) * .1; draw(); } });
+  ScrollTrigger.create({ trigger: '#tunPin', start: 'top top', end: () => '+=' + Math.round(innerHeight * 1.6), pin: true, scrub: true, anticipatePin: 1, onUpdate: s => { prog = s.progress; draw(); } });
+  const tl = gsap.timeline({ scrollTrigger: { trigger: '#tunPin', start: 'top 60%', end: () => '+=' + Math.round(innerHeight * 1.1), scrub: .6 } });
+  tl.from($$('.c', $('#tunTitle')), { yPercent: 115, rotate: 6, stagger: .02, ease: 'power3.out', duration: 1 })
+    .from('.tun-text .label', { opacity: 0, y: 20, duration: .5 }, 0);
+}
+
+function initTeam(){
+  const s = $('#strip');
+  const dist = () => Math.max(0, s.scrollWidth - innerWidth);
+  gsap.fromTo(s, { x: 0 }, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '#teamPin', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: .7, invalidateOnRefresh: true, anticipatePin: 1 } });
+  charsIn($('#teamTitle'), { scrollTrigger: { trigger: '#teamPin', start: 'top 70%', once: true } });
+  const imgs = $$('img', s); let sk = 0;
+  gsap.ticker.add(() => { const tgt = clamp(vel * .25, -7, 7); sk += (tgt - sk) * .12; if (Math.abs(sk) > .01) imgs.forEach(im => { im.style.transform = `skewX(${(-sk).toFixed(2)}deg) scale(${(1 + Math.abs(sk) * .006).toFixed(3)})`; }); });
+  let rf; imgs.forEach(im => { const done = () => { clearTimeout(rf); rf = setTimeout(() => ScrollTrigger.refresh(), 200); }; if (im.complete) done(); else im.addEventListener('load', done, { once: true }); });
+}
+
+function initSkillPreview(){
+  if (!hover) return;
+  const prev = skPrev, imgs = $$('img', prev); let on = false, x = innerWidth / 2, y = innerHeight / 2;
+  $$('#skList li').forEach(li => {
+    li.addEventListener('pointerenter', () => { on = true; prev.classList.add('on'); imgs.forEach((im, k) => im.classList.toggle('on', k === +li.dataset.i)); });
+  });
+  skList.addEventListener('pointerleave', () => { on = false; prev.classList.remove('on'); });
+  gsap.ticker.add(() => { x += (pointer.x - x) * .14; y += (pointer.y - y) * .14; prev.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(-50%,-50%) scale(${on ? 1 : .6}) rotate(${clamp((pointer.x - x) * .05, -8, 8).toFixed(2)}deg)`; });
+}
+
+function initMarquees(){
+  const list = $$('.mq').map(m => ({ el: m, track: $('.mq-track', m), base: +m.dataset.dir || -1, x: 0, sk: 0 }));
+  let dir = 1;
+  gsap.ticker.add((t, dt) => {
+    if (vel > .3) dir = 1; else if (vel < -.3) dir = -1;
+    const k = Math.min(Math.abs(vel) * .06, 5);
+    list.forEach(m => {
+      const half = m.track.scrollWidth / 2; if (!half) return;
+      m.x += m.base * dir * (dt / 1000) * (70 + k * 160);
+      if (m.x <= -half) m.x += half; if (m.x > 0) m.x -= half;
+      const tgt = clamp(-vel * .12, -10, 10); m.sk += (tgt - m.sk) * .1;
+      m.track.style.transform = `translate3d(${m.x.toFixed(2)}px,0,0) skewX(${m.sk.toFixed(2)}deg)`;
+    });
+  });
+}
+
+/* scramble */
+function scrambleTitle(){
+  const lines = $$('.ln>span', $('#ctTitle')), chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789#%&/';
+  const finals = lines.map(l => $$('.c', l).map(c => c.textContent));
+  const cs = lines.map(l => $$('.c', l));
+  gsap.from(cs.flat(), { yPercent: 115, duration: 1.1, ease: 'expo.out', stagger: .02 });
+  if (reduce) return;
+  const start = performance.now();
+  const tick = now => {
+    let done = true;
+    cs.forEach((arr, li) => arr.forEach((c, i) => {
+      const t = (now - start - li * 180 - i * 45) / 600;
+      if (t < 1) { done = false; c.textContent = t < 0 ? chars[(Math.random() * chars.length) | 0] : (Math.random() < t ? finals[li][i] : chars[(Math.random() * chars.length) | 0]); }
+      else c.textContent = finals[li][i];
+    }));
+    if (!done) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+/* language + copy */
+$$('[data-lang]').forEach(b => b.addEventListener('click', () => {
+  if (b.dataset.lang === lang) return; lang = b.dataset.lang;
+  try { localStorage.setItem('ktg-lang', lang); } catch (e) {}
+  applyLang();
+  if (window.ScrollTrigger) setTimeout(() => ScrollTrigger.refresh(), 80);
+}));
+$$('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+  const val = b.dataset.copy; let ok = false;
+  try { await navigator.clipboard.writeText(val); ok = true; } catch (e) {
+    const el = b.closest('.c-row').querySelector('.c-val'); const r = document.createRange(); r.selectNodeContents(el); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+  }
+  if (ok) { setRoll(b, T().c_copied); setTimeout(() => setRoll(b, T().c_copy), 1400); }
+}));
+
+/* ================= boot ================= */
+(async function boot(){
+  setProgress(15);
+  const guard = setTimeout(() => setProgress(100), 8000);
+  window.__glOk = await initHero().catch(err => { console.error(err); return false; });
+  try { initScroll(); } catch (err) { console.error(err); }
+  clearTimeout(guard);
+  await finishLoader();
+  if (heroStage) heroStage.playIntro();
+  if (!reduce) {
+    gsap.from('.hfade', { opacity: 0, y: 16, duration: 1, ease: 'power3.out', stagger: .08, delay: .5 });
+    gsap.from('.nav > *', { opacity: 0, y: -14, duration: 1, ease: 'power3.out', stagger: .08, delay: .3 });
+    gsap.from('#bezel', { scale: .7, opacity: 0, rotate: -60, duration: 2.4, ease: 'expo.out' });
+  }
+})();
+</script>
+
+</html>
