@@ -30,7 +30,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .label{font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;line-height:1.35}
 .wrap{padding-left:var(--gl);padding-right:var(--gr)}
 .disp{margin:0;font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.035em;line-height:.92;text-wrap:balance}
-.ln{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
+.ln{display:block;overflow:hidden;padding:.2em 0 .1em;margin:-.2em 0 -.1em}
+:root[lang=vi] .disp{line-height:1.02}
 .ln>span{display:block}
 .wd{display:inline-block;white-space:nowrap}
 .c{display:inline-block;will-change:transform}
@@ -239,7 +240,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .bcell .y{left:12px;bottom:12px}
   .sec-head{flex-direction:column;align-items:flex-start;gap:12px}
   .sec-head .label{text-align:left}
-  .stage{left:var(--gl);right:var(--gr);width:auto;top:calc(var(--nav-h) + 52px + env(safe-area-inset-top,0px));height:40svh;aspect-ratio:auto;transform:none}
+  .stage{left:var(--gl);right:var(--gr);width:auto;max-width:none;top:calc(var(--nav-h) + 52px + env(safe-area-inset-top,0px));height:40svh;aspect-ratio:auto;transform:none}
   .stage .outline{transform:translate(8px,8px)}
   .ch{left:var(--gl);right:var(--gr);width:auto;bottom:calc(9vh + 22px)}
   .ch-name{font-size:clamp(28px,9vw,52px);margin-bottom:12px}
@@ -928,9 +929,9 @@ function initWork(){
   chEls.forEach((c, i) => gsap.set(c, { autoAlpha: i === 0 ? 1 : 0 }));
   bgEls.forEach((b, i) => gsap.set(b, { autoAlpha: i === 0 ? 1 : 0, xPercent: 0 }));
   const tl = gsap.timeline({ defaults: { ease: 'none' } });
-  const STEP = 1.5;
+  const STEP = 2.2, FIRST = 1.0;
   for (let i = 1; i < N; i++) {
-    const t0 = (i - 1) * STEP + .35;
+    const t0 = (i - 1) * STEP + FIRST;
     tl.to(shapes[i - 1], { clipPath: polyAt(100, 0), duration: .75, ease: 'power2.in' }, t0);
     tl.to($$('.ch-top,.ch-name,.ch-role,.ch-desc', chEls[i - 1]), { yPercent: -40, autoAlpha: 0, duration: .45, ease: 'power2.in', stagger: .04 }, t0);
     tl.to(bgEls[i - 1], { autoAlpha: 0, duration: .4 }, t0 + .2);
@@ -939,22 +940,23 @@ function initWork(){
     tl.fromTo(shapes[i], { clipPath: polyAt(0, 100) }, { clipPath: poly(POLY[i]), duration: .95, ease: 'power3.out' }, t0 + .45);
     tl.fromTo($('img', shapes[i]), { scale: 1.4, yPercent: 6 }, { scale: 1, yPercent: 0, duration: 1.2, ease: 'power2.out' }, t0 + .45);
     tl.set(chEls[i], { autoAlpha: 1 }, t0 + .62);
-    tl.fromTo($$('.ch-top,.ch-name,.ch-role,.ch-desc', chEls[i]), { yPercent: 60, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: .6, ease: 'power3.out', stagger: .06 }, t0 + .65);
+    tl.fromTo($$('.ch-top,.ch-name,.ch-role,.ch-desc', chEls[i]), { yPercent: 60, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: .55, ease: 'power3.out', stagger: .05 }, t0 + .65);
     tl.fromTo(bgEls[i], { autoAlpha: 0 }, { autoAlpha: 1, duration: .5 }, t0 + .6);
   }
-  tl.to({}, { duration: .5 });
-  bgEls.forEach((b, i) => { const s = Math.max(0, (i - 1) * STEP + .35); tl.fromTo(b, { xPercent: 4 }, { xPercent: -22, duration: STEP + 1.2, ease: 'none' }, Math.max(0, s - .2)); });
+  tl.to({}, { duration: 1 });
+  bgEls.forEach((b, i) => { const s = i === 0 ? 0 : (i - 1) * STEP + FIRST; tl.fromTo(b, { xPercent: 4 }, { xPercent: -22, duration: STEP + 1.6, ease: 'none' }, Math.max(0, s - .2)); });
   const cnt = $('#workCount b');
   let last = -1;
   const setIdx = time => {
-    const idx = clamp(Math.floor((time - .35 + STEP * .55) / STEP), 0, N - 1);
+    const idx = clamp(Math.floor((time - FIRST - .6) / STEP) + 1, 0, N - 1);
     const cont = clamp(time / Math.max(.001, tl.duration()) * N, 0, N);
     tickEls.forEach((t, k) => { t.classList.toggle('on', k === idx); $('i', t).style.setProperty('--f', clamp(cont - k, 0, 1).toFixed(3)); });
     if (idx !== last) { last = idx; cnt.textContent = pad(idx + 1); if (!reduce) gsap.fromTo(cnt, { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .4, ease: 'power3.out' }); }
   };
   setIdx(0);
+  tl.eventCallback('onUpdate', () => setIdx(tl.time()));
   ScrollTrigger.create({ trigger: '#workPin', start: 'top top', pin: true, scrub: .9, animation: tl, anticipatePin: 1,
-    end: () => '+=' + Math.round(tl.duration() * innerHeight * .55), onUpdate: () => setIdx(tl.time()) });
+    end: () => '+=' + Math.round(tl.duration() * innerHeight * .42) });
 }
 
 function initTunnel(){
