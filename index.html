@@ -764,7 +764,7 @@ function makeStage(canvas, layouts, opts = {}){
   function build(lines){
     st.letters.forEach(L => { group.remove(L.mesh); L.mesh.geometry.dispose(); });
     const r = contourLetters(lines, coarse ? 230 : 320); st.dims = r;
-    const depth = .26, bev = { bevelEnabled: true, bevelThickness: .045, bevelSize: .022, bevelSegments: coarse ? 3 : 5, curveSegments: 1, depth };
+    const depth = .26, bev = { bevelEnabled: true, bevelThickness: .04, bevelSize: .014, bevelOffset: -.014, bevelSegments: coarse ? 3 : 5, curveSegments: 1, depth };
     st.letters = r.letters.map((l, i) => {
       const g = new THREE.ExtrudeGeometry(l.shapes, bev); g.translate(0, 0, -depth / 2);
       const sg = toCreasedNormals(g, .7); g.dispose();
