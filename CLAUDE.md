@@ -3,7 +3,7 @@
 File bàn giao cho Claude ở những cuộc trò chuyện sau. Đọc hết file này trước khi sửa bất cứ thứ gì.
 Chủ dự án nói chuyện bằng tiếng Việt, xưng "mình/tôi". Hãy trả lời bằng tiếng Việt.
 
-## 1. Trạng thái hiện tại (cập nhật 28/10/2026)
+## 1. Trạng thái hiện tại (cập nhật 29/10/2026)
 
 - **Trang đang chạy:** https://kthegoat.vercel.app
 - **Kho code:** GitHub `namkzhongli/kthegoat-portfolio`, nhánh `main`.
@@ -13,6 +13,24 @@ Chủ dự án nói chuyện bằng tiếng Việt, xưng "mình/tôi". Hãy tr�
 - **Trên máy chủ dự án:** `Desktop/PRO 5/` chứa ảnh gốc (dung lượng lớn). `Desktop/PRO 5/portfolio/site/` là một bản sao cũ của trang, **kho GitHub mới là bản chuẩn**.
 
 Chủ dự án đã duyệt bản này ("tương đối ổn rồi") và cho đưa lên Vercel.
+
+## 1b. Trang dự án riêng cho từng thương hiệu (cập nhật 29/10/2026)
+
+- **Đã làm: KAZA** (`https://kthegoat.vercel.app/#kaza`). Chủ dự án chọn hướng "C": bấm nút "Xem dự án" ở chương KAZA (mục Dự án), bấm vào ảnh chương, hoặc bấm ô logo KAZA ở mục Thương hiệu → ảnh trong khối đa giác bay ra toàn màn hình, chuyển đen trắng sang màu, có vệt sáng chrome quét ngang, rồi tên thương hiệu trồi lên và giải mã chữ.
+- Bên trong: màn đầu (logo, tên lớn, 4 ô thông tin) → (01) Khởi đầu → (02) Con số (nền đen) → (03) Việc đã làm (ảnh dính bên phải đổi theo dòng đang đọc) → (04) Những đêm (dải ảnh trượt ngang, dính màn hình) → (05) Cột mốc → (06) Hậu trường → chân trang đen, chữ chạy "Keep All Zeal Alive", nút "Chương tiếp theo".
+- **Code:** `CASES` (ảnh, kích thước, chú thích, mốc) và `I18N[lang].cases.kaza` (chữ). `BRANDS[i].cs = 'kaza'` bật trang cho thương hiệu đó. Các hàm `renderCase`, `buildCaseFX`, `openCase`, `closeCase`, `requestClose`. Trang là lớp phủ `#cs` có thanh cuộn riêng (Lenis riêng, ScrollTrigger dùng `scroller: cs`); Lenis chính dừng lại và `main` bị `inert` khi trang mở. Đóng bằng nút Đóng, phím Esc, hoặc nút Back của trình duyệt.
+- **Làm thương hiệu tiếp theo:** thêm khóa vào `CASES` + `I18N.vi/en.cases`, đặt `cs` trong `BRANDS`, ảnh vào `img/<tên>/` (nén 1500–1800px, q78). Ảnh trong mỗi dự án xếp **theo nhịp sáng/tối** (chủ dự án yêu cầu), không theo ngày; dòng thời gian vẫn theo ngày.
+- Ảnh trang dự án **giữ màu gốc** (chủ dự án đã đồng ý bỏ đen trắng; phần còn lại của trang vẫn đen trắng cho đến khi chủ dự án nói "làm").
+- **Dữ kiện KAZA (chủ dự án xác nhận):** bắt đầu 13.10.2024, khi quán vừa xây xong; chức danh **Giám Đốc Sáng Tạo** (không chỉ Marketing); đội Sáng tạo 4 → 7 người; điều phối 100+ nhân sự toàn quán; 3 kênh TikTok (kênh lớn nhất 100K người theo dõi, video cao nhất 7M lượt xem); tự xây Game Night, Ladies Night (chương trình của chính KAZA, không phải bên thứ ba), From The Chef – Món ngon mời bạn (mời món miễn phí tối thứ 6 hàng tuần), Performance; chiến dịch KAZA Carnival, KAZA có gì vui?, KAZA's Special – Món này bếp khen; ảnh điện thoại quay là ảnh hậu trường của đội. Ảnh đã chọn tạm, chủ dự án sẽ tự thay nếu không ưng.
+- Ảnh gốc nằm trên Google Drive của chủ dự án (thư mục "NamK Portfolio", có thư mục con cho từng thương hiệu/đêm diễn). Công cụ Drive tải được ảnh ≤ ~6 MB; ảnh lớn hơn phải nhờ chủ dự án gửi trong chat.
+
+### Việc đã chốt nhưng CHỜ chủ dự án nói "làm" (chưa sửa)
+- Chữ 3D đổi từ chrome bạc sang **đen nhám, có đường sáng mảnh ở cạnh vát** (giữ nguyên hình khối và chuyển động).
+- Bỏ đen trắng toàn trang (`.gimg`), sắp ảnh theo tone cho hài hòa.
+- Thêm **ZOJY CAFE** và **ASTRO** → 9 thương hiệu, lưới 5×2 (9 + ô kêu gọi), bộ đếm "/ 09", sửa "Bảy thương hiệu". Mọi mảng i18n phải đủ 9 phần tử. Chưa có logo ZOJY/ASTRO.
+- Mốc thời gian mới: Cốm 1–4/2023; Kimmy và ZOJY 2–6/2024 (cùng vai trò); Embé 3–4/2024; ASTRO 8/2024–hết 9/2024 (chỉ ghi giai đoạn + vai trò); Meow 2/9/2024–31/8/2025 (nâng giải từ đấu 1-1/2-2 lên giải 64 người, tổng thưởng 50 triệu; chưa rõ "lớn nhất" ở phạm vi nào); KAZA từ 13/10/2024; Dog & Duck 12/2024–5/2025 (giữ câu "Không phải chương nào cũng thắng…", thêm "Được sống với HipHop, sống với đam mê và ước mơ luôn cháy trong tim, luôn là một cuộc đời hoàn hảo").
+- Bốn ô số mục Giới thiệu: 5 năm làm sáng tạo / 6 ngành nghề / 200+ nhân sự từng làm việc cùng / 7M lượt xem cao nhất một video (dòng phụ 100K người theo dõi một kênh). Bỏ mọi câu "5–7 người" và "2 năm thành điểm đến hàng đầu".
+- Mục Kỹ năng: bấm để mở rộng (accordion) với hình chuyển động SVG tượng trưng, mô tả ngắn, bỏ ảnh chân dung chạy theo chuột.
 
 ## 2. Gu và quyết định đã chốt (đừng tự ý đổi)
 
@@ -105,13 +123,16 @@ _project/                  Tài liệu dự án, KHÔNG deploy (xem .vercelignor
 
 - **Môi trường cloud của Claude thường KHÔNG truy cập được CDN** (jsDelivr, cdnjs, Google Fonts, npm đều bị chặn). Vì vậy:
   - **Kiểm tra bố cục và lỗi code offline:** `NODE_PATH=$(npm root -g) node _project/tools/test/run.js`. Lệnh dùng thư viện giả, chụp toàn trang desktop và điện thoại, báo tràn ngang. Lệnh này không chạy chuyển động thật hay WebGL.
+  - **Trang dự án offline:** `NODE_PATH=$(npm root -g) node _project/tools/test/run-case.js` mở trang KAZA (chế độ giảm chuyển động) và chụp toàn bộ, ra `case-desk.png`, `case-mob.png`.
+  - **Xem chuyển động thật trước khi lên production:** push lên một nhánh khác `main` (ví dụ `kaza-case`) → Vercel tạo bản xem trước tại `https://kthegoat-git-<tên-nhánh>-namkzhongli-3019.vercel.app` (mở được trong Chrome của chủ dự án vì đã đăng nhập Vercel). Muốn xem khung điện thoại khi cửa sổ không thu nhỏ được: thay trang bằng một `<iframe>` 390×844 trỏ về chính trang đó. Muốn chụp giữa chuyển động: `gsap.globalTimeline.timeScale(0.12)`.
   - **Kiểm tra thật:** push lên `main`, đợi khoảng 10 giây để Vercel deploy, rồi mở https://kthegoat.vercel.app trong trình duyệt của app Claude trên máy chủ dự án (trang đã được cho phép). Thêm `?v=số` để tránh cache, đọc console, dùng `resize_window` để thử 1440×900 và khung điện thoại, rồi nhớ đặt lại.
 - `index.html` trong kho là trang HTML đầy đủ (có `<!doctype>` và `<head>`). Nếu muốn dựng lại một bản xem thử artifact trong chat, hãy bỏ phần bao ngoài đó và đăng kèm thư mục `img/` và `logos/`.
 - **Commit:** tác giả `NamK <kthegoat.info@gmail.com>`. Chỉ push sau khi đã kiểm tra.
 
 ## 8. Việc còn dang dở và gợi ý tiếp theo
 
-1. **Ảnh thật cho từng chương dự án.** Ảnh trong `BRANDS[].img` đang được **gán tạm theo cảm giác**, chưa đúng thương hiệu. Chủ dự án chưa gửi ảnh riêng từng nơi. Riêng `ktg-08` (nightclub) gán cho KAZA và `bomb9215` (quán bar) gán cho Dog & Duck cũng chỉ là đoán.
+0. **Trang dự án cho các thương hiệu còn lại** (Bích Vân, Cốm, Embé, Kimmy, ZOJY, Meow, ASTRO, Dog & Duck) theo khuôn KAZA, và các việc ở mục 1b đang chờ lệnh "làm".
+1. **Ảnh thật cho từng chương dự án.** (KAZA đã có ảnh thật `img/kaza/k-cover`.) Ảnh trong `BRANDS[].img` đang được **gán tạm theo cảm giác**, chưa đúng thương hiệu. Chủ dự án chưa gửi ảnh riêng từng nơi. Riêng `ktg-08` (nightclub) gán cho KAZA và `bomb9215` (quán bar) gán cho Dog & Duck cũng chỉ là đoán.
 2. **Phần Kỹ năng:** chủ dự án chưa duyệt từng dòng.
 3. **Thêm ngôn ngữ** Trung, Hàn, Nhật, Pháp, Tây Ban Nha (xem mục 5).
 4. **Tên miền riêng** (nếu chủ dự án muốn).
