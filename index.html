@@ -1346,17 +1346,23 @@ function makeStage(canvas, layouts, opts = {}){
   const capMat = new THREE.MeshStandardMaterial({ color: 0x0c0c0c, metalness: 0, roughness: .82 });
   const edgeMat = new THREE.MeshStandardMaterial({ color: 0xbdbdbd, metalness: 1, roughness: .2, envMapIntensity: 1.25 });
   const mat = [capMat, edgeMat];
+  const lineMat = new THREE.LineBasicMaterial({ color: 0xe2e2e0, transparent: true, opacity: .9 });
   const group = new THREE.Group(); scene.add(group);
   const st = { group, letters: [], visible: true, px: 0, py: 0, tx: 0, ty: 0, p: 0, dims: { w: 1, h: 1 }, key: '', fill: opts.fill || .7, intro: 0 };
   const rnd = (a, b) => a + Math.random() * (b - a);
   function build(lines){
-    st.letters.forEach(L => { group.remove(L.mesh); L.mesh.geometry.dispose(); });
+    st.letters.forEach(L => { group.remove(L.mesh); L.mesh.geometry.dispose(); L.mesh.children.forEach(c => c.geometry.dispose()); });
     const r = contourLetters(lines, coarse ? 230 : 320); st.dims = r;
     const depth = .26, bev = { bevelEnabled: true, bevelThickness: .03, bevelSize: .02, bevelOffset: -.02, bevelSegments: coarse ? 3 : 5, curveSegments: 1, depth };
     st.letters = r.letters.map((l, i) => {
       const g = new THREE.ExtrudeGeometry(l.shapes, bev); g.translate(0, 0, -depth / 2);
       const sg = toCreasedNormals(g, .7); g.dispose();
       const mesh = new THREE.Mesh(sg, mat); mesh.position.set(l.x, l.y, 0); group.add(mesh);
+      /* thin light line along the front edge of every contour (outer + holes), riding on the letter */
+      l.shapes.forEach(sh => [sh, ...sh.holes].forEach(path => {
+        const pts = path.getPoints().map(p => new THREE.Vector3(p.x, p.y, depth / 2 + .006));
+        mesh.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(pts), lineMat));
+      }));
       const ang = rnd(0, Math.PI * 2);
       return { mesh, bx: l.x, by: l.y, i, iz: 0, iy: 0, irx: 0, iry: 0, is: 1, push: 0, tilt: 0,
         dx: Math.cos(ang) * rnd(1.2, 3.2), dy: Math.sin(ang) * rnd(.8, 2.4), dz: rnd(1.5, 5), rx: rnd(-3, 3), ry: rnd(-3, 3), rz: rnd(-1.2, 1.2), ph: rnd(0, 6.28) };
