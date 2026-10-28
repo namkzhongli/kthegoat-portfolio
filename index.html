@@ -1344,7 +1344,7 @@ function makeStage(canvas, layouts, opts = {}){
   /* matte black faces; the bevel + walls are a dark glossy metal so the studio lights draw thin bright lines on the edges.
      ExtrudeGeometry group 0 = front/back caps, group 1 = bevel + side walls. */
   const capMat = new THREE.MeshStandardMaterial({ color: 0x0c0c0c, metalness: 0, roughness: .82 });
-  const edgeMat = new THREE.MeshStandardMaterial({ color: 0x1c1c1c, metalness: .92, roughness: .26, envMapIntensity: 1.5 });
+  const edgeMat = new THREE.MeshStandardMaterial({ color: 0xbdbdbd, metalness: 1, roughness: .2, envMapIntensity: 1.25 });
   const mat = [capMat, edgeMat];
   const group = new THREE.Group(); scene.add(group);
   const st = { group, letters: [], visible: true, px: 0, py: 0, tx: 0, ty: 0, p: 0, dims: { w: 1, h: 1 }, key: '', fill: opts.fill || .7, intro: 0 };
@@ -1352,7 +1352,7 @@ function makeStage(canvas, layouts, opts = {}){
   function build(lines){
     st.letters.forEach(L => { group.remove(L.mesh); L.mesh.geometry.dispose(); });
     const r = contourLetters(lines, coarse ? 230 : 320); st.dims = r;
-    const depth = .26, bev = { bevelEnabled: true, bevelThickness: .04, bevelSize: .014, bevelOffset: -.014, bevelSegments: coarse ? 3 : 5, curveSegments: 1, depth };
+    const depth = .26, bev = { bevelEnabled: true, bevelThickness: .03, bevelSize: .02, bevelOffset: -.02, bevelSegments: coarse ? 3 : 5, curveSegments: 1, depth };
     st.letters = r.letters.map((l, i) => {
       const g = new THREE.ExtrudeGeometry(l.shapes, bev); g.translate(0, 0, -depth / 2);
       const sg = toCreasedNormals(g, .7); g.dispose();
