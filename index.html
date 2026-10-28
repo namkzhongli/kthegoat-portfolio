@@ -246,7 +246,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 @media (hover:hover){.cs-bar .pill:hover{background:#fff;color:#000}}
 .cs-idx{font-variant-numeric:tabular-nums}
 .cs-sec{padding-block:clamp(90px,16vh,190px)}
-.cs-h{font-size:clamp(38px,6.6vw,120px)}
+.cs-h{font-size:clamp(34px,5.2vw,96px)}
+.cs-gal .cs-h{font-size:clamp(30px,4.2vw,76px)}
 .cs-hd{display:grid;gap:clamp(20px,3.4vh,36px);margin-bottom:clamp(40px,8vh,96px)}
 .cs-hero{position:relative;height:var(--vh);min-height:560px;overflow:hidden;background:#0b0b0b;color:var(--p3)}
 .cs-hero .bg{position:absolute;inset:0;overflow:hidden}
@@ -285,7 +286,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .cs-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid rgba(248,248,247,.26)}
 .cs-stat{padding:24px 20px 10px 0;display:grid;gap:16px;align-content:start}
 .cs-stat+.cs-stat{border-left:1px solid rgba(248,248,247,.26);padding-left:20px}
-.cs-stat .v{font-weight:800;font-stretch:125%;letter-spacing:-.045em;font-size:clamp(52px,8vw,150px);line-height:.88;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cs-stat .v{font-weight:800;font-stretch:112%;letter-spacing:-.045em;font-size:clamp(44px,5.6vw,108px);line-height:.88;font-variant-numeric:tabular-nums;white-space:nowrap}
 .cs-stat .label{color:rgba(248,248,247,.62);max-width:22ch}
 .cs-teamline{display:flex;justify-content:space-between;gap:16px;margin-top:clamp(40px,7vh,80px);padding-top:18px;border-top:1px solid rgba(248,248,247,.26);color:rgba(248,248,247,.62)}
 .cs-teamline b{color:var(--p3);font-weight:500}
@@ -305,7 +306,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .cs-stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .cs-stick .figcap{margin-top:16px}
 .cs-gal{position:relative;background:var(--p2)}
-.cs-gal-pin{position:sticky;top:0;height:var(--vh);overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(22px,4vh,44px);padding-top:calc(var(--nav-h) + env(safe-area-inset-top,0px))}
+.cs-gal-pin{position:sticky;top:0;height:var(--vh);overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(22px,4vh,44px);padding-top:calc(var(--nav-h) + 16px + env(safe-area-inset-top,0px))}
 .cs-gal-hd{display:flex;justify-content:space-between;align-items:end;gap:24px}
 .cs-gal-hd .cs-hd{margin:0}
 .cs-gal-hd>.label{color:var(--ink-2);text-align:right;font-variant-numeric:tabular-nums}
@@ -341,9 +342,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .cs-next a{display:grid;gap:18px;text-decoration:none}
 .cs-next .label{color:rgba(248,248,247,.6)}
 .cs-next .nm{display:flex;align-items:center;gap:.3em;font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.04em;font-size:clamp(40px,8.4vw,150px);line-height:.92}
-.cs-next .nm i{display:inline-grid;place-items:center;font-style:normal;width:.62em;height:.62em;border:1px solid rgba(248,248,247,.4);border-radius:50%;font-size:.5em;transition:transform .5s cubic-bezier(.2,.7,.2,1),background .3s,color .3s}
+.cs-next .nm i{display:inline-grid;place-items:center;flex:none;font-style:normal;font-stretch:100%;width:1.5em;height:1.5em;line-height:1;border:1px solid rgba(248,248,247,.4);border-radius:50%;font-size:.42em;letter-spacing:0;transition:transform .5s cubic-bezier(.2,.7,.2,1),background .3s,color .3s}
 @media (hover:hover){.cs-next a:hover .nm i{transform:rotate(-45deg);background:var(--p3);color:var(--ink)}}
-.cs-end .pill{border-color:rgba(248,248,247,.4);justify-self:start}
+.cs-end .pill{border-color:rgba(248,248,247,.4);justify-self:start;text-transform:uppercase}
 @media (hover:hover){.cs-end .pill:hover{background:var(--p3);color:var(--ink)}}
 .cs-end-meta{display:flex;justify-content:space-between;gap:16px;margin-top:clamp(40px,8vh,90px);padding-top:18px;border-top:1px solid rgba(248,248,247,.2);color:rgba(248,248,247,.5)}
 
@@ -362,7 +363,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .cs-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cs-stat:nth-child(3){border-left:0;padding-left:0}
   .cs-stat:nth-child(n+3){border-top:1px solid rgba(248,248,247,.26)}
-  .cs-stat .v{font-size:clamp(46px,15vw,84px)}
+  .cs-stat .v{font-size:clamp(40px,12vw,76px)}
   .cs-do-grid{grid-template-columns:1fr}
   .cs-stick{display:none}
   .cs-list .m{display:block;grid-column:1 / -1;margin-top:8px;overflow:hidden;aspect-ratio:16/10;clip-path:polygon(0 0,100% 0,100% 86%,92% 100%,0 100%)}
@@ -1324,6 +1325,20 @@ function scrambleChars(els, { dur = 600, gap = 45, set = SCR, delay = 0 } = {}){
   requestAnimationFrame(tick);
 }
 
+/* decode a whole string left to right (for labels that are not split into chars) */
+function scrambleText(el, { dur = 700, delay = 0, set = SCR } = {}){
+  if (reduce) return;
+  const fin = el.textContent, st = performance.now() + delay;
+  const tick = now => {
+    const t = (now - st) / dur;
+    if (t >= 1) { el.textContent = fin; return; }
+    const k = Math.max(0, Math.floor(fin.length * t));
+    el.textContent = fin.slice(0, k) + Array.from(fin.slice(k)).map(ch => /\s|[.\-→·]/.test(ch) ? ch : set[(Math.random() * set.length) | 0]).join('');
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
 function renderCase(key){
   const c = CASES[key], t = T().cases[key], g = T();
   const bi = BRANDS.findIndex(b => b.cs === key), b = BRANDS[bi], ni = (bi + 1) % N, nb = BRANDS[ni];
@@ -1438,7 +1453,7 @@ function buildCaseFX(intro){
       gsap.from(chars, { yPercent: 118, duration: 1.3, ease: 'expo.out', stagger: .07 });
       scrambleChars(chars, { dur: 700, gap: 90 });
       gsap.from('.cs-hero-top, .cs-meta > div, .cs-cue', { opacity: 0, y: 26, duration: 1.1, ease: 'power3.out', stagger: .07, delay: .25 });
-      scrambleChars($$('.cs-meta .v'), { dur: 500, gap: 0, delay: 350 });
+      $$('.cs-meta .v').forEach((v, i) => scrambleText(v, { dur: 900, delay: 300 + i * 120 }));
       gsap.from('.cs-bar', { opacity: 0, duration: .6, delay: .15 });
     }
     gsap.to('.cs-hero .bg img', { scale: 1.16, yPercent: 7, ease: 'none', scrollTrigger: S({ trigger: '#csHero', start: 'top top', end: 'bottom top', scrub: true }) });
@@ -1484,7 +1499,7 @@ function buildCaseFX(intro){
     /* milestones */
     const tl = $$('#csTl li');
     gsap.from(tl, { opacity: 0, y: 26, duration: .9, ease: 'power3.out', stagger: .06, scrollTrigger: S({ trigger: '#csTl', start: 'top 86%', once: true }) });
-    ScrollTrigger.create(S({ trigger: '#csTl', start: 'top 86%', once: true, onEnter: () => tl.forEach((li, i) => scrambleChars($$('.d', li).flatMap(d => { const s = d.textContent; d.innerHTML = Array.from(s).map(ch => `<span>${ch}</span>`).join(''); return $$('span', d); }), { dur: 500, gap: 30, set: '0123456789', delay: i * 70 })) }));
+    ScrollTrigger.create(S({ trigger: '#csTl', start: 'top 86%', once: true, onEnter: () => tl.forEach((li, i) => scrambleText($('.d', li), { dur: 650, set: '0123456789', delay: i * 80 })) }));
 
     /* behind the scenes + end */
     gsap.from('.cs-bts .side p', { opacity: 0, y: 24, duration: 1, ease: 'power3.out', scrollTrigger: S({ trigger: '.cs-bts .side', start: 'top 88%', once: true }) });
@@ -1519,6 +1534,7 @@ function openCase(key, fromEl, fromPoly){
   renderCase(key);
   cs.scrollTop = 0;
   lockPage(true);
+  try { history.scrollRestoration = 'manual'; } catch (e) {} // going "back" must not jump the page under us
   if (location.hash !== '#' + key) { try { history.pushState({ cs: key }, '', '#' + key); CS.pushed = true; } catch (e) {} }
   const show = () => {
     cs.classList.add('open'); cs.setAttribute('aria-hidden', 'false');
@@ -1560,6 +1576,7 @@ function closeCase(){
     gsap.set(cs, { clearProps: 'clipPath' });
     $('#csIn').innerHTML = '';
     CS.open = false; CS.busy = false; CS.key = null; CS.refresh = null;
+    setTimeout(() => { try { history.scrollRestoration = 'auto'; } catch (e) {} }, 100);
     if (after) after();
     else if (CS.from && CS.from.focus && document.contains(CS.from)) CS.from.focus({ preventScroll: true });
   };
