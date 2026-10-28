@@ -1,0 +1,70 @@
+
+1. Website mẫu (quan trọng nhất)
+* Link website tôi muốn làm:
+    * https://haoqi.design/
+    * https://www.voyeurverite.com
+* Bạn muốn giống đến mức nào:
+    * Bám sát đến từng hiệu ứng
+    * Kết hợp giữa 2 trang web (1 bên là 3D, 1 bên là 2D)
+* Phần nào trong mẫu bạn thích nhất (hiệu ứng cuộn, chuyển cảnh, con trỏ chuột, intro…)?
+    * Phần tôi thích nhất là việc cuộn trang web tạo ra hiệu ứng liên tục và liền mạch
+    * Chuyển cảnh rất mượt mà, không có cảm giác là đang bị chuyển cảnh
+    * Intro cũng tương đối ấn tượng
+2. Bạn là ai, làm nghề gì
+* Tên hiển thị, chức danh (VD: Designer, Motion Artist, Marketer, Dev...).
+    * Tôi tên là Y Nam Knul
+    * Nickname mọi người thường gọi là NamK
+    * Tên mà tôi thường dùng để Flex trong các dự án là K THE GOAT
+    * Tôi hiện đang là Marketing Director cho KAZA Restaurant và Bích Vân Store
+* Portfolio này nhắm tới ai: khách hàng, nhà tuyển dụng, hay đối tác?
+    * Portfolio này tôi muốn nhắm tới tất cả mọi người
+    * Từ khách hàng, tuyển dụng, đối tác
+    * Tới những người muốn biết thêm về tôi, tôi là ai, làm cái méo gì
+    * Hoặc đơn giản là làm cho chính tôi ngắm nghía về bản thân
+* Tone mong muốn: chỉn chu chuyên nghiệp, tối giản, hay bựa bựa Gen Z?
+    * Tôi muốn tối giản, chuyên nghiệp
+    * Chỉn chu, gọn gàng
+    * Nhưng cũng phải thật công nghệ, hiện đại
+3. Nội dung
+* Các mục cần có: Giới thiệu, Dự án/tác phẩm, Kỹ năng, Kinh nghiệm, Liên hệ... (bớt hoặc thêm tùy bạn).
+    * Giới thiệu về bản thân tôi
+    * Các dự án tôi đã và đang thực hiện
+    * Kỹ năng (cái này chúng ta nên trao đổi lại, tôi chả biết kỹ năng là kỹ năng gì)
+    * Kinh nghiệm (các dự án đã làm qua thì có tính là kinh nghiệm không?)
+    * Liên hệ
+* Danh sách dự án: tên, mô tả ngắn, ảnh/video minh họa, link (nếu có).
+    * Khởi đầu với Bích Vân Store từ 2021 từ vị trí nhân viên kho, vẫn đang tiếp tục đến bây giờ
+    * 2022: Cốm Natural (Cafe - Camping), Embes (cửa hàng thời trang trẻ em)
+    * 2023: Kimmy Cuisine & Lounge (nhà hàng Fine Dining)
+    * 2024: Meow Billiard (chuỗi Billard toàn quốc, cơ sở Buôn Ma Thuột)
+    * Tháng 10/2024: Tiếp nhận dự án KAZA và tiếp tục đến nay
+    * Tháng 12/2024: Tiếp nhận dự án 2D - Dog & Duck (quán Bar local, nhỏ) - Đóng cửa vào tháng 5/2025
+    * Hiện tại: Marketing Director của KAZA và Bích Vân Store
+    * Các thương hiệu trên, nếu cần, mình sẽ gom logo và hình ảnh cho bạn nhé
+* Bạn đã có sẵn nội dung chữ chưa, hay muốn mình viết giúp?
+    * Tôi chưa có nội dung gì sất
+4. Hình ảnh và thương hiệu
+* Ảnh chân dung, logo, ảnh/video tác phẩm (bạn gửi file, hoặc dùng ảnh tạm trước).
+    * Ảnh thì mình có rất nhiều ảnh luôn, chắc là để gửi sau nhé
+    * Hoặc mình có thể tổng hợp nó lại thành 1 file trên máy tính cho bạn
+* Bảng màu và font bạn thích. Nếu dùng chung nhận diện Bích Vân Store (gradient hồng–xanh) thì cho mình biết, còn nếu là thương hiệu cá nhân riêng thì cho mình thêm hướng.
+    * Mình thích tone màu đen, trắng, xám. Nhưng đừng làm nó tông tối, mình muốn mọi thứ sáng sủa 1 chút
+5. Kỹ thuật
+* Ngôn ngữ: tiếng Việt, tiếng Anh, hay song ngữ?
+    * Mình thích song ngữ hoặc đa ngữ luôn
+    * Có thể tùy chọn thêm cả bản tiếng Trung, tiếng Hàn, tiếng Nhật, tiếng Pháp, tiếng Tây Ban Nha
+* Có cần responsive cho điện thoại không (mình khuyên là có).
+    * Maybe
+* Có cần form liên hệ hoạt động thật, hay chỉ nút link Zalo/Email/Facebook?
+    * Vì là 1 nơi public nên chắc sđt nên là số đẹp còn Email thì email công việc
+    * SDT là 0706034567
+    * Email là kthegoat.info@gmail.com
+* Hình thức nhận sản phẩm: mình làm sẵn bản để xem thử ngay trong chat, hay bạn cần bộ file để tự đưa lên hosting/domain riêng? Bạn đã có domain chưa?
+    * Có thể cho mình xem bản thử trong chat, nếu oke thì chúng ta đưa lên Vercel
+6. Mức độ "tùm lum lum la"
+* Bạn muốn mức nào: vừa phải mượt mà, hay đẩy tối đa (cuộn parallax, chữ chạy, chuyển cảnh, 3D, cursor tùy biến...)?
+    * Không cần cursor tùy biến đâu
+    * Làm nó mượt mà để xem được tốt trên cả mobile lẫn web, đừng làm nó nặng quá, load mệt
+* Có hiệu ứng nào bạn nhất định không muốn không?
+    * Hiện tại thì chưa, chắc phải làm ra rồi mới biết
+
