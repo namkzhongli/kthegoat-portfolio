@@ -35,7 +35,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .ln>span{display:block}
 .wd{display:inline-block;white-space:nowrap}
 .c{display:inline-block;will-change:transform}
-.gimg{filter:grayscale(1) contrast(1.06)}
+.gimg{} /* photos stay in their original colour (owner's call, 29/10/2026) */
 .eyebrow{display:flex;gap:14px;align-items:center;color:var(--ink-2)}
 .eyebrow::after{content:"";flex:0 0 48px;height:1px;background:currentColor}
 
@@ -85,6 +85,15 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 #c-hero{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hero-fallback{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;text-align:center;font-size:clamp(48px,11vw,190px);transition:opacity .6s}
 .gl-ready .hero-fallback{opacity:0}
+/* roles + tagline under the 3D signature; --sigb is set from the 3D layout (bottom edge of the letters) */
+.hroles{position:absolute;left:var(--gl);right:var(--gr);top:calc(var(--sigb,62%) + clamp(16px,3.2vh,40px));display:grid;justify-items:center;gap:clamp(14px,2.2vh,24px);text-align:center;pointer-events:none;z-index:2}
+.roles{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;row-gap:4px;pointer-events:auto}
+.roles li{display:flex;align-items:center}
+.roles li+li::before{content:"";flex:none;width:5px;height:5px;margin:0 clamp(10px,1.3vw,22px);background:var(--ink);opacity:.45;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.role{display:inline-flex;padding:8px 0 6px;font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.005em;font-size:clamp(11px,1.12vw,17px);line-height:1;cursor:default;-webkit-user-select:none;user-select:none}
+.role .c{display:inline-block;white-space:pre;will-change:transform}
+.tagline{margin:0;display:flex;align-items:center;gap:14px;font-size:clamp(15px,1.55vw,23px);font-weight:500;letter-spacing:-.01em;line-height:1.2}
+.tagline i{display:block;width:clamp(24px,4vw,64px);height:1px;background:var(--ink);opacity:.5}
 .hc{position:absolute;display:grid;gap:4px}
 .hc.tl{left:var(--gl);top:calc(var(--nav-h) + 28px + env(safe-area-inset-top,0px))}
 .hc.tr{right:var(--gr);top:calc(var(--nav-h) + 28px + env(safe-area-inset-top,0px));text-align:right}
@@ -124,13 +133,15 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .stat+.stat{border-left:1px solid var(--line);padding-left:20px}
 .stat .v{font-weight:800;font-stretch:125%;letter-spacing:-.04em;font-size:clamp(44px,6.4vw,112px);line-height:.9;font-variant-numeric:tabular-nums}
 .stat .label{color:var(--ink-2);max-width:24ch}
+.stat .label.sub{color:var(--ink);display:flex;gap:8px;align-items:center}
+.stat .label.sub::before{content:"";width:14px;height:1px;background:currentColor}
 
 /* brands */
 .brands{position:relative;z-index:2;background:linear-gradient(var(--p3) 0 80%,var(--p1));padding-block:clamp(40px,8vh,90px) clamp(90px,16vh,180px)}
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:clamp(36px,6vh,72px)}
 .sec-head .disp{font-size:clamp(34px,5.6vw,100px)}
 .sec-head .label{color:var(--ink-2);text-align:right;max-width:30ch}
-.bgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.bgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
 .bcell{position:relative;aspect-ratio:1.18;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden;text-decoration:none;isolation:isolate}
 .bcell::before{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleY(0);transform-origin:bottom;transition:transform .55s cubic-bezier(.7,0,.2,1);z-index:-1}
 .bcell img{width:56%;height:42%;object-fit:contain;transition:transform .55s cubic-bezier(.2,.7,.2,1),filter .3s}
@@ -195,16 +206,58 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 /* skills */
 .skills{position:relative;z-index:2;background:linear-gradient(var(--p2),var(--p3) 30%);padding-block:clamp(100px,18vh,200px)}
 .sk{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.sk li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px;align-items:center;padding:clamp(16px,2.6vh,28px) 0;border-bottom:1px solid var(--line);position:relative}
-.sk li::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.7,0,.2,1)}
-.sk .n{display:block;overflow:hidden;height:1.06em;font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.03em;font-size:clamp(22px,3.6vw,60px);line-height:1.06}
+.sk-it{position:relative;border-bottom:1px solid var(--line)}
+.sk-it::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.7,0,.2,1)}
+.sk-it.open::after{transform:scaleX(1)}
+.sk-head{width:100%;display:grid;grid-template-columns:clamp(34px,4vw,64px) minmax(0,7fr) minmax(0,4fr) 44px;gap:16px;align-items:center;padding:clamp(16px,2.6vh,28px) 0;text-align:left;text-transform:inherit;letter-spacing:inherit}
+.sk-no{color:var(--ink-3)}
+.sk .n{display:block;overflow:hidden;height:1.06em;font-weight:800;font-stretch:125%;text-transform:uppercase;letter-spacing:-.03em;font-size:clamp(22px,3.4vw,58px);line-height:1.06}
 .sk .n .roll>span{height:1.06em}
-.sk .d{color:var(--ink-2);font-size:clamp(14px,1.1vw,17px)}
-@media (hover:hover){.sk li:hover::after{transform:scaleX(1)}.sk li:hover .roll{transform:translateY(-50%)}}
-.sk-prev{position:fixed;left:0;top:0;z-index:70;width:clamp(180px,16vw,260px);aspect-ratio:4/5;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.6);transition:opacity .3s,transform .4s cubic-bezier(.2,.7,.2,1);clip-path:polygon(10% 0,100% 0,100% 82%,84% 100%,0 100%,0 14%)}
-.sk-prev.on{opacity:1}
-.sk-prev img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s}
-.sk-prev img.on{opacity:1}
+.sk .d{color:var(--ink-2);font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.sk-pl{position:relative;width:40px;height:40px;border:1px solid var(--line-2);border-radius:50%;justify-self:end;transition:transform .6s cubic-bezier(.7,0,.2,1),background .3s,border-color .3s}
+.sk-pl::before,.sk-pl::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:1px;background:var(--ink);transform:translate(-50%,-50%);transition:background .3s}
+.sk-pl::after{transform:translate(-50%,-50%) rotate(90deg)}
+.sk-it.open .sk-pl{transform:rotate(135deg);background:var(--ink);border-color:var(--ink)}
+.sk-it.open .sk-pl::before,.sk-it.open .sk-pl::after{background:var(--p3)}
+.sk-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .7s cubic-bezier(.7,0,.2,1)}
+.sk-it.open .sk-panel{grid-template-rows:1fr}
+.sk-in{overflow:hidden;min-height:0}
+.sk-wrap{display:grid;grid-template-columns:clamp(34px,4vw,64px) minmax(180px,4fr) minmax(0,7fr);gap:16px clamp(24px,4vw,64px);align-items:center;padding:4px 0 clamp(28px,5vh,56px)}
+.sk-art{grid-column:2;aspect-ratio:5/4;border:1px solid var(--line);background:radial-gradient(rgba(11,11,11,.12) 1px,transparent 1.2px) 0 0/14px 14px,var(--p3);display:grid;place-items:center;color:var(--ink);clip-path:polygon(0 0,100% 0,100% 84%,88% 100%,0 100%)}
+.sk-art svg{width:84%;height:auto;overflow:visible}
+.sk-art svg *{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;transform-box:fill-box;transform-origin:center}
+.sk-art svg [fill="currentColor"]{fill:currentColor}
+.sk-txt{grid-column:3;display:grid;gap:22px;max-width:620px}
+.sk-lead{margin:0;font-size:clamp(18px,1.7vw,27px);line-height:1.36;font-weight:500;letter-spacing:-.01em}
+.sk-tags{display:flex;flex-wrap:wrap;gap:8px}
+.sk-tags span{border:1px solid var(--line-2);border-radius:99px;padding:7px 12px 6px;line-height:1}
+.sk-it:not(.open) .sk-art *{animation-play-state:paused}
+.a-spin{animation:skSpin 14s linear infinite}
+.a-orbit{transform-box:view-box!important;transform-origin:100px 80px!important;animation:skSpin 5s linear infinite}
+.a-pulse{animation:skPulse 2.4s ease-in-out infinite}
+.a-feed{animation:skFeed 3.2s cubic-bezier(.7,0,.2,1) infinite}
+.a-iris{animation:skSpin 9s linear infinite}
+.a-blink{animation:skBlink 1.1s steps(2,start) infinite}
+.a-bar{transform-origin:bottom!important;animation:skBar 3s cubic-bezier(.7,0,.2,1) infinite}
+.a-draw{stroke-dasharray:220;animation:skDraw 3s cubic-bezier(.7,0,.2,1) infinite}
+.a-beam{transform-box:view-box!important}
+.a-beam.l{transform-origin:40px 10px!important;animation:skBeamL 3.4s ease-in-out infinite alternate}
+.a-beam.r{transform-origin:160px 10px!important;animation:skBeamR 3.4s ease-in-out infinite alternate}
+.a-node{animation:skNode 2.5s ease-in-out infinite}
+.a-flow{animation:skFlow 1.2s linear infinite}
+.a-dot{animation:skDot 1.2s ease-in-out infinite}
+@keyframes skSpin{to{transform:rotate(360deg)}}
+@keyframes skPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+@keyframes skFeed{0%,20%{transform:translateY(0)}55%,100%{transform:translateY(-46px)}}
+@keyframes skBlink{to{opacity:0}}
+@keyframes skBar{0%{transform:scaleY(.15)}40%,80%{transform:scaleY(1)}100%{transform:scaleY(.15)}}
+@keyframes skDraw{0%{stroke-dashoffset:220}45%,80%{stroke-dashoffset:0}100%{stroke-dashoffset:-220}}
+@keyframes skBeamL{from{transform:rotate(-14deg)}to{transform:rotate(22deg)}}
+@keyframes skBeamR{from{transform:rotate(14deg)}to{transform:rotate(-22deg)}}
+@keyframes skNode{0%,100%{fill:transparent}30%,60%{fill:currentColor}}
+@keyframes skFlow{to{stroke-dashoffset:-14}}
+@keyframes skDot{0%,100%{transform:translateY(0);opacity:.35}40%{transform:translateY(-7px);opacity:1}}
+@media (hover:hover){.sk-head:hover .roll{transform:translateY(-50%)}.sk-head:hover .sk-pl{border-color:var(--ink)}}
 
 /* contact */
 .contact{position:relative;z-index:2;background:linear-gradient(var(--p3),var(--p1) 40%);padding-top:clamp(60px,10vh,120px)}
@@ -257,6 +310,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .cs-hero-top{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;color:rgba(248,248,247,.72)}
 .cs-logo{height:clamp(30px,5vh,54px);width:auto;filter:invert(1)}
 .cs-title.disp,:root[lang=vi] .cs-title.disp{font-size:clamp(96px,27vw,470px);line-height:.8;letter-spacing:-.055em;margin-left:-.04em}
+.cs-title.long.disp,:root[lang=vi] .cs-title.long.disp{font-size:clamp(56px,12.5vw,230px);line-height:.86}
+.cs-title.xlong.disp,:root[lang=vi] .cs-title.xlong.disp{font-size:clamp(42px,8.2vw,150px);line-height:.9}
+.cs-track.fit{align-self:center}
 .cs-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid rgba(248,248,247,.28)}
 .cs-meta>div{padding:14px 16px 0 0;display:grid;gap:8px;align-content:start}
 .cs-meta>div+div{border-left:1px solid rgba(248,248,247,.28);padding-left:16px}
@@ -348,10 +404,13 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 @media (hover:hover){.cs-end .pill:hover{background:var(--p3);color:var(--ink)}}
 .cs-end-meta{display:flex;justify-content:space-between;gap:16px;margin-top:clamp(40px,8vh,90px);padding-top:18px;border-top:1px solid rgba(248,248,247,.2);color:rgba(248,248,247,.5)}
 
+@media (max-width:1180px) and (min-width:821px){.bcell .i{display:none}.bcell .k{font-size:9px;max-width:60%}.bcell img{width:62%}}
 @media (max-width:820px){
   :root{--nav-h:56px}
   .bcell .cs-mark{top:auto;bottom:12px;right:12px;font-size:9px}
   .cs-title.disp,:root[lang=vi] .cs-title.disp{font-size:clamp(80px,27vw,200px)}
+  .cs-title.long.disp,:root[lang=vi] .cs-title.long.disp{font-size:clamp(44px,15vw,110px)}
+  .cs-title.xlong.disp,:root[lang=vi] .cs-title.xlong.disp{font-size:clamp(34px,10.5vw,80px)}
   .cs-meta{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cs-meta>div:nth-child(3){border-left:0;padding-left:0}
   .cs-meta>div:nth-child(n+3){border-top:1px solid rgba(248,248,247,.28);margin-top:14px}
@@ -401,13 +460,18 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .bgname{font-size:clamp(90px,34vw,220px)}
   .ticks{bottom:calc(3vh + env(safe-area-inset-bottom,0px))}
   .tick span{font-size:9px}
-  .sk li{grid-template-columns:1fr;gap:6px}
+  .sk-head{grid-template-columns:28px minmax(0,1fr) 36px;gap:10px}
+  .sk .d{display:none}
+  .sk-pl{width:34px;height:34px}
+  .sk-wrap{grid-template-columns:1fr;gap:20px}
+  .sk-art,.sk-txt{grid-column:1}
+  .sk-art{max-width:320px}
   .c-row{grid-template-columns:1fr;row-gap:10px}
   .team-head{flex-direction:column;align-items:flex-start;gap:8px}
   .team-head .label{text-align:left}
   .strip img{height:clamp(200px,42vh,420px)}
 }
-@media (prefers-reduced-motion:reduce){#loader{transition:none}.grain,.bezel svg,.brand b,.cs-mq .tr{animation:none}}
+@media (prefers-reduced-motion:reduce){#loader{transition:none}.grain,.bezel svg,.brand b,.cs-mq .tr,.sk-art *{animation:none!important}}
 </style>
 
 <div id="loader" aria-hidden="true">
@@ -439,10 +503,14 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
     <div class="dots" aria-hidden="true"></div>
     <div class="bezel" id="bezel" aria-hidden="true"></div>
     <div class="shadow" aria-hidden="true"></div>
-    <h1 class="hero-fallback disp">K THE GOAT<span class="sr"> — Y Nam Knul (NamK), Marketing Director</span></h1>
+    <h1 class="hero-fallback disp">K THE GOAT<span class="sr"> — Y Nam Knul (NamK), Creative Director</span></h1>
     <canvas id="c-hero" aria-hidden="true"></canvas>
+    <div class="hroles hfade" id="hroles">
+      <ul class="roles" aria-label="Roles"><li><span class="role">Social Media</span></li><li><span class="role">Planner</span></li><li><span class="role">Photographer</span></li><li><span class="role">Editor</span></li><li><span class="role">Content Creator</span></li><li><span class="role">Copywriter</span></li></ul>
+      <p class="tagline"><i aria-hidden="true"></i><span id="tagline">Anything you can imagine.</span><i aria-hidden="true"></i></p>
+    </div>
     <div class="hc tl label hfade"><span>Y Nam Knul</span><span class="mut">aka NamK</span></div>
-    <div class="hc tr label hfade"><span>Marketing Director</span><span class="mut">KAZA · Bích Vân Store</span></div>
+    <div class="hc tr label hfade"><span>Creative Director · KAZA</span><span class="mut">Marketing Director · Bích Vân Store</span></div>
     <div class="hc bl label hfade"><span class="scrollcue"><i></i><span data-t="hero_scroll"></span></span></div>
     <div class="hc bc label hfade"><span class="mut" data-t="hero_based"></span></div>
     <div class="hc br label hfade"><span>Est. 2021</span></div>
@@ -489,7 +557,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   <section class="work" id="work" data-sec="work">
     <div class="work-pin" id="workPin">
       <div class="bgnames" id="bgnames" aria-hidden="true"></div>
-      <div class="work-head label"><span class="eyebrow"><span data-t="eb_work"></span></span><span class="work-count" id="workCount"><b>01</b> / 07</span></div>
+      <div class="work-head label"><span class="eyebrow"><span data-t="eb_work"></span></span><span class="work-count" id="workCount"><b>01</b> / <span id="workTotal">09</span></span></div>
       <div class="stage" id="stage">
         <svg class="outline" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon id="wkOutline" points="10,0 100,0 100,78 72,100 0,100 0,22"/></svg>
       </div>
@@ -532,8 +600,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
       </div>
       <ul class="sk" id="skList"></ul>
     </div>
-    <div class="sk-prev" id="skPrev" aria-hidden="true"></div>
-  </section>
+      </section>
 
   <section class="contact" id="contact" data-sec="contact">
     <div class="wrap">
@@ -582,17 +649,18 @@ const pad = (n, l = 2) => String(n).padStart(l, '0');
 const IMG = n => `img/${n}.jpg`;
 const LOGO = n => `logos/${n}.png`;
 const BRANDS = [
-  { name:'Bích Vân Store', logo:'bichvan', img:'img_7376', year:'2021' },
-  { name:'Cốm Natural', logo:'com', img:'art-12', year:'2022' },
-  { name:'Embé', logo:'embe', img:'art-14', year:'2022' },
-  { name:'Kimmy Cuisine & Lounge', logo:'kimmy', img:'img_9658', year:'2023' },
-  { name:'Meow Billiards', logo:'meow', img:'dscf1790', year:'2024' },
+  { name:'Bích Vân Store', logo:'bichvan', img:'bv/bv-cover', year:'2021', cs:'bv' },
+  { name:'Cốm Natural', logo:'com', img:'com/com-cover', year:'2023', cs:'com' },
+  { name:'Kimmy Cuisine & Lounge', logo:'kimmy', img:'kimmy/kimmy-cover', year:'2024', cs:'kimmy' },
+  { name:'ZOJY CAFE', logo:'zojy', img:'zojy/zojy-cover', year:'2024', cs:'zojy' },
+  { name:'Embé', logo:'embe', img:'art-14', year:'2024' },
+  { name:'ASTRO', logo:'astro', img:'astro/astro-cover', year:'2024', cs:'astro' },
+  { name:'Meow Billiards', logo:'meow', img:'meow/meow-cover', year:'2024', cs:'meow' },
   { name:'KAZA', logo:'kaza', img:'kaza/k-cover', year:'2024', cs:'kaza' },
-  { name:'Dog & Duck', logo:'dogduck', img:'bomb9215', year:'2024' }
+  { name:'Dog & Duck', logo:'dogduck', img:'dd/dd-cover', year:'2024', cs:'dd' }
 ];
 const N = BRANDS.length;
 const TEAM_IMG = ['dscf1860','dscf1935','dscf1912','dscf2058','dscf2061','dscf1865','dscf2063','dscf2071','dscf1913','dscf2080'];
-const SK_IMG = ['img_9648','img_9652','img_9653','img_9655','img_9656','img_9657','img_9649'];
 
 /* Case studies (mini landing page per brand). Text lives in I18N[lang].cases[key].
    Photos: [file, width, height]. Gallery items add [date, artist] and are ordered by light/dark rhythm, not by date. */
@@ -625,45 +693,54 @@ const CASES = {
       ['22.10.2026', 3, 'Đạt G']
     ],
     bts: [['kaza/k-bts-phone', 1600, 1066], ['kaza/k-bts-me', 933, 1400]]
-  }
+  },
+  bv: {"cover":["bv/bv-cover",1800,1350],"figs":[["bv/bv-me-marshall",1050,1400],["bv/bv-store",1600,1200]],"work":["bv/bv-consult","bv/bv-me-laptop","bv/bv-me-box","bv/bv-cover","bv/bv-me-sofa"],"gallery":[["bv/bv-customer",1050,1400],["bv/bv-charity",1050,1400]]},
+  com: {"cover":["com/com-cover",1800,1350],"figs":[["com/com-aerial",1080,810]],"work":["com/com-cover","com/com-aerial","com/com-cover"],"gallery":[]},
+  kimmy: {"cover":["kimmy/kimmy-cover",1800,1200],"figs":[["kimmy/kimmy-arch",1600,1066],["kimmy/kimmy-smoke",917,1400]],"work":["kimmy/kimmy-dining","kimmy/kimmy-poster","kimmy/kimmy-wine"],"gallery":[["kimmy/kimmy-bar",1600,1066],["kimmy/kimmy-cocktail",934,1400],["kimmy/kimmy-lounge",1600,1066]]},
+  zojy: {"cover":["zojy/zojy-cover",1378,1800],"figs":[["zojy/zojy-front",1072,1400],["zojy/zojy-drink",1050,1400]],"work":["zojy/zojy-product","zojy/zojy-poster","zojy/zojy-work"],"gallery":[["zojy/zojy-neon",1072,1400],["zojy/zojy-deadline",1026,1400]]},
+  astro: {"cover":["astro/astro-cover",1800,1201],"figs":[["astro/astro-stage",934,1400],["astro/astro-opening",675,1200]],"work":["astro/astro-dj","astro/astro-beams","astro/astro-crew"],"gallery":[["astro/astro-green",1600,1067],["astro/astro-party",1400,1400],["astro/astro-mirror",1400,1400],["astro/astro-banner",1800,685]]},
+  meow: {"cover":["meow/meow-cover",1350,1800],"figs":[["meow/meow-me",1050,1400],["meow/meow-desk",1050,1400]],"work":["meow/meow-fit","meow/meow-direct","meow/meow-cover"],"gallery":[["meow/meow-shoot",1050,1400],["meow/meow-frame",1050,1400]]},
+  dd: {"cover":["dd/dd-cover",1800,1350],"figs":[["dd/dd-me",1050,1400],["dd/dd-clown",1050,1400]],"work":[],"gallery":[["dd/dd-crowd",1050,1400],["dd/dd-room",1600,1200],["dd/dd-dance",1050,1400],["dd/dd-red",1050,1400],["dd/dd-hands",787,1400]]}
 };
 
 const I18N = {
   vi: {
     nav_about:'Giới thiệu', nav_work:'Dự án', nav_team:'Đội nhóm', nav_contact:'Liên hệ',
     hero_scroll:'Cuộn để xem', hero_based:'Việt Nam · GMT+7',
-    mq1:['Marketing Director','KAZA Restaurant','Bích Vân Store'], mq2:['K The Goat','NamK','Since 2021'], mq3:['Hãy làm việc cùng nhau','K The Goat'],
+    mq1:['Creative Director','KAZA','Marketing Director','Bích Vân Store'], mq2:['K The Goat','NamK','Since 2021'], mq3:['Hãy làm việc cùng nhau','K The Goat'],
     eb_about:'(01) Giới thiệu', eb_brands:'(02) Thương hiệu', eb_work:'(03) Dự án', eb_team:'(04) Đội nhóm', eb_skills:'(05) Kỹ năng', eb_contact:'(06) Liên hệ',
     sec:{hero:'K The Goat',about:'Giới thiệu',brands:'Thương hiệu',work:'Dự án',tun:'Tinh thần',team:'Đội nhóm',skills:'Kỹ năng',contact:'Liên hệ'},
-    st_lines:['Từ nhân viên kho','đến Marketing','Director.'],
-    st_p:'Mình là Y Nam Knul, mọi người gọi là NamK. Năm 2021 mình vào Bích Vân Store ở vị trí nhân viên kho, rồi tự mày mò Digital Marketing. Hiện tại mình là Marketing Director của KAZA Restaurant và Bích Vân Store.',
+    st_lines:['Từ nhân viên kho','đến Giám Đốc','Sáng Tạo.'],
+    st_p:'Mình là Y Nam Knul, mọi người gọi là NamK. Năm 2021 mình vào Bích Vân Store ở vị trí nhân viên kho, rồi tự mày mò Digital Marketing. Hiện tại mình là Giám Đốc Sáng Tạo của KAZA và Marketing Director của Bích Vân Store.',
     st_p2:'Không ngại thử thách, kể cả những chương không thắng.',
-    stats:[['05','+','Năm làm nghề, bắt đầu từ 2021'],['07','','Thương hiệu đã đồng hành'],['5–7','','Người trong đội tại KAZA'],['02','','Năm để KAZA thành điểm đến hàng đầu thành phố']],
-    br_lines:['Bảy thương hiệu,','một hành trình.'], br_cap:'Từ bán lẻ đến F&B và giải trí',
-    br_kind:['Bán lẻ Apple','Café · Camping','Thời trang trẻ em','Fine Dining','Billiard','F&B · Giải trí','Bar'],
+    stats:[['05','','Năm làm sáng tạo, từ 2021'],['06','','Ngành nghề: bán lẻ, café, F&B, nightlife, thể thao, thời trang'],['200','+','Nhân sự từng làm việc cùng'],['07','M','Lượt xem cao nhất của một video','100K người theo dõi trên một kênh']],
+    br_lines:['Chín thương hiệu,','một hành trình.'], br_cap:'Từ bán lẻ đến F&B, nightlife và thể thao',
+    br_kind:['Bán lẻ Apple','Café · Camping','Fine Dining','Café cao cấp','Thời trang trẻ em','Nightlife Club','Billiards','F&B · Giải trí','Bar · Hip-hop'],
     br_cta:'Thương hiệu tiếp theo?', br_cta2:'Liên hệ',
-    period:['2021 — nay','2022','2022','2023','2024','10/2024 — nay','12/2024 — 05/2025'],
-    role:['Nhân viên kho → Marketing Director','Social Media · Café & Camping','Social Media · Thời trang trẻ em','Social Media · Nhà hàng Fine Dining','Social Media · Chuỗi billiard toàn quốc','Giám Đốc Sáng Tạo','Quán bar local nhỏ'],
+    period:['2021 — nay','01 — 04/2023','02 — 06/2024','02 — 06/2024','03 — 04/2024','08 — 09/2024','09/2024 — 08/2025','10/2024 — nay','12/2024 — 05/2025'],
+    role:['Nhân viên kho → Marketing Director','Social Media','Chỉ đạo hình ảnh · Social Media','Chỉ đạo hình ảnh · Social Media','Social Media','Chỉ đạo hình ảnh · Kế hoạch social','Chỉ đạo hình ảnh · Xây dựng giải đấu','Giám Đốc Sáng Tạo','Quán bar local nhỏ'],
     desc:[
-      'Bắt đầu ở kho. Tự học Digital Marketing và một mình xử lý mọi vấn đề: auto-reply khách hàng, nâng cấp hình ảnh thương hiệu, đổi logo. Hai năm sau mới có đội 2–3 người.',
-      'Làm một mình từ đầu đến cuối: lên kế hoạch, chụp hình, sửa hình, viết bài, đăng bài.',
-      'Một mình lo toàn bộ nội dung, từ ý tưởng đến bài đăng.',
-      'Nhà hàng fine dining, vẫn một mình lo trọn quy trình nội dung.',
-      'Phụ trách cơ sở Buôn Ma Thuột của chuỗi billiard toàn quốc.',
+      'Khởi đầu từ con số 0, trong một căn phòng trống chật hẹp. Vừa làm kho vừa tự học, một mình lo auto-reply, hình ảnh, đổi logo. Hai năm sau mới có đội 2–3 người.',
+      'Bước ra khỏi vùng an toàn: job social đầu tiên ngoài Bích Vân. Tự lên kế hoạch, gom hình từ khách hàng, đăng bài lên fanpage.',
+      'Lần đầu với F&B, song song cùng ZOJY CAFE. Chỉ đạo sản xuất hình ảnh, brief thiết kế, lên kế hoạch và đăng bài trên Facebook.',
+      'Một bên cà phê cao cấp, một bên fine dining. Lần đầu với ngành cà phê: chỉ đạo hình ảnh, brief thiết kế, lên kế hoạch và đăng bài.',
+      'Một chương ngắn với thời trang cho mẹ và bé. Một mình lo nội dung, từ ý tưởng đến bài đăng.',
+      'Quay lại với nightlife, ngành mình yêu nhất. Chỉ đạo hình ảnh, màu sắc, ánh sáng, quyết định visual nào được lên social.',
+      'Lần đầu với thể thao. Đưa billiard Buôn Ma Thuột từ những trận solo 1-1, 2-2 lên giải 64 người, có phân hạng, tổng thưởng đến 50 triệu.',
       'Vào khi quán vừa xây xong. Dựng nhận diện, hệ thống 3 kênh TikTok và cả loạt chương trình riêng của KAZA. Đội Sáng tạo từ 4 lên 7 người.',
       'Đóng cửa tháng 5/2025. Không phải chương nào cũng thắng, nhưng chương nào cũng là của mình.'
     ],
     tun_lines:['Không ai dọn đường.','Mình tự mở.'], tun_cap:'Tinh thần',
     team_lines:['Từ một mình','đến cả đội.'], team_cap:'Làm việc nhóm · KAZA',
-    sk_lines:['Kỹ năng'], sk_cap:'Những việc mình làm mỗi ngày',
+    sk_lines:['Kỹ năng'], sk_cap:'Bấm vào từng dòng để mở',
     skills:[
-      ['Chiến lược thương hiệu','Định vị, nhận diện, đổi logo, nâng cấp hình ảnh'],
-      ['Social Media & Content','Lên kế hoạch, chụp, sửa hình, viết bài, đăng bài'],
-      ['Hình ảnh & Video','Chụp ảnh, motion graphics, Reels'],
-      ['Marketing F&B & giải trí','Nhà hàng, bar, billiard, sự kiện'],
-      ['Quản lý đội nhóm','Dẫn đội 5–7 người tại KAZA'],
-      ['Tự động hóa & AI','Auto-reply khách hàng, quy trình làm việc với AI'],
-      ['Bán lẻ & Fanpage','Bích Vân Store, từ kho đến thương hiệu']
+      ['Chiến lược thương hiệu','Định vị · Nhận diện','Biến một cái tên thành thứ người ta nhớ. Định vị, nhận diện, đổi logo, nâng cấp hình ảnh, từ cửa hàng bán lẻ đến club.',['Định vị','Nhận diện','Logo','Hình ảnh thương hiệu']],
+      ['Social Media & Content','Kế hoạch · Viết · Đăng','Lên kế hoạch, viết, đăng. Ở KAZA, toàn bộ nội dung, font chữ và cách thương hiệu xuất hiện trước công chúng đều do mình quyết.',['Facebook','TikTok','Content plan','Copywriting']],
+      ['Hình ảnh & Video','Chỉ đạo · Chụp · Dựng','Brief, chỉ đạo sản xuất, chụp, quay, dựng. Màu sắc, ánh sáng, và visual nào được lên sóng.',['Art direction','Chụp ảnh','Video','Motion graphics']],
+      ['Tăng trưởng TikTok','100K · 7M lượt xem','Xây hệ thống 3 kênh cho KAZA: kênh lớn nhất 100K người theo dõi, video cao nhất 7 triệu lượt xem. Kênh Bích Vân Store 30K người theo dõi, video cao nhất 6 triệu.',['Hệ thống kênh','Viral','Kênh vệ tinh']],
+      ['Sự kiện & chương trình','Ý tưởng → vận hành','Game Night, Ladies Night, From The Chef, đêm nghệ sĩ, giải billiard 64 người. Từ ý tưởng đến lúc đèn sân khấu bật.',['Concept','Sự kiện','Giải đấu','Chiến dịch']],
+      ['Dẫn đội','4 → 7 người · 200+ nhân sự','Từ một mình làm tất cả đến dẫn đội Sáng tạo. Đã làm việc cùng hơn 200 nhân sự.',['Quản lý đội','Brief','Phối hợp']],
+      ['Tự động hóa & AI','Nhanh hơn · Gọn hơn','Auto-reply khách hàng từ những ngày đầu ở Bích Vân. Giờ là quy trình làm việc cùng AI cho nội dung, hình ảnh và motion.',['Auto-reply','AI workflow','Automation']]
     ],
     ct_lines:['Hãy làm việc','cùng nhau.'],
     c_phone:'Điện thoại', c_call:'Gọi', c_mail:'Gửi mail', c_copy:'Chép', c_copied:'Đã chép', to_top:'Lên đầu trang',
@@ -697,44 +774,145 @@ const I18N = {
         bts:'Phía sau mỗi đêm diễn là đội Sáng tạo: lên ý tưởng, quay, dựng và đăng.',
         btsCap:[['Đội quay trực tiếp','27.08.2026'],['Tại KAZA','NamK']],
         mq:['Keep All Zeal Alive','KAZA']
+      },
+      bv: {
+        meta:[['Thời gian','2021 → Nay'],['Vai trò','Nhân viên kho → Marketing Director'],['Lĩnh vực','Bán lẻ Apple'],['Khởi đầu','Từ con số 0']],
+        est:'Từ 2021',
+        eb1:'(01) Khởi đầu', h1:['Bắt đầu','từ con số 0.'],
+        lead:'Năm 2021, mình vào Bích Vân Store làm nhân viên kho. Một căn phòng trống chật hẹp, và những ước mơ tìm cách thoát ra. Mình tự học Digital Marketing từ đó.',
+        sub:'Hai năm làm một mình, rồi mới có đội 2–3 người. Vẫn ở đây đến hôm nay.',
+        figs:[['Tại cửa hàng','Bích Vân Store'],['Cửa hàng hôm nay','Bích Vân Store']],
+        eb3:'(02) Việc đã làm', h3:['Việc','đã làm.'],
+        work:[
+          ['Auto-reply khách hàng','Tự dựng hệ thống trả lời tự động cho fanpage, khi còn làm một mình.',[]],
+          ['Nâng cấp hình ảnh','Làm lại hình ảnh thương hiệu trên social.',[]],
+          ['Đổi logo','Nhận diện mới cho Bích Vân Store.',[]],
+          ['Kênh TikTok','30K người theo dõi, video cao nhất 6 triệu lượt xem.',[]],
+          ['Marketing Director','Từ nhân viên kho đến người dẫn marketing của cửa hàng.',[]]
+        ],
+        eb4:'(03) Khoảnh khắc', h4:['Ở cửa hàng.'], gal:[['Khách hàng','Bích Vân Store'],['Từ thiện','Bích Vân Store']]
+      },
+      com: {
+        meta:[['Thời gian','01 → 04/2023'],['Vai trò','Social Media'],['Lĩnh vực','Café · Camping'],['Lần đầu','Job ngoài Bích Vân']],
+        est:'Từ 01.2023',
+        eb1:'(01) Khởi đầu', h1:['Bước ra khỏi','vùng an toàn.'],
+        lead:'Tháng 1/2023, lần đầu tiên mình nhận thêm một job social ngoài Bích Vân Store: một quán café kiêm khu cắm trại.',
+        sub:'Quán đã đóng cửa, page cũng đã bị xoá. Đây là những tấm ảnh còn giữ được.',
+        figs:[['Từ trên cao','Cốm Natural']],
+        eb3:'(02) Việc đã làm', h3:['Việc','đã làm.'],
+        work:[
+          ['Lên kế hoạch bài đăng','Tự mình lên lịch nội dung cho fanpage.',[]],
+          ['Hình ảnh từ khách hàng','Thu thập ảnh khách chụp, chọn lọc rồi đăng tải.',[]],
+          ['Vận hành fanpage','Một mình từ đầu đến cuối.',[]]
+        ]
+      },
+      kimmy: {
+        meta:[['Thời gian','02 → 06/2024'],['Vai trò','Chỉ đạo hình ảnh · Social'],['Lĩnh vực','Fine Dining'],['Song song','ZOJY CAFE']],
+        est:'Từ 02.2024',
+        eb1:'(01) Khởi đầu', h1:['Lần đầu','với F&B.'],
+        lead:'Tháng 2/2024, mình nhận cùng lúc hai thương hiệu: Kimmy Cuisine & Lounge, một nhà hàng fine dining, và ZOJY CAFE, một quán cà phê cao cấp.',
+        sub:'Làm đến tháng 6/2024.',
+        figs:[['Không gian','Kimmy'],['Món ăn','Kimmy']],
+        eb3:'(02) Việc đã làm', h3:['Việc','đã làm.'],
+        work:[
+          ['Chỉ đạo sản xuất hình ảnh','Món ăn, cocktail, không gian.',[]],
+          ['Brief thiết kế','Ấn phẩm theo tháng và các dịp trong năm.',['Hello March',"Women's Day",'Thanksgiving Week','Happiness Week']],
+          ['Kế hoạch & đăng bài','Lên lịch và đăng bài trên Facebook.',[]]
+        ],
+        eb4:'(03) Khoảnh khắc', h4:['Ánh tím','của Kimmy.'], gal:[['Quầy bar','Kimmy'],['Cocktail','Kimmy'],['Lounge','Kimmy']]
+      },
+      zojy: {
+        meta:[['Thời gian','02 → 06/2024'],['Vai trò','Chỉ đạo hình ảnh · Social'],['Lĩnh vực','Café cao cấp'],['Song song','Kimmy']],
+        est:'Từ 02.2024',
+        eb1:'(01) Khởi đầu', h1:['Lần đầu','với cà phê.'],
+        lead:'Song song với Kimmy, ZOJY là lần đầu mình làm với ngành cà phê. Một bên cà phê cao cấp, một bên fine dining.',
+        sub:'Làm đến tháng 6/2024.',
+        figs:[['Mặt tiền','ZOJY'],['Đồ uống','ZOJY']],
+        eb3:'(02) Việc đã làm', h3:['Việc','đã làm.'],
+        work:[
+          ['Chỉ đạo sản xuất hình ảnh','Đồ uống, không gian, những góc ngồi làm việc.',[]],
+          ['Brief thiết kế','Poster sản phẩm và các dịp trong năm.',[]],
+          ['Kế hoạch & đăng bài','Lên lịch và đăng bài trên Facebook.',[]]
+        ],
+        eb4:'(03) Khoảnh khắc', h4:['Một góc ZOJY.'], gal:[['Biển hiệu','ZOJY'],['Poster','ZOJY']]
+      },
+      astro: {
+        meta:[['Thời gian','08 → 09/2024'],['Vai trò','Chỉ đạo hình ảnh · Social'],['Lĩnh vực','Nightlife Club'],['Ngành','Yêu thích nhất']],
+        est:'Từ 08.2024',
+        eb1:'(01) Khởi đầu', h1:['Quay lại','với nightlife.'],
+        lead:'Ngành mình yêu nhất.',
+        figs:[['Sân khấu','ASTRO'],['Khai trương','ASTRO']],
+        eb3:'(02) Vai trò', h3:['Vai trò.'],
+        work:[
+          ['Chỉ đạo hình ảnh','Màu sắc, ánh sáng, khung hình.',[]],
+          ['Kế hoạch social','Lên lịch nội dung và bài đăng.',[]],
+          ['Duyệt visual','Quyết định hình ảnh nào xuất hiện trên social media.',[]]
+        ],
+        eb4:'(03) Những đêm', h4:['Những đêm','ở ASTRO.'], gal:[['Laser','ASTRO'],['Party','ASTRO'],['Dancer','ASTRO'],['Ảnh bìa','ASTRO']]
+      },
+      meow: {
+        meta:[['Thời gian','02.09.2024 → 31.08.2025'],['Vai trò','Chỉ đạo hình ảnh · Giải đấu'],['Lĩnh vực','Thể thao · Billiards'],['Giải đấu','64 người · 50 triệu']],
+        est:'Từ 02.09.2024',
+        eb1:'(01) Khởi đầu', h1:['Định hình lại','billiard thành phố.'],
+        lead:'Lần đầu mình làm với thể thao. Khi đó, bi-da ở Buôn Ma Thuột chỉ là những trận solo, giải cỏ ăn tiền cá nhân, chưa có hệ thống giải thưởng hay phân hạng.',
+        sub:'Ảnh thi đấu và trao giải không còn. Đây là hậu trường những ngày làm việc.',
+        figs:[['Hậu trường','Meow'],['Bàn làm việc','Meow']],
+        eb3:'(02) Việc đã làm', h3:['Việc','đã làm.'],
+        work:[
+          ['Chỉ đạo sản xuất hình ảnh','Quay, chụp ngay tại bàn đấu.',[]],
+          ['Xây hệ thống giải đấu','Phối hợp ban tổ chức và ban quản lý, đưa giải từ solo 1-1, 2-2 lên 64 người, có phân hạng và giải thưởng.',['Bán chuyên nghiệp','Chuyên nghiệp','Phân hạng']],
+          ['Tổng thưởng 50 triệu','Cho giải lớn nhất mình từng tổ chức ở đây.',[]]
+        ],
+        eb4:'(03) Hậu trường', h4:['Hậu trường.'], gal:[['Ghi hình','Meow'],['Khung hình','Meow']]
+      },
+      dd: {
+        meta:[['Thời gian','12/2024 → 05/2025'],['Thể loại','Bar local'],['Âm nhạc','Hip-hop'],['Trạng thái','Đã đóng cửa']],
+        est:'Từ 12.2024',
+        eb1:'(01) Một chương', h1:['Không phải chương nào','cũng thắng.'],
+        lead:'Nhưng chương nào cũng là của mình.',
+        sub:'Được sống với HipHop, sống với đam mê và ước mơ luôn cháy trong tim, luôn là một cuộc đời hoàn hảo.',
+        figs:[['Hậu trường','Dog & Duck'],['Đêm diễn','Dog & Duck']],
+        eb4:'(02) Những đêm', h4:['Những đêm','ở Dog & Duck.']
       }
     }
   },
   en: {
     nav_about:'About', nav_work:'Work', nav_team:'Team', nav_contact:'Contact',
     hero_scroll:'Scroll to explore', hero_based:'Vietnam · GMT+7',
-    mq1:['Marketing Director','KAZA Restaurant','Bích Vân Store'], mq2:['K The Goat','NamK','Since 2021'], mq3:["Let's work together",'K The Goat'],
+    mq1:['Creative Director','KAZA','Marketing Director','Bích Vân Store'], mq2:['K The Goat','NamK','Since 2021'], mq3:["Let's work together",'K The Goat'],
     eb_about:'(01) About', eb_brands:'(02) Brands', eb_work:'(03) Work', eb_team:'(04) Team', eb_skills:'(05) Skills', eb_contact:'(06) Contact',
     sec:{hero:'K The Goat',about:'About',brands:'Brands',work:'Work',tun:'Mindset',team:'Team',skills:'Skills',contact:'Contact'},
-    st_lines:['From warehouse','staff to Marketing','Director.'],
-    st_p:'I am Y Nam Knul, people call me NamK. In 2021 I joined Bích Vân Store as warehouse staff and taught myself digital marketing. Today I am Marketing Director of KAZA Restaurant and Bích Vân Store.',
+    st_lines:['From warehouse','staff to Creative','Director.'],
+    st_p:'I am Y Nam Knul, people call me NamK. In 2021 I joined Bích Vân Store as warehouse staff and taught myself digital marketing. Today I am Creative Director at KAZA and Marketing Director at Bích Vân Store.',
     st_p2:'Not afraid of hard problems, including the chapters that did not win.',
-    stats:[['05','+','Years in the field, since 2021'],['07','','Brands worked with'],['5–7','','People on the team at KAZA'],['02','','Years to make KAZA a top city destination']],
-    br_lines:['Seven brands,','one journey.'], br_cap:'From retail to F&B and entertainment',
-    br_kind:['Apple retail','Café · Camping','Kids fashion','Fine dining','Billiards','F&B · Entertainment','Bar'],
+    stats:[['05','','Years of creative work, since 2021'],['06','','Industries: retail, café, F&B, nightlife, sport, fashion'],['200','+','People worked with'],['07','M','Views on a single top video','100K followers on one channel']],
+    br_lines:['Nine brands,','one journey.'], br_cap:'From retail to F&B, nightlife and sport',
+    br_kind:['Apple retail','Café · Camping','Fine dining','Premium café','Kids fashion','Nightlife club','Billiards','F&B · Entertainment','Bar · Hip-hop'],
     br_cta:'Your brand next?', br_cta2:'Contact',
-    period:['2021 — now','2022','2022','2023','2024','10/2024 — now','12/2024 — 05/2025'],
-    role:['Warehouse staff → Marketing Director','Social Media · Café & Camping','Social Media · Kids fashion','Social Media · Fine dining','Social Media · National billiard chain','Creative Director','Small local bar'],
+    period:['2021 — now','01 — 04/2023','02 — 06/2024','02 — 06/2024','03 — 04/2024','08 — 09/2024','09/2024 — 08/2025','10/2024 — now','12/2024 — 05/2025'],
+    role:['Warehouse staff → Marketing Director','Social Media','Visual direction · Social Media','Visual direction · Social Media','Social Media','Visual direction · Social planning','Visual direction · Tournament building','Creative Director','Small local bar'],
     desc:[
-      'Started in the warehouse. Taught myself digital marketing and solved every problem alone: customer auto-reply, a stronger brand image, a new logo. A team of 2–3 came two years later.',
-      'Solo, start to finish: planning, shooting, editing photos, writing and posting.',
-      'All content handled alone, from idea to published post.',
-      'A fine dining restaurant, still running the whole content process alone.',
-      'Handled the Buôn Ma Thuột branch of a nationwide billiard chain.',
+      'Started from zero, in a small empty room. Working the warehouse while teaching myself, I handled auto-reply, visuals and a new logo alone. A team of 2–3 came two years later.',
+      'Out of the comfort zone: my first social job outside Bích Vân. Planned the posts, collected guests’ photos, published to the fanpage.',
+      'My first time in F&B, run in parallel with ZOJY CAFE. Directed the visuals, briefed the design, planned and posted on Facebook.',
+      'Premium coffee on one side, fine dining on the other. My first coffee brand: visual direction, design briefs, planning and posting.',
+      'A short chapter in fashion for mums and babies. All content handled alone, from idea to post.',
+      'Back to nightlife, my favourite industry. Directed visuals, colour and light, and decided which visuals went to social.',
+      'My first time in sport. Took billiards in Buôn Ma Thuột from 1-on-1 and 2-on-2 money matches to a 64-player tournament with rankings and up to 50 million VND in prizes.',
       'Joined when the venue had just been built. Built the identity, a 3-channel TikTok system and a whole line of KAZA-owned programs. The creative team grew from 4 to 7.',
       'Closed in May 2025. Not every chapter wins, but every one of them is mine.'
     ],
     tun_lines:['Nobody cleared the road.','I opened it myself.'], tun_cap:'Mindset',
     team_lines:['From solo','to a whole team.'], team_cap:'Teamwork · KAZA',
-    sk_lines:['Skills'], sk_cap:'What I do every day',
+    sk_lines:['Skills'], sk_cap:'Tap a row to open it',
     skills:[
-      ['Brand strategy','Positioning, identity, logo change, brand image upgrade'],
-      ['Social Media & Content','Planning, shooting, editing, writing, posting'],
-      ['Photo & Video','Photography, motion graphics, Reels'],
-      ['F&B & entertainment marketing','Restaurants, bars, billiards, events'],
-      ['Team leadership','Leading a team of 5–7 at KAZA'],
-      ['Automation & AI','Customer auto-reply, AI-assisted workflows'],
-      ['Retail & Fanpage','Bích Vân Store, from warehouse to brand']
+      ['Brand strategy','Positioning · Identity','Turning a name into something people remember. Positioning, identity, logo changes and brand image, from a retail shop to a club.',['Positioning','Identity','Logo','Brand image']],
+      ['Social Media & Content','Plan · Write · Post','Planning, writing, posting. At KAZA every post, every font and the way the brand shows up in public is my call.',['Facebook','TikTok','Content plan','Copywriting']],
+      ['Photo & Video','Direct · Shoot · Edit','Briefs, production direction, shooting, filming, editing. Colour, light, and which visuals go live.',['Art direction','Photography','Video','Motion graphics']],
+      ['TikTok growth','100K · 7M views','Built a 3-channel system for KAZA: biggest channel 100K followers, top video 7 million views. Bích Vân Store channel at 30K followers, top video 6 million.',['Channel system','Viral','Satellite channels']],
+      ['Events & programs','Idea → operation','Game Night, Ladies Night, From The Chef, artist nights, a 64-player billiards tournament. From the first idea to the moment the stage lights go on.',['Concept','Events','Tournaments','Campaigns']],
+      ['Leading teams','4 → 7 people · 200+ staff','From doing everything alone to leading a creative team. Worked with more than 200 people.',['Team lead','Briefs','Coordination']],
+      ['Automation & AI','Faster · Leaner','Customer auto-reply since the early days at Bích Vân. Now an AI-assisted workflow for content, visuals and motion.',['Auto-reply','AI workflow','Automation']]
     ],
     ct_lines:["Let's work",'together.'],
     c_phone:'Phone', c_call:'Call', c_mail:'Send mail', c_copy:'Copy', c_copied:'Copied', to_top:'Back to top',
@@ -768,6 +946,105 @@ const I18N = {
         bts:'Behind every show is the creative team: ideas, shooting, editing and posting.',
         btsCap:[['Team shooting live','27.08.2026'],['At KAZA','NamK']],
         mq:['Keep All Zeal Alive','KAZA']
+      },
+      bv: {
+        meta:[['Period','2021 → Now'],['Role','Warehouse staff → Marketing Director'],['Field','Apple retail'],['Start','From zero']],
+        est:'Since 2021',
+        eb1:'(01) The start', h1:['Starting','from zero.'],
+        lead:'In 2021 I joined Bích Vân Store as warehouse staff. A small empty room, and dreams looking for a way out. That is where I taught myself digital marketing.',
+        sub:'Two years alone, then a team of 2–3. Still here today.',
+        figs:[['In store','Bích Vân Store'],['The store today','Bích Vân Store']],
+        eb3:'(02) What I did', h3:['What','I did.'],
+        work:[
+          ['Customer auto-reply','Built the fanpage’s automatic replies while working alone.',[]],
+          ['Brand image upgrade','Redid the brand’s look on social.',[]],
+          ['New logo','A new identity for Bích Vân Store.',[]],
+          ['TikTok channel','30K followers, top video at 6 million views.',[]],
+          ['Marketing Director','From warehouse staff to leading the store’s marketing.',[]]
+        ],
+        eb4:'(03) Moments', h4:['In store.'], gal:[['Customers','Bích Vân Store'],['Charity','Bích Vân Store']]
+      },
+      com: {
+        meta:[['Period','01 → 04/2023'],['Role','Social Media'],['Field','Café · Camping'],['First','Job outside Bích Vân']],
+        est:'Since 01.2023',
+        eb1:'(01) The start', h1:['Out of the','comfort zone.'],
+        lead:'In January 2023 I took my first social job outside Bích Vân Store: a café that doubles as a campsite.',
+        sub:'The café has closed and the page was deleted. These are the photos that survived.',
+        figs:[['From above','Cốm Natural']],
+        eb3:'(02) What I did', h3:['What','I did.'],
+        work:[
+          ['Post planning','Planned the fanpage content calendar myself.',[]],
+          ['Guest photos','Collected guests’ photos, picked the best and posted them.',[]],
+          ['Running the page','Alone, start to finish.',[]]
+        ]
+      },
+      kimmy: {
+        meta:[['Period','02 → 06/2024'],['Role','Visual direction · Social'],['Field','Fine dining'],['In parallel','ZOJY CAFE']],
+        est:'Since 02.2024',
+        eb1:'(01) The start', h1:['First time','in F&B.'],
+        lead:'In February 2024 I took on two brands at once: Kimmy Cuisine & Lounge, a fine dining restaurant, and ZOJY CAFE, a premium café.',
+        sub:'Until June 2024.',
+        figs:[['The room','Kimmy'],['The food','Kimmy']],
+        eb3:'(02) What I did', h3:['What','I did.'],
+        work:[
+          ['Visual production','Food, cocktails, the room.',[]],
+          ['Design briefs','Monthly and seasonal pieces.',['Hello March',"Women's Day",'Thanksgiving Week','Happiness Week']],
+          ['Planning & posting','Scheduled and posted on Facebook.',[]]
+        ],
+        eb4:'(03) Moments', h4:['Kimmy in','violet light.'], gal:[['The bar','Kimmy'],['Cocktail','Kimmy'],['Lounge','Kimmy']]
+      },
+      zojy: {
+        meta:[['Period','02 → 06/2024'],['Role','Visual direction · Social'],['Field','Premium café'],['In parallel','Kimmy']],
+        est:'Since 02.2024',
+        eb1:'(01) The start', h1:['First time','in coffee.'],
+        lead:'Alongside Kimmy, ZOJY was my first coffee brand. Premium coffee on one side, fine dining on the other.',
+        sub:'Until June 2024.',
+        figs:[['Storefront','ZOJY'],['Drinks','ZOJY']],
+        eb3:'(02) What I did', h3:['What','I did.'],
+        work:[
+          ['Visual production','Drinks, the space, the work-friendly corners.',[]],
+          ['Design briefs','Product posters and seasonal pieces.',[]],
+          ['Planning & posting','Scheduled and posted on Facebook.',[]]
+        ],
+        eb4:'(03) Moments', h4:['A corner','of ZOJY.'], gal:[['Neon sign','ZOJY'],['Poster','ZOJY']]
+      },
+      astro: {
+        meta:[['Period','08 → 09/2024'],['Role','Visual direction · Social'],['Field','Nightlife club'],['Industry','My favourite']],
+        est:'Since 08.2024',
+        eb1:'(01) The start', h1:['Back to','nightlife.'],
+        lead:'My favourite industry.',
+        figs:[['The stage','ASTRO'],['Grand opening','ASTRO']],
+        eb3:'(02) Role', h3:['Role.'],
+        work:[
+          ['Visual direction','Colour, light, framing.',[]],
+          ['Social planning','Content and post calendar.',[]],
+          ['Visual sign-off','Decided which visuals appeared on social media.',[]]
+        ],
+        eb4:'(03) The nights', h4:['Nights','at ASTRO.'], gal:[['Lasers','ASTRO'],['Party','ASTRO'],['Dancer','ASTRO'],['Cover art','ASTRO']]
+      },
+      meow: {
+        meta:[['Period','02.09.2024 → 31.08.2025'],['Role','Visual direction · Tournaments'],['Field','Sport · Billiards'],['Tournament','64 players · 50M VND']],
+        est:'Since 02.09.2024',
+        eb1:'(01) The start', h1:['Reshaping','the city’s billiards.'],
+        lead:'My first time in sport. Back then, billiards in Buôn Ma Thuột meant 1-on-1 money matches and street tournaments, with no prize system and no rankings.',
+        sub:'Match and award photos are gone. These are the behind-the-scenes days.',
+        figs:[['Behind the scenes','Meow'],['At the desk','Meow']],
+        eb3:'(02) What I did', h3:['What','I did.'],
+        work:[
+          ['Visual production','Filming and shooting right at the table.',[]],
+          ['Tournament system','With the organisers and management, grew matches from 1-on-1 and 2-on-2 into 64-player tournaments with rankings and prizes.',['Semi-pro','Pro','Rankings']],
+          ['50M VND in prizes','For the biggest tournament I organised there.',[]]
+        ],
+        eb4:'(03) Behind the scenes', h4:['Behind','the scenes.'], gal:[['Filming','Meow'],['Framing','Meow']]
+      },
+      dd: {
+        meta:[['Period','12/2024 → 05/2025'],['Type','Local bar'],['Music','Hip-hop'],['Status','Closed']],
+        est:'Since 12.2024',
+        eb1:'(01) A chapter', h1:['Not every chapter','wins.'],
+        lead:'But every one of them is mine.',
+        sub:'Living with hip-hop, with passion and dreams that keep burning: that is a perfect life.',
+        figs:[['Behind the scenes','Dog & Duck'],['Show night','Dog & Duck']],
+        eb4:'(02) The nights', h4:['Nights at','Dog & Duck.']
       }
     }
   }
@@ -790,8 +1067,10 @@ const POLY = [
   [[10,0],[100,0],[100,78],[72,100],[0,100],[0,22]],
   [[0,12],[70,0],[100,0],[100,100],[30,100],[0,64]],
   [[22,0],[100,0],[100,62],[78,100],[0,100],[0,34]],
+  [[0,0],[64,0],[100,24],[100,100],[0,100],[0,40]],
   [[0,0],[100,14],[100,100],[40,100],[40,58],[0,58]],
   [[50,0],[100,26],[100,100],[0,100],[0,26],[50,0]],
+  [[0,18],[100,0],[100,82],[60,100],[0,100],[0,60]],
   [[0,0],[100,0],[100,100],[55,100],[30,62],[0,100]],
   [[30,0],[100,0],[100,70],[70,100],[0,100],[0,30]]
 ];
@@ -820,7 +1099,8 @@ BRANDS.forEach((b, i) => {
   bgrid.appendChild(c);
 });
 const cta = document.createElement('a'); cta.className = 'bcell cta'; cta.href = '#contact'; cta.dataset.go = '#contact';
-cta.innerHTML = `<span class="i label">08</span><span class="q"></span><span class="arr" aria-hidden="true">→</span>`;
+cta.innerHTML = `<span class="i label">${pad(N + 1)}</span><span class="q"></span><span class="arr" aria-hidden="true">→</span>`;
+$('#workTotal').textContent = pad(N);
 bgrid.appendChild(cta);
 
 const strip = $('#strip');
@@ -830,12 +1110,37 @@ TEAM_IMG.forEach((n, i) => {
   strip.appendChild(f);
 });
 
-const skList = $('#skList'), skPrev = $('#skPrev');
-SK_IMG.forEach((n, i) => {
-  const li = document.createElement('li'); li.dataset.i = i;
-  li.innerHTML = '<span class="n"></span><span class="d"></span>'; skList.appendChild(li);
-  const im = document.createElement('img'); im.className = 'gimg'; im.src = IMG(n); im.alt = ''; im.loading = 'lazy'; skPrev.appendChild(im);
+/* skills: click-to-expand rows, each with a small looping line drawing (pure SVG + CSS, paused while closed) */
+const SK_ART = [
+  /* brand: a mark inside a rotating dashed ring */
+  `<g class="a-spin"><circle cx="100" cy="80" r="58" stroke-dasharray="3 7"/></g><circle cx="100" cy="80" r="40"/><path class="a-pulse" d="M100 50 L130 80 L100 110 L70 80Z"/><path d="M14 80H50M150 80H186M100 4V30M100 130V156"/><circle class="a-orbit" cx="158" cy="80" r="4" fill="currentColor"/>`,
+  /* content: a feed of posts that keeps scrolling */
+  `<clipPath id="skc1"><rect x="40" y="6" width="120" height="148" rx="10"/></clipPath><rect x="40" y="6" width="120" height="148" rx="10"/><g clip-path="url(#skc1)"><g class="a-feed">${[0, 1, 2, 3].map(k => `<rect x="54" y="${18 + k * 46}" width="92" height="36" rx="3"/><path d="M62 ${30 + k * 46}H110M62 ${40 + k * 46}H96"/><circle cx="132" cy="${36 + k * 46}" r="6"/>`).join('')}</g></g>`,
+  /* visual: viewfinder, turning iris, blinking REC */
+  `<path d="M30 40V22H52M148 22H170V40M170 120V138H148M52 138H30V120"/><g class="a-iris">${[0, 60, 120, 180, 240, 300].map(a => `<path d="M100 80 L${(100 + 34 * Math.cos(a * Math.PI / 180)).toFixed(1)} ${(80 + 34 * Math.sin(a * Math.PI / 180)).toFixed(1)}" />`).join('')}</g><circle cx="100" cy="80" r="34"/><circle cx="100" cy="80" r="12"/><circle class="a-blink" cx="42" cy="32" r="3.5" fill="currentColor"/><text x="50" y="35.5" font-size="9" font-family="Geist Mono,monospace" fill="currentColor" stroke="none">REC</text>`,
+  /* growth: bars rise, the trend line draws itself */
+  `<path d="M24 140H180M24 140V16"/>${[0, 1, 2, 3, 4].map(k => `<rect class="a-bar" style="animation-delay:${k * .12}s" x="${40 + k * 28}" y="${120 - k * 22}" width="16" height="${20 + k * 22}"/>`).join('')}<path class="a-draw" d="M36 118 L76 96 L104 100 L132 62 L172 22"/><path d="M162 22H172V32"/>`,
+  /* events: two spotlights sweep over a stage */
+  `<path d="M20 140H180"/><path d="M40 140V128H160V140"/><g class="a-beam l"><path d="M40 10 L20 128 H70Z" stroke-dasharray="2 4"/></g><g class="a-beam r"><path d="M160 10 L130 128 H180Z" stroke-dasharray="2 4"/></g><circle cx="40" cy="10" r="4"/><circle cx="160" cy="10" r="4"/><circle class="a-pulse" cx="100" cy="112" r="7"/>`,
+  /* team: a small network that lights up node by node */
+  `${[[100, 30], [46, 70], [154, 70], [66, 128], [134, 128]].map(([x, y], k) => `<circle class="a-node" style="animation-delay:${k * .25}s" cx="${x}" cy="${y}" r="${k ? 9 : 13}"/>`).join('')}<path d="M100 43 L52 64M100 43 L148 64M53 79 L63 119M147 79 L137 119M75 128H125M55 70H145" stroke-dasharray="3 4" class="a-flow"/>`,
+  /* automation & AI: a chat that answers itself */
+  `<rect x="22" y="22" width="96" height="40" rx="8"/><path d="M40 62 L34 76 L54 62"/><path d="M36 38H100M36 48H80"/><rect x="82" y="86" width="96" height="40" rx="8"/><path d="M160 126 L166 140 L146 126"/>${[0, 1, 2].map(k => `<circle class="a-dot" style="animation-delay:${k * .15}s" cx="${112 + k * 18}" cy="106" r="4" fill="currentColor"/>`).join('')}`
+];
+const skList = $('#skList');
+SK_ART.forEach((art, i) => {
+  const li = document.createElement('li'); li.className = 'sk-it'; li.dataset.i = i;
+  li.innerHTML = `<button type="button" class="sk-head" aria-expanded="false" aria-controls="skp${i}"><span class="sk-no label">${pad(i + 1)}</span><span class="n"></span><span class="d"></span><span class="sk-pl" aria-hidden="true"></span></button>
+    <div class="sk-panel" id="skp${i}" role="region"><div class="sk-in"><div class="sk-wrap"><div class="sk-art"><svg viewBox="0 0 200 160" aria-hidden="true">${art}</svg></div><div class="sk-txt"><p class="sk-lead"></p><div class="sk-tags label"></div></div></div></div></div>`;
+  skList.appendChild(li);
 });
+function toggleSkill(li){
+  const open = !li.classList.contains('open');
+  $$('.sk-it', skList).forEach(o => { const on = o === li && open; o.classList.toggle('open', on); $('.sk-head', o).setAttribute('aria-expanded', String(on)); });
+  if (open && window.gsap && !reduce) gsap.fromTo($$('.sk-lead, .sk-tags span', li), { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: .8, ease: 'power3.out', stagger: .04, delay: .15 });
+  clearTimeout(toggleSkill.t); toggleSkill.t = setTimeout(() => { if (window.ScrollTrigger) ScrollTrigger.refresh(); }, 750);
+}
+$$('.sk-head', skList).forEach(b => b.addEventListener('click', () => toggleSkill(b.parentElement)));
 
 /* case-study overlay shell; the inside is rendered per brand when it opens */
 const CS = { open: false, busy: false, key: null, ctx: null, lenis: null, raf: null, tick: null, vel: 0, pushed: false, from: null, before: null, after: null, refresh: null };
@@ -851,6 +1156,20 @@ function fillMarquee(m){
   const one = `<span class="mq-item">${words.map(w => `${esc(w)} ${STAR}`).join(' ')}</span>`;
   $('.mq-track', m).innerHTML = one.repeat(4);
 }
+
+/* roles under the signature: each name bounces letter by letter on hover (or tap) */
+const roleEls = $$('.role');
+roleEls.forEach(r => {
+  const txt = r.textContent; r.setAttribute('aria-label', txt);
+  r.innerHTML = Array.from(txt).map(ch => `<span class="c" aria-hidden="true">${esc(ch)}</span>`).join('');
+});
+function bounceRole(r, delay = 0){
+  if (reduce || !window.gsap || r._b) return; r._b = true;
+  const cs = $$('.c', r);
+  cs.forEach((c, i) => gsap.to(c, { keyframes: [{ y: -13, scaleY: 1.08, duration: .2, ease: 'power2.out' }, { y: 0, scaleY: 1, duration: .75, ease: 'bounce.out' }], delay: delay + i * .028, overwrite: true }));
+  setTimeout(() => { r._b = false; }, (delay + cs.length * .028 + .95) * 1000);
+}
+roleEls.forEach(r => { r.addEventListener('pointerenter', () => bounceRole(r)); r.addEventListener('click', () => bounceRole(r)); });
 
 /* bezel (watch-bezel ring behind the signature) */
 (function bezel(){
@@ -880,7 +1199,7 @@ function applyLang(){
   $$('[data-t]').forEach(el => { const v = t[el.dataset.t]; if (typeof v !== 'string') return; if (el.hasAttribute('data-roll') || el.closest('.nav ul')) setRoll(el, v); else el.textContent = v; });
   setSplit($('#stTitle'), t.st_lines);
   setWords($('#stP'), t.st_p); $('#stP2').textContent = t.st_p2;
-  $('#stats').innerHTML = t.stats.map(s => `<div class="stat"><span class="v" data-to="${esc(s[0])}" data-suf="${esc(s[1])}">${esc(s[0] + s[1])}</span><span class="label">${esc(s[2])}</span></div>`).join('');
+  $('#stats').innerHTML = t.stats.map(s => `<div class="stat"><span class="v" data-to="${esc(s[0])}" data-suf="${esc(s[1])}">${esc(s[0] + s[1])}</span><span class="label">${esc(s[2])}</span>${s[3] ? `<span class="label sub">${esc(s[3])}</span>` : ''}</div>`).join('');
   setSplit($('#brTitle'), t.br_lines);
   $$('.bcell:not(.cta) .k', bgrid).forEach((k, i) => k.textContent = t.br_kind[i]);
   $('.q', cta).textContent = t.br_cta; cta.setAttribute('aria-label', t.br_cta + ' ' + t.br_cta2);
@@ -888,7 +1207,11 @@ function applyLang(){
   setSplit($('#tunTitle'), t.tun_lines);
   setSplit($('#teamTitle'), t.team_lines);
   setSplit($('#skTitle'), t.sk_lines);
-  $$('#skList li').forEach((li, i) => { const n = $('.n', li); n.innerHTML = ''; const r = document.createElement('span'); setRoll(r, t.skills[i][0]); n.appendChild(r.firstChild); n.setAttribute('aria-label', t.skills[i][0]); $('.d', li).textContent = t.skills[i][1]; });
+  $$('#skList li').forEach((li, i) => {
+    const [name, short, lead, tags] = t.skills[i];
+    const n = $('.n', li); n.innerHTML = ''; const r = document.createElement('span'); setRoll(r, name); n.appendChild(r.firstChild); n.setAttribute('aria-label', name);
+    $('.d', li).textContent = short; $('.sk-lead', li).textContent = lead; $('.sk-tags', li).innerHTML = tags.map(x => `<span>${esc(x)}</span>`).join('');
+  });
   setSplit($('#ctTitle'), t.ct_lines);
   $$('.mq').forEach(fillMarquee);
   const lm = $('#loadMsg'); if (lm) lm.textContent = t.loading; // the loader is removed after boot
@@ -1018,7 +1341,11 @@ function makeStage(canvas, layouts, opts = {}){
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08;
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(24, 1, .1, 200);
   scene.environment = makeEnv(renderer);
-  const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 1, roughness: .1 });
+  /* matte black faces; the bevel + walls are a dark glossy metal so the studio lights draw thin bright lines on the edges.
+     ExtrudeGeometry group 0 = front/back caps, group 1 = bevel + side walls. */
+  const capMat = new THREE.MeshStandardMaterial({ color: 0x0c0c0c, metalness: 0, roughness: .82 });
+  const edgeMat = new THREE.MeshStandardMaterial({ color: 0x1c1c1c, metalness: .92, roughness: .26, envMapIntensity: 1.5 });
+  const mat = [capMat, edgeMat];
   const group = new THREE.Group(); scene.add(group);
   const st = { group, letters: [], visible: true, px: 0, py: 0, tx: 0, ty: 0, p: 0, dims: { w: 1, h: 1 }, key: '', fill: opts.fill || .7, intro: 0 };
   const rnd = (a, b) => a + Math.random() * (b - a);
@@ -1045,6 +1372,7 @@ function makeStage(canvas, layouts, opts = {}){
     const d = Math.max(st.dims.w / (fw * 2 * t * camera.aspect), st.dims.h / (fh * 2 * t));
     camera.position.set(0, 0, d); camera.lookAt(0, 0, 0); camera.updateProjectionMatrix();
     st.halfW = d * t * camera.aspect;
+    if (opts.onLayout) opts.onLayout(h / 2 * (1 + (st.dims.h / 2) / (d * t)), h); // px from top to the bottom of the letters
   }
   st.layout = layout;
   st.playIntro = () => {
@@ -1083,7 +1411,7 @@ async function initHero(){
   try { await Promise.race([document.fonts.load(SIGN_FONT(100), 'K THE GOAT'), new Promise(r => setTimeout(r, 4000))]); } catch (e) {}
   setProgress(45);
   await new Promise(r => setTimeout(r, 40));
-  const st = makeStage($('#c-hero'), [['K THE GOAT'], ['K THE', 'GOAT']], { fill: .74 });
+  const st = makeStage($('#c-hero'), [['K THE GOAT'], ['K THE', 'GOAT']], { fill: .72, onLayout: y => $('#hero').style.setProperty('--sigb', Math.round(y) + 'px') });
   if (!st) return false;
   heroStage = st; stages.push(st); st.layout(); setProgress(85);
   root.classList.add('gl-ready');
@@ -1148,7 +1476,6 @@ function initScroll(){
   /* skills */
   charsIn($('#skTitle'), { scrollTrigger: { trigger: '#skTitle', start: 'top 85%', once: true } });
   $$('#skList li').forEach(li => gsap.from(li, { opacity: 0, y: 30, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: li, start: 'top 94%', once: true } }));
-  initSkillPreview();
 
   /* contact */
   ScrollTrigger.create({ trigger: '#ctTitle', start: 'top 85%', once: true, onEnter: scrambleTitle });
@@ -1261,16 +1588,6 @@ function initTeam(){
   let rf; imgs.forEach(im => { const done = () => { clearTimeout(rf); rf = setTimeout(() => ScrollTrigger.refresh(), 200); }; if (im.complete) done(); else im.addEventListener('load', done, { once: true }); });
 }
 
-function initSkillPreview(){
-  if (!hover) return;
-  const prev = skPrev, imgs = $$('img', prev); let on = false, x = innerWidth / 2, y = innerHeight / 2;
-  $$('#skList li').forEach(li => {
-    li.addEventListener('pointerenter', () => { on = true; prev.classList.add('on'); imgs.forEach((im, k) => im.classList.toggle('on', k === +li.dataset.i)); });
-  });
-  skList.addEventListener('pointerleave', () => { on = false; prev.classList.remove('on'); });
-  gsap.ticker.add(() => { x += (pointer.x - x) * .14; y += (pointer.y - y) * .14; prev.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(-50%,-50%) scale(${on ? 1 : .6}) rotate(${clamp((pointer.x - x) * .05, -8, 8).toFixed(2)}deg)`; });
-}
-
 function initMarquees(){
   const list = $$('.mq').map(m => ({ el: m, track: $('.mq-track', m), base: +m.dataset.dir || -1, x: 0, sk: 0 }));
   let dir = 1;
@@ -1344,50 +1661,58 @@ function renderCase(key){
   const bi = BRANDS.findIndex(b => b.cs === key), b = BRANDS[bi], ni = (bi + 1) % N, nb = BRANDS[ni];
   const im = (a, extra = '') => `<img src="${IMG(a[0])}" alt="" width="${a[1]}" height="${a[2]}" decoding="async" loading="lazy" ${extra}>`;
   const hd = (eb, h, cls = '') => `<div class="cs-hd ${cls}"><div class="eyebrow label"><span>${esc(eb)}</span></div><h3 class="disp cs-h">${splitHTML(h)}</h3></div>`;
-  const mqItem = `<span class="mq-item">${t.mq.map(w => `${esc(w)} ${STAR}`).join(' ')}</span>`;
+  const fig = (a, cap, cls) => `<figure class="cs-fig ${cls}"><div class="ph">${im(a)}</div><figcaption class="label"><span>${esc(cap ? cap[0] : '')}</span><span>${esc(cap ? cap[1] : b.name)}</span></figcaption></figure>`;
+  const mqItem = `<span class="mq-item">${(t.mq || [b.name, 'K The Goat']).map(w => `${esc(w)} ${STAR}`).join(' ')}</span>`;
+  const figs = c.figs || [], work = t.work || [], gallery = c.gallery || [];
   $('#csIdx').textContent = `${g.cs_proj} ${pad(bi + 1)} / ${pad(N)} — ${b.name}`;
   cs.setAttribute('aria-label', b.name);
-  $('#csIn').innerHTML = `
+  let h = `
   <header class="cs-hero" id="csHero">
     <div class="bg"><img src="${IMG(c.cover[0])}" alt="${esc(b.name)}" width="${c.cover[1]}" height="${c.cover[2]}" decoding="async"></div>
     <span class="cs-cue label">(${pad(bi + 1)}) ${esc(t.est)}</span>
     <div class="cs-hero-in">
       <div class="cs-hero-top label"><img class="cs-logo" src="${LOGO(b.logo)}" alt=""><span>${esc(g.cs_scroll)} ↓</span></div>
-      <h2 class="disp cs-title" id="csTitle">${splitHTML([b.name])}</h2>
+      <h2 class="disp cs-title${b.name.length > 14 ? ' xlong' : b.name.length > 6 ? ' long' : ''}" id="csTitle">${splitHTML([b.name])}</h2>
       <div class="cs-meta label">${t.meta.map(m => `<div><span class="k">${esc(m[0])}</span><span class="v">${esc(m[1])}</span></div>`).join('')}</div>
     </div>
   </header>
-  <section class="cs-sec cs-intro wrap"><div class="cs-grid">
+  <section class="cs-sec cs-intro wrap"><div class="cs-grid figs-${figs.length}">
     ${hd(t.eb1, t.h1)}
-    <figure class="cs-fig f1"><div class="ph">${im(c.figs[0])}</div><figcaption class="label"><span>${esc(t.figs[0][0])}</span><span>${esc(t.figs[0][1])}</span></figcaption></figure>
-    <div class="cs-lead"><p id="csLead">${wordsHTML(t.lead)}</p><p class="sub">${esc(t.sub)}</p></div>
-    <figure class="cs-fig f2"><div class="ph">${im(c.figs[1])}</div><figcaption class="label"><span>${esc(t.figs[1][0])}</span><span>${esc(t.figs[1][1])}</span></figcaption></figure>
-  </div></section>
+    ${figs[0] ? fig(figs[0], t.figs && t.figs[0], 'f1') : ''}
+    <div class="cs-lead"><p id="csLead">${wordsHTML(t.lead)}</p>${t.sub ? `<p class="sub">${esc(t.sub)}</p>` : ''}</div>
+    ${figs[1] ? fig(figs[1], t.figs && t.figs[1], 'f2') : ''}
+  </div></section>`;
+  if (c.stats) h += `
   <section class="cs-num" id="csNum"><div class="bg">${im(c.crowd)}</div><div class="wrap">
     ${hd(t.eb2, t.h2)}
     <div class="cs-stats" id="csStats">${c.stats.map((s, i) => `<div class="cs-stat"><span class="v" data-v="${s.v}" data-w="${s.w}" data-suf="${s.suf}">${pad(s.v, s.w)}${s.suf}</span><span class="label">${esc(t.stats[i])}</span></div>`).join('')}</div>
     <div class="cs-teamline label"><span>${esc(t.team[0])}</span><span>${t.team[1]}</span></div>
-  </div></section>
+  </div></section>`;
+  if (work.length) h += `
   <section class="cs-sec cs-do wrap">
     ${hd(t.eb3, t.h3)}
     <div class="cs-do-grid">
-      <ol class="cs-list" id="csList">${t.work.map((w, i) => `<li><span class="no label">${pad(i + 1)}</span><h4>${esc(w[0])}</h4><p>${esc(w[1])}</p>${w[2].length ? `<div class="cs-tags label">${w[2].map(x => `<span>${esc(x)}</span>`).join('')}</div>` : ''}<div class="m"><img src="${IMG(c.work[i])}" alt="" loading="lazy" decoding="async"></div></li>`).join('')}</ol>
+      <ol class="cs-list" id="csList">${work.map((w, i) => `<li><span class="no label">${pad(i + 1)}</span><h4>${esc(w[0])}</h4><p>${esc(w[1])}</p>${w[2] && w[2].length ? `<div class="cs-tags label">${w[2].map(x => `<span>${esc(x)}</span>`).join('')}</div>` : ''}${c.work[i] ? `<div class="m"><img src="${IMG(c.work[i])}" alt="" loading="lazy" decoding="async"></div>` : ''}</li>`).join('')}</ol>
       <div class="cs-stick"><div class="cs-stack" id="csStack">${c.work.map(n => `<img src="${IMG(n)}" alt="" loading="lazy" decoding="async">`).join('')}</div><div class="figcap label"><span id="csWkNo"></span><span id="csWkName"></span></div></div>
     </div>
-  </section>
+  </section>`;
+  if (gallery.length) h += `
   <section class="cs-gal" id="csGal"><div class="cs-gal-pin">
-    <div class="wrap cs-gal-hd">${hd(t.eb4, t.h4)}<span class="label" id="csGalCount">01 / ${pad(c.gallery.length)}</span></div>
-    <div class="cs-track" id="csTrack">${c.gallery.map(p => `<figure><div class="ph">${im(p)}</div><figcaption class="label"><b>${esc(p[3])}</b><span>${esc(p[4])}</span></figcaption></figure>`).join('')}</div>
-  </div></section>
+    <div class="wrap cs-gal-hd">${hd(t.eb4, t.h4)}<span class="label" id="csGalCount">01 / ${pad(gallery.length)}</span></div>
+    <div class="cs-track" id="csTrack">${gallery.map((p, i) => { const cap = p[3] ? [p[3], p[4]] : (t.gal && t.gal[i]) || [pad(i + 1), b.name]; return `<figure><div class="ph">${im(p)}</div><figcaption class="label"><b>${esc(cap[0])}</b><span>${esc(cap[1])}</span></figcaption></figure>`; }).join('')}</div>
+  </div></section>`;
+  if (c.timeline) h += `
   <section class="cs-sec cs-mile wrap">
     ${hd(t.eb5, t.h5)}
     <ul class="cs-tl" id="csTl">${c.timeline.map(r => `<li><span class="d label">${r[0]}</span><span class="t label">${esc(t.kinds[r[1]])}</span><span class="a">${esc(r[1] === 0 ? t.first : r[2])}</span></li>`).join('')}</ul>
-  </section>
+  </section>`;
+  if (c.bts) h += `
   <section class="cs-sec cs-bts wrap"><div class="cs-bts-grid">
     ${hd(t.eb6, t.h6)}
-    <figure class="cs-fig big"><div class="ph">${im(c.bts[0])}</div><figcaption class="label"><span>${esc(t.btsCap[0][0])}</span><span>${esc(t.btsCap[0][1])}</span></figcaption></figure>
-    <div class="side"><p>${esc(t.bts)}</p><figure class="cs-fig"><div class="ph">${im(c.bts[1])}</div><figcaption class="label"><span>${esc(t.btsCap[1][0])}</span><span>${esc(t.btsCap[1][1])}</span></figcaption></figure></div>
-  </div></section>
+    ${fig(c.bts[0], t.btsCap[0], 'big')}
+    <div class="side"><p>${esc(t.bts)}</p>${fig(c.bts[1], t.btsCap[1], '')}</div>
+  </div></section>`;
+  h += `
   <footer class="cs-end">
     <div class="cs-mq" aria-hidden="true"><div class="tr">${mqItem.repeat(4)}</div></div>
     <div class="wrap">
@@ -1398,6 +1723,7 @@ function renderCase(key){
       <div class="cs-end-meta label"><span>${esc(b.name)} — ${esc(t.meta[0][1])}</span><span>© 2026 Y Nam Knul</span></div>
     </div>
   </footer>`;
+  $('#csIn').innerHTML = h;
   $('#csBack').addEventListener('click', () => requestClose());
   $('#csNext').addEventListener('click', e => {
     e.preventDefault();
@@ -1417,22 +1743,21 @@ function setupCaseScroll(){
 function buildCaseFX(intro){
   const key = CS.key, c = CASES[key], t = T().cases[key];
   const S = o => ({ scroller: cs, ...o });
+  const has = sel => !!$(sel, cs);
   const desk = matchMedia('(min-width: 821px)').matches;
   const gal = $('#csGal'), track = $('#csTrack');
-  const dist = () => Math.max(0, track.scrollWidth - innerWidth);
-  const setGalH = () => { gal.style.height = (innerHeight + dist()) + 'px'; };
-  if (reduce) { const pin = $('.cs-gal-pin', gal); Object.assign(pin.style, { position: 'static', height: 'auto', overflowX: 'auto', paddingBottom: '60px' }); }
-  else {
-    setGalH();
-    ScrollTrigger.addEventListener('refreshInit', setGalH);
-    CS.cleanup = () => { ScrollTrigger.removeEventListener('refreshInit', setGalH); };
+  const dist = () => track ? Math.max(0, track.scrollWidth - innerWidth) : 0;
+  const setGalH = () => { if (!gal) return; track.classList.toggle('fit', track.scrollWidth <= innerWidth); gal.style.height = (innerHeight + dist()) + 'px'; };
+  if (gal) {
+    if (reduce) { const pin = $('.cs-gal-pin', gal); Object.assign(pin.style, { position: 'static', height: 'auto', overflowX: 'auto', paddingBottom: '60px' }); }
+    else { setGalH(); ScrollTrigger.addEventListener('refreshInit', setGalH); CS.cleanup = () => { ScrollTrigger.removeEventListener('refreshInit', setGalH); }; }
   }
 
   /* sticky image stack in "what I did" */
   const stackImgs = $$('#csStack img'), rows = $$('#csList li');
   let wk = -1, z = 1;
   const setWork = (i, instant) => {
-    if (i === wk) return; wk = i;
+    if (i === wk || !rows.length) return; wk = i;
     rows.forEach((li, k) => li.classList.toggle('on', k === i));
     $('#csWkNo').textContent = `${pad(i + 1)} / ${pad(rows.length)}`;
     $('#csWkName').textContent = t.work[i][0];
@@ -1443,15 +1768,15 @@ function buildCaseFX(intro){
   };
 
   CS.ctx = gsap.context(() => {
-    gsap.set(stackImgs.slice(1), { clipPath: 'inset(100% 0% 0% 0%)' });
+    if (stackImgs.length > 1) gsap.set(stackImgs.slice(1), { clipPath: 'inset(100% 0% 0% 0%)' });
     setWork(0, true);
     if (reduce) return;
 
     /* hero */
     if (intro) {
       const chars = $$('#csTitle .c');
-      gsap.from(chars, { yPercent: 118, duration: 1.3, ease: 'expo.out', stagger: .07 });
-      scrambleChars(chars, { dur: 700, gap: 90 });
+      gsap.from(chars, { yPercent: 118, duration: 1.3, ease: 'expo.out', stagger: Math.min(.07, .6 / chars.length) });
+      scrambleChars(chars, { dur: 700, gap: Math.min(90, 900 / chars.length) });
       gsap.from('.cs-hero-top, .cs-meta > div, .cs-cue', { opacity: 0, y: 26, duration: 1.1, ease: 'power3.out', stagger: .07, delay: .25 });
       $$('.cs-meta .v').forEach((v, i) => scrambleText(v, { dur: 900, delay: 300 + i * 120 }));
       gsap.from('.cs-bar', { opacity: 0, duration: .6, delay: .15 });
@@ -1461,12 +1786,12 @@ function buildCaseFX(intro){
 
     /* headings rise, character by character */
     $$('.cs-h', cs).forEach(h => {
-      if (h.closest('.cs-gal')) charsIn(h, { scrollTrigger: S({ trigger: gal, start: 'top 75%', once: true }) });
+      if (gal && h.closest('.cs-gal')) charsIn(h, { scrollTrigger: S({ trigger: gal, start: 'top 75%', once: true }) });
       else charsIn(h, { scrollTrigger: S({ trigger: h, start: 'top 88%', once: true }) });
     });
     /* lead paragraph lights up word by word */
     gsap.fromTo($$('#csLead .w'), { opacity: .14 }, { opacity: 1, ease: 'none', stagger: .06, scrollTrigger: S({ trigger: '#csLead', start: 'top 82%', end: 'bottom 52%', scrub: true }) });
-    gsap.from('.cs-lead .sub', { opacity: 0, y: 20, duration: 1, ease: 'power3.out', scrollTrigger: S({ trigger: '.cs-lead .sub', start: 'top 92%', once: true }) });
+    if (has('.cs-lead .sub')) gsap.from('.cs-lead .sub', { opacity: 0, y: 20, duration: 1, ease: 'power3.out', scrollTrigger: S({ trigger: '.cs-lead .sub', start: 'top 92%', once: true }) });
 
     /* figures: wipe in, then parallax */
     $$('.cs-fig', cs).forEach(f => {
@@ -1474,42 +1799,48 @@ function buildCaseFX(intro){
       gsap.fromTo($('img', f), { yPercent: -7, scale: 1.14 }, { yPercent: 7, scale: 1, ease: 'none', scrollTrigger: S({ trigger: f, start: 'top bottom', end: 'bottom top', scrub: true }) });
     });
 
-    /* numbers */
-    gsap.fromTo('.cs-num .bg', { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: S({ trigger: '#csNum', start: 'top bottom', end: 'bottom top', scrub: true }) });
-    gsap.from('.cs-stat', { opacity: 0, y: 46, duration: 1.1, ease: 'power3.out', stagger: .09, scrollTrigger: S({ trigger: '#csStats', start: 'top 86%', once: true }) });
-    ScrollTrigger.create(S({ trigger: '#csStats', start: 'top 86%', once: true, onEnter: () => {
-      $$('#csStats .v').forEach((v, i) => { const n = +v.dataset.v, w = +v.dataset.w, suf = v.dataset.suf, o = { v: 0 }; v.textContent = pad(0, w) + suf; gsap.to(o, { v: n, duration: 2, delay: i * .09, ease: 'power3.out', onUpdate: () => { v.textContent = pad(Math.round(o.v), w) + suf; } }); });
-    } }));
-    gsap.from('.cs-teamline', { opacity: 0, y: 20, duration: 1, ease: 'power3.out', scrollTrigger: S({ trigger: '.cs-teamline', start: 'top 94%', once: true }) });
+    /* numbers (KAZA) */
+    if (has('#csStats')) {
+      gsap.fromTo('.cs-num .bg', { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: S({ trigger: '#csNum', start: 'top bottom', end: 'bottom top', scrub: true }) });
+      gsap.from('.cs-stat', { opacity: 0, y: 46, duration: 1.1, ease: 'power3.out', stagger: .09, scrollTrigger: S({ trigger: '#csStats', start: 'top 86%', once: true }) });
+      ScrollTrigger.create(S({ trigger: '#csStats', start: 'top 86%', once: true, onEnter: () => {
+        $$('#csStats .v').forEach((v, i) => { const n = +v.dataset.v, w = +v.dataset.w, suf = v.dataset.suf, o = { v: 0 }; v.textContent = pad(0, w) + suf; gsap.to(o, { v: n, duration: 2, delay: i * .09, ease: 'power3.out', onUpdate: () => { v.textContent = pad(Math.round(o.v), w) + suf; } }); });
+      } }));
+      gsap.from('.cs-teamline', { opacity: 0, y: 20, duration: 1, ease: 'power3.out', scrollTrigger: S({ trigger: '.cs-teamline', start: 'top 94%', once: true }) });
+    }
 
     /* what I did: rows + scroll-spy driving the sticky image */
     rows.forEach((li, i) => {
       gsap.from(li.children, { y: 26, opacity: 0, duration: 1, ease: 'power3.out', stagger: .05, scrollTrigger: S({ trigger: li, start: 'top 92%', once: true }) });
       ScrollTrigger.create(S({ trigger: li, start: 'top 58%', end: 'bottom 58%', onToggle: e => { if (e.isActive) setWork(i); } }));
     });
-    if (desk) gsap.from('#csStack', { clipPath: 'polygon(0 100%,0 100%,0 100%,0 100%,0 100%)', duration: 1.4, ease: 'expo.out', clearProps: 'clipPath', scrollTrigger: S({ trigger: '#csList', start: 'top 80%', once: true }) });
+    if (desk && rows.length) gsap.from('#csStack', { clipPath: 'polygon(0 100%,0 100%,0 100%,0 100%,0 100%)', duration: 1.4, ease: 'expo.out', clearProps: 'clipPath', scrollTrigger: S({ trigger: '#csList', start: 'top 80%', once: true }) });
 
-    /* the nights: sticky horizontal strip */
-    const n = c.gallery.length, cnt = $('#csGalCount');
-    let gi = -1;
-    gsap.fromTo(track, { x: 0 }, { x: () => -dist(), ease: 'none', scrollTrigger: S({ trigger: gal, start: 'top top', end: 'bottom bottom', scrub: .7, invalidateOnRefresh: true,
-      onUpdate: s => { const k = clamp(Math.round(s.progress * (n - 1)), 0, n - 1); if (k !== gi) { gi = k; cnt.textContent = `${pad(k + 1)} / ${pad(n)}`; } } }) });
-    gsap.from($$('figure', track), { yPercent: 18, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: .06, scrollTrigger: S({ trigger: gal, start: 'top 70%', once: true }) });
+    /* gallery: sticky horizontal strip */
+    if (gal) {
+      const n = $$('figure', track).length, cnt = $('#csGalCount');
+      let gi = -1;
+      gsap.fromTo(track, { x: 0 }, { x: () => -dist(), ease: 'none', scrollTrigger: S({ trigger: gal, start: 'top top', end: 'bottom bottom', scrub: .7, invalidateOnRefresh: true,
+        onUpdate: s => { const k = clamp(Math.round(s.progress * (n - 1)), 0, n - 1); if (k !== gi) { gi = k; cnt.textContent = `${pad(k + 1)} / ${pad(n)}`; } } }) });
+      gsap.from($$('figure', track), { yPercent: 18, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: .06, scrollTrigger: S({ trigger: gal, start: 'top 70%', once: true }) });
+    }
 
-    /* milestones */
+    /* milestones (KAZA) */
     const tl = $$('#csTl li');
-    gsap.from(tl, { opacity: 0, y: 26, duration: .9, ease: 'power3.out', stagger: .06, scrollTrigger: S({ trigger: '#csTl', start: 'top 86%', once: true }) });
-    ScrollTrigger.create(S({ trigger: '#csTl', start: 'top 86%', once: true, onEnter: () => tl.forEach((li, i) => scrambleText($('.d', li), { dur: 650, set: '0123456789', delay: i * 80 })) }));
+    if (tl.length) {
+      gsap.from(tl, { opacity: 0, y: 26, duration: .9, ease: 'power3.out', stagger: .06, scrollTrigger: S({ trigger: '#csTl', start: 'top 86%', once: true }) });
+      ScrollTrigger.create(S({ trigger: '#csTl', start: 'top 86%', once: true, onEnter: () => tl.forEach((li, i) => scrambleText($('.d', li), { dur: 650, set: '0123456789', delay: i * 80 })) }));
+    }
 
     /* behind the scenes + end */
-    gsap.from('.cs-bts .side p', { opacity: 0, y: 24, duration: 1, ease: 'power3.out', scrollTrigger: S({ trigger: '.cs-bts .side', start: 'top 88%', once: true }) });
+    if (has('.cs-bts .side p')) gsap.from('.cs-bts .side p', { opacity: 0, y: 24, duration: 1, ease: 'power3.out', scrollTrigger: S({ trigger: '.cs-bts .side', start: 'top 88%', once: true }) });
     gsap.from('.cs-next .nm', { yPercent: 60, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: S({ trigger: '.cs-next', start: 'top 92%', once: true }) });
   }, cs);
 
   /* velocity skew on the strip, like the team strip on the main page */
-  const gimgs = $$('img', track); let sk = 0;
+  const gimgs = track ? $$('img', track) : []; let sk = 0;
   CS.tick = () => { const tg = clamp(CS.vel * .25, -7, 7); sk += (tg - sk) * .12; if (Math.abs(sk) > .01) gimgs.forEach(im => { im.style.transform = `skewX(${(-sk).toFixed(2)}deg) scale(${(1 + Math.abs(sk) * .006).toFixed(3)})`; }); };
-  if (!reduce) gsap.ticker.add(CS.tick);
+  if (!reduce && gimgs.length) gsap.ticker.add(CS.tick);
   ScrollTrigger.refresh();
 }
 
@@ -1552,14 +1883,14 @@ function openCase(key, fromEl, fromPoly){
   document.body.appendChild(fly);
   const img = $('img', fly), sw = $$('.cs-sweep', fly), tag = $('.cs-tag', fly);
   gsap.set(fly, { left: r.left, top: r.top, width: r.width, height: r.height, clipPath: poly(fromPoly || FULL) });
-  gsap.set(img, { filter: 'grayscale(1) contrast(1.06) brightness(1)' });
+  gsap.set(img, { filter: 'saturate(.35) contrast(1.06) brightness(1)' });
   gsap.set(sw, { xPercent: -60 });
   const tl = gsap.timeline({ onComplete: () => { show(); gsap.to(fly, { opacity: 0, duration: .4, ease: 'power1.out', onComplete: () => fly.remove() }); } });
   tl.to(fly, { left: 0, top: 0, width: innerWidth, height: innerHeight, clipPath: poly(FULL), duration: 1.3, ease: 'expo.inOut' }, 0)
     .fromTo(img, { scale: 1.12 }, { scale: 1, duration: 1.3, ease: 'expo.inOut' }, 0)
-    .to(img, { filter: 'grayscale(0) contrast(1) brightness(1)', duration: .9, ease: 'power2.inOut' }, .35)
-    .to(img, { filter: 'grayscale(0) contrast(1) brightness(1.35)', duration: .18, ease: 'power1.out' }, .62)
-    .to(img, { filter: 'grayscale(0) contrast(1) brightness(1)', duration: .5, ease: 'power2.out' }, .8)
+    .to(img, { filter: 'saturate(1) contrast(1) brightness(1)', duration: .9, ease: 'power2.inOut' }, .35)
+    .to(img, { filter: 'saturate(1.15) contrast(1) brightness(1.35)', duration: .18, ease: 'power1.out' }, .62)
+    .to(img, { filter: 'saturate(1) contrast(1) brightness(1)', duration: .5, ease: 'power2.out' }, .8)
     .to(sw[0], { xPercent: 60, duration: 1.25, ease: 'power2.inOut' }, .08)
     .to(sw[1], { xPercent: 60, duration: 1, ease: 'power3.inOut' }, .3)
     .fromTo(tag, { opacity: 0 }, { opacity: 1, duration: .25 }, .15)
@@ -1641,6 +1972,11 @@ $$('[data-copy]').forEach(b => b.addEventListener('click', async () => {
     gsap.from('.hfade', { opacity: 0, y: 16, duration: 1, ease: 'power3.out', stagger: .08, delay: .5 });
     gsap.from('.nav > *', { opacity: 0, y: -14, duration: 1, ease: 'power3.out', stagger: .08, delay: .3 });
     gsap.from('#bezel', { scale: .7, opacity: 0, rotate: -60, duration: 2.4, ease: 'expo.out' });
+    /* roles land one after another, then a single wave runs through them; the tagline decodes */
+    gsap.from('.roles li', { opacity: 0, y: 18, duration: .9, ease: 'power3.out', stagger: .08, delay: 1.1 });
+    roleEls.forEach((r, i) => bounceRole(r, 2 + i * .16));
+    gsap.from('.tagline i', { scaleX: 0, duration: 1.2, ease: 'expo.out', delay: 1.6 });
+    setTimeout(() => scrambleText($('#tagline'), { dur: 1100 }), 1500);
   }
 })();
 </script>

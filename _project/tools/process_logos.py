@@ -20,4 +20,8 @@ im = Image.open(SRC + 'embe.jpg').convert('L'); L = np.asarray(im).astype(float)
 bl = np.asarray(im.filter(ImageFilter.GaussianBlur(14))).astype(float); m = (L - bl - 4) / 8
 mask = np.zeros_like(m); mask[370:590, 225:735] = 1; m *= mask
 save('embe', np.asarray(Image.fromarray((np.clip(m, 0, 1) * 255).astype('uint8')).filter(ImageFilter.MedianFilter(3))).astype(float) / 255)
+
+# ASTRO: white wordmark on black. ZOJY: light gold mark on dark grey.
+a = rgb('astro.jpg'); m = (a.mean(-1) - .35) / .3; m[:30] = 0; m[-30:] = 0; m[:, :30] = 0; m[:, -30:] = 0; save('astro', m)
+a = rgb('zojy.jpg'); m = (a.mean(-1) - .32) / .15; m[:20] = 0; m[-20:] = 0; m[:, :20] = 0; m[:, -20:] = 0; save('zojy', m)
 print('done')
