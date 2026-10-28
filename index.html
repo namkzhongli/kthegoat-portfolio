@@ -731,7 +731,8 @@ function contourLetters(lines, px){
   const out = letters.filter(l => l.outers.length).map(l => {
     const cx = (l.x0 + l.x1) / 2, cy = l.cy;
     const conv = p => p.map(([x, y]) => new THREE.Vector2((x - cx) / unit, -(y - cy) / unit));
-    const shapesL = l.outers.map(o => { const s = new THREE.Shape(conv(o.p)); o.holes.forEach(h => s.holes.push(new THREE.Path(conv(h)))); return s; });
+    const orient = (arr, ccw) => { let a = 0; for (let i = 0, j = arr.length - 1; i < arr.length; j = i++) a += arr[j].x * arr[i].y - arr[i].x * arr[j].y; return (a > 0) === ccw ? arr : arr.reverse(); };
+    const shapesL = l.outers.map(o => { const s = new THREE.Shape(orient(conv(o.p), false)); o.holes.forEach(h => s.holes.push(new THREE.Path(orient(conv(h), true)))); return s; });
     return { shapes: shapesL, x: (cx - W / 2) / unit, y: -(cy - H / 2) / unit };
   });
   return { letters: out, w: (Math.max(...widths)) / unit, h: (lineH * (lines.length - 1) + capH) / unit };
